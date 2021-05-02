@@ -1,14 +1,15 @@
-var PLAYER, BACKGROUND, TILE1
+var PLAYER, BACKGROUND, TILE1;
 var game_size = [1264, 560];
 
 function preload() {
-  PLAYER = loadImage('media/player.png')
-  BACKGROUND = loadImage('media/background.png')
-  TILE1 = loadImage('media/tile1.png')
+  PLAYER = loadImage('media/player.png');
+  BACKGROUND = loadImage('media/background.png');
+  TILE1 = loadImage('media/tile1.png');
 }
 
 function setup() {
   createCanvas(game_size[0], game_size[1]);
+  BACKGROUND.resize(game_size[0], game_size[1]);
   square(30, 20, 55);
   frameRate(60);
 }
