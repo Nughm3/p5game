@@ -1,3 +1,4 @@
+var PLAYER, BACKGROUND, TILE1
 var game_size = [1264, 560];
 
 function preload() {
@@ -13,9 +14,11 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-}
+  image(BACKGROUND, 0,0);
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(255);
+  // text('Game Title', game_size[0]/2, game_size[1]/3);        UNFINISHED
+  // text('Game Subtitle', game_size[0]/2, game_size[1]*1/3+50);
 
-// preload()
-// setup()
-// draw()
+}
