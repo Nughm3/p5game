@@ -3,8 +3,9 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1280, 720);
+  createCanvas(1250, 550);
   square(30, 20, 55);
+  frameRate(60);
 }
 
 function draw() {
