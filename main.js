@@ -23,3 +23,7 @@ function draw() {
   // text('Game Subtitle', game_size[0]/2, game_size[1]*1/3+50);
 
 }
+
+preload()
+setup()
+draw()
