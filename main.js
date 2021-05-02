@@ -3,6 +3,7 @@ var game_size = [1264, 560];
 function preload() {
   PLAYER = loadImage('media/player.png')
   BACKGROUND = loadImage('media/background.png')
+  TILE1 = loadImage('media/tile1.png')
 }
 
 function setup() {
@@ -15,4 +16,6 @@ function draw() {
   background(220);
 }
 
-setup()
+// preload()
+// setup()
+// draw()
