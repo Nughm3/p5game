@@ -1,9 +1,12 @@
+var game_size = [1264, 560];
+
 function preload() {
-  // Load game assets
+  PLAYER = loadImage('media/player.png')
+  BACKGROUND = loadImage('media/background.png')
 }
 
 function setup() {
-  createCanvas(1250, 550);
+  createCanvas(game_size[0], game_size[1]);
   square(30, 20, 55);
   frameRate(60);
 }
