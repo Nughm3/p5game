@@ -12,6 +12,8 @@ have powerups along the way
 cutscene at the start explains story (skippable)
 dodges other robots along the way (bullet hell enemies)
 normal movement set + maybe wall climbs and dashes
+difficult platforming sections, try to build a physics script that doesn't allow wall jumping
+encourage dashing
 
 robot goes around places to gain power orbs to slowly gain power to take down the factory?
 or maybe he fights the owner of the factory at the end (will need boss fight which is hard)
