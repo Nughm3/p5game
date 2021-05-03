@@ -4,9 +4,11 @@ var game_size = [1264, 560];
 var playerx = 0
 var playery = 432
 
-var playeryvel = -5
-var gravity = 0.2
+var playeryvel = 0
+var gravity = 1
 
+
+var jumping = false
 var movementspeed = 3
 
 var leftpressed = false;
@@ -28,8 +30,18 @@ function moveright() {
 }
 
 function jump() {
-  playery += playeryvel
-  playeryvel += gravity
+  playery -= 5
+  playery -= 4
+  playery -= 3
+  playery -= 2
+  playery -= 1
+  playery -= 0
+  playery -= -1
+  playery -= -2
+  playery -= -3
+  playery -= -4
+  playery -= -5
+  jumping = false
 }
 
 function setup() {
@@ -63,8 +75,9 @@ function setup() {
   });
 
   document.addEventListener("keydown", function(event) {
-    if (event.key === 'ArrowUp') {
+    if (event.key === 'ArrowUp' & jumping == false) {
       uppressed = true
+      jumping = true
     }
   });
 
