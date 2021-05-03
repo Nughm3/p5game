@@ -18,11 +18,11 @@ function setup() {
 
 function draw() {
   image(BACKGROUND, 0,0);
+  playerx+=1  
   image(PLAYER, playerx, playery)
     for (repeat=0;repeat<20;repeat++)
     {
       image(TILE1, repeat*64, 496)
-      playerx+=0.2
     }
   textAlign(CENTER, CENTER);
   textSize(40);
