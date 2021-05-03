@@ -9,25 +9,47 @@ function preload() {
   TILE1 = loadImage('media/tile1.png');
 }
 
+function moveleft() {
+  playerx -= 5
+}
+
+function moveright() {
+  playerx += 5
+}
+
+function jump() {
+  // later
+}
+
 function setup() {
   createCanvas(game_size[0], game_size[1]);
+  
+  image(BACKGROUND, 0,0);
+
+  for (repeat=0;repeat<20;repeat++)
+  {
+    image(TILE1, repeat*64, 496)
+  }
+
   BACKGROUND.resize(game_size[0], game_size[1]);
-  square(30, 20, 55);
   frameRate(60);
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === 'Enter') {
+      moveleft()
+      alert("working")
+    }
+  });
 }
 
 function draw() {
-  image(BACKGROUND, 0,0);
-  playerx+=1  
+  // context. clearRect(0, 0, game_size[0], game_size[1];
   image(PLAYER, playerx, playery)
-    for (repeat=0;repeat<20;repeat++)
-    {
-      image(TILE1, repeat*64, 496)
-    }
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
   // text('Game Title', game_size[0]/2, game_size[1]/3);        UNFINISHED
   // text('Game Subtitle', game_size[0]/2, game_size[1]*1/3+50);
+
 
 }
