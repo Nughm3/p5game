@@ -4,10 +4,14 @@ var game_size = [1264, 560];
 var playerx = 0
 var playery = 432
 
+var playeryvel = -5
+var gravity = 0.2
+
 var movementspeed = 3
 
 var leftpressed = false;
 var rightpressed = false;
+var uppressed = false;
 
 function preload() {
   PLAYER = loadImage('media/player.png');
@@ -16,16 +20,16 @@ function preload() {
 }
 
 function moveleft() {
-  // context. clearRect(0, 0, game_size[0], game_size[1];
-  playerx -= 5
+  playerx -= movementspeed
 }
 
 function moveright() {
-  playerx += 5
+  playerx += movementspeed
 }
 
 function jump() {
-  // later
+  playery += playeryvel
+  playeryvel += gravity
 }
 
 function setup() {
@@ -57,6 +61,18 @@ function setup() {
       rightpressed = false
     }
   });
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === 'ArrowUp') {
+      uppressed = true
+    }
+  });
+
+  document.addEventListener("keyup", function(event) {
+    if (event.key === 'ArrowUp') {
+      uppressed = false
+    }
+  });
 }
 
 function draw() {
@@ -70,10 +86,13 @@ function draw() {
   }
 
   if (leftpressed == true)
-    playerx -= movementspeed
+    moveleft()
 
   if (rightpressed == true)
-    playerx += movementspeed
+    moveright()
+
+  if (uppressed == true)
+    jump()
 
   textAlign(CENTER, CENTER);
   textSize(40);
