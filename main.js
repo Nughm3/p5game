@@ -3,6 +3,9 @@ var game_size = [1264, 560];
 var playerx = 0
 var playery = 432
 
+var leftpressed = false;
+var rightpressed = false;
+
 function preload() {
   PLAYER = loadImage('media/player.png');
   BACKGROUND = loadImage('media/background.png');
@@ -28,10 +31,27 @@ function setup() {
   BACKGROUND.resize(game_size[0], game_size[1]);
   frameRate(60);
 
-  document.addEventListener("keypress", function(event) {
-    if (event.key === 'q') {
-      moveleft()
-      alert(playerx)
+  document.addEventListener("keydown", function(event) {
+    if (event.key === 'a') {
+      leftpressed = true
+    }
+  });
+
+  document.addEventListener("keyup", function(event) {
+    if (event.key === 'a') {
+      leftpressed = false
+    }
+  });
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === 'd') {
+      rightpressed = true
+    }
+  });
+
+  document.addEventListener("keyup", function(event) {
+    if (event.key === 'd') {
+      rightpressed = false
     }
   });
 }
@@ -45,6 +65,12 @@ function draw() {
   {
     image(TILE1, repeat*64, 496)
   }
+
+  if (leftpressed == true)
+    playerx -= 2.5
+
+  if (rightpressed == true)
+    playerx += 2.5
 
   textAlign(CENTER, CENTER);
   textSize(40);
