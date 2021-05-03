@@ -1,5 +1,7 @@
 var PLAYER, BACKGROUND, TILE1;
 var game_size = [1264, 560];
+var playerx = 0
+var playery = 432
 
 function preload() {
   PLAYER = loadImage('media/player.png');
@@ -16,6 +18,12 @@ function setup() {
 
 function draw() {
   image(BACKGROUND, 0,0);
+  image(PLAYER, playerx, playery)
+    for (repeat=0;repeat<20;repeat++)
+    {
+      image(TILE1, repeat*64, 496)
+      playerx+=0.2
+    }
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
@@ -23,7 +31,3 @@ function draw() {
   // text('Game Subtitle', game_size[0]/2, game_size[1]*1/3+50);
 
 }
-
-preload()
-setup()
-draw()
