@@ -1,7 +1,10 @@
 var PLAYER, BACKGROUND, TILE1;
 var game_size = [1264, 560];
+
 var playerx = 0
 var playery = 432
+
+var movementspeed = 3
 
 var leftpressed = false;
 var rightpressed = false;
@@ -32,25 +35,25 @@ function setup() {
   frameRate(60);
 
   document.addEventListener("keydown", function(event) {
-    if (event.key === 'a') {
+    if (event.key === 'ArrowLeft') {
       leftpressed = true
     }
   });
 
   document.addEventListener("keyup", function(event) {
-    if (event.key === 'a') {
+    if (event.key === 'ArrowLeft') {
       leftpressed = false
     }
   });
 
   document.addEventListener("keydown", function(event) {
-    if (event.key === 'd') {
+    if (event.key === 'ArrowRight') {
       rightpressed = true
     }
   });
 
   document.addEventListener("keyup", function(event) {
-    if (event.key === 'd') {
+    if (event.key === 'ArrowRight') {
       rightpressed = false
     }
   });
@@ -67,10 +70,10 @@ function draw() {
   }
 
   if (leftpressed == true)
-    playerx -= 2.5
+    playerx -= movementspeed
 
   if (rightpressed == true)
-    playerx += 2.5
+    playerx += movementspeed
 
   textAlign(CENTER, CENTER);
   textSize(40);
