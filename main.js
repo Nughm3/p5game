@@ -7,6 +7,7 @@ var playery = 300
 var playeryvel = 0
 var gravity = 1
 
+var touchingground = false
 
 var allowjump = false
 var movementspeed = 5
@@ -30,8 +31,10 @@ function moveright() {
 }
 
 function jump() {
-  playeryvel = 13
+  playeryvel = 17
+  touchingground = false
   allowjump = false
+  uppressed = false
 }
 
 function setup() {
@@ -95,7 +98,7 @@ function draw() {
   if (playeryvel < -3)
     allowjump = true
 
-  if (uppressed == true)
+  if (uppressed == true && allowjump == true)
     jump()
 
   playeryvel -= gravity
