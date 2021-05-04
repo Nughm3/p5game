@@ -31,6 +31,7 @@ function moveright() {
 
 function jump() {
   
+  alert("jump")
   jumping = true
   uppressed = false
   playeryvel = 13
@@ -72,12 +73,6 @@ function setup() {
     if (event.key === 'ArrowUp' & jumping == false) {
       uppressed = true
       jumping = true
-    }
-  });
-
-  document.addEventListener("keyup", function(event) {
-    if (event.key === 'ArrowUp') {
-      uppressed = false
     }
   });
 }
