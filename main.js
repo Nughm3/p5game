@@ -2,7 +2,7 @@ var PLAYER, BACKGROUND, TILE1;
 var game_size = [1264, 560];
 
 var playerx = 0
-var playery = 432
+var playery = 300
 
 var playeryvel = 0
 var gravity = 1
@@ -31,8 +31,11 @@ function moveright() {
 
 function jump() {
   
-  jumping = false
+  jumping = true
+  uppressed = false
   playeryvel = 13
+  if (playeryvel < -5)
+    jumping = false
 }
 
 function setup() {
