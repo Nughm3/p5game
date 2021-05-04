@@ -92,12 +92,11 @@ function draw() {
     moveright()
   }
 
-  if (uppressed == true)
-    jump()
-
-
   if (playeryvel < -3)
     allowjump = true
+
+  if (uppressed == true)
+    jump()
 
   playeryvel -= gravity
   playery -= playeryvel
@@ -105,6 +104,4 @@ function draw() {
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
-  // text('Game Title', game_size[0]/2, game_size[1]/3);        UNFINISHED
-  // text('Game Subtitle', game_size[0]/2, game_size[1]*1/3+50);
 }
