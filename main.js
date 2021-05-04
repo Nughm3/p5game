@@ -8,7 +8,7 @@ var playeryvel = 0
 var gravity = 1
 
 
-var jumping = false
+var allowjump = false
 var movementspeed = 5
 
 var leftpressed = false;
@@ -30,13 +30,8 @@ function moveright() {
 }
 
 function jump() {
-  
-  alert("jump")
-  jumping = true
-  uppressed = false
   playeryvel = 13
-  if (playeryvel < -5)
-    jumping = false
+  allowjump = false
 }
 
 function setup() {
@@ -70,9 +65,9 @@ function setup() {
   });
 
   document.addEventListener("keydown", function(event) {
-    if (event.key === 'ArrowUp' & jumping == false) {
+    if (event.key === 'ArrowUp' && allowjump == true) {
       uppressed = true
-      jumping = true
+      allowjump = false
     }
   });
 }
@@ -99,6 +94,10 @@ function draw() {
 
   if (uppressed == true)
     jump()
+
+
+  if (playeryvel < -3)
+    allowjump = true
 
   playeryvel -= gravity
   playery -= playeryvel
