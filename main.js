@@ -9,7 +9,7 @@ var gravity = 1
 
 
 var jumping = false
-var movementspeed = 3
+var movementspeed = 5
 
 var leftpressed = false;
 var rightpressed = false;
@@ -30,18 +30,9 @@ function moveright() {
 }
 
 function jump() {
-  playery -= 5
-  playery -= 4
-  playery -= 3
-  playery -= 2
-  playery -= 1
-  playery -= 0
-  playery -= -1
-  playery -= -2
-  playery -= -3
-  playery -= -4
-  playery -= -5
+  
   jumping = false
+  playeryvel = 13
 }
 
 function setup() {
@@ -98,15 +89,22 @@ function draw() {
     image(TILE1, repeat*64, 496)
   }
 
-  if (leftpressed == true)
+  if (leftpressed == true && playerx > -12)
+  {
     moveleft()
+  }  
 
-  if (rightpressed == true)
+  if (rightpressed == true && playerx < 1210)
+  {
     moveright()
+  }
 
   if (uppressed == true)
     jump()
 
+  playeryvel -= gravity
+  playery -= playeryvel
+  
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
