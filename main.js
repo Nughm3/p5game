@@ -16,6 +16,10 @@ var leftpressed = false;
 var rightpressed = false;
 var uppressed = false;
 
+var levels = []
+var level0 = [0,1,2,3]
+levels.push(level0)
+
 function preload() {
   PLAYER = loadImage('media/player.png');
   BACKGROUND = loadImage('media/background.png');
@@ -95,13 +99,17 @@ function draw() {
     moveright()
   }
 
-  if (playeryvel < -3)
+  if (playeryvel < -5)
     allowjump = true
 
   if (uppressed == true && allowjump == true)
     jump()
 
-  playeryvel -= gravity
+  if (playeryvel > -15)
+    playeryvel -= gravity
+  else
+    playeryvel = -15
+
   playery -= playeryvel
   
   textAlign(CENTER, CENTER);
