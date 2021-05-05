@@ -10,14 +10,15 @@ var gravity = 1
 var touchingground = false
 
 var allowjump = false
-var movementspeed = 5
+var movementspeed = 6
 
 var leftpressed = false;
 var rightpressed = false;
 var uppressed = false;
 
 var levels = []
-var level0 = [0,1,2,3]
+var level = 0
+var level0 = [0,1,2,3,4,5,6,7,10,11,12,14,16,17,18,19,26,27,34,54]
 levels.push(level0)
 
 function preload() {
@@ -84,9 +85,19 @@ function draw() {
   image(BACKGROUND, 0,0);
   image(PLAYER, playerx, playery)
 
-  for (repeat=0;repeat<20;repeat++)
+  // for (repeat=0;repeat<20;repeat++)
+  // {
+  //   image(TILE1, repeat*64, 496)
+  // }
+
+  for (repeat = 0; repeat < levels[level].length; repeat++)
   {
-    image(TILE1, repeat*64, 496)
+    if (levels[level][repeat] < 20)
+      image(TILE1, levels[level][repeat]*64, 496)
+    else if (levels[level][repeat] < 40)
+      image(TILE1, (levels[level][repeat]-20)*64, 432)
+    else if (levels[level][repeat] < 60)
+      image(TILE1, (levels[level][repeat]-40)*64, 368)
   }
 
   if (leftpressed == true && playerx > -12)
