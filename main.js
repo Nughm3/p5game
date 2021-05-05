@@ -1,5 +1,5 @@
 var PLAYER, BACKGROUND, TILE1;
-var game_size = [1264, 560];
+var game_size = [1216, 504];
 
 var playerx = 0
 var playery = 300
