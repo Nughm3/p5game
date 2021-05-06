@@ -1,6 +1,8 @@
 var PLAYER, BACKGROUND, TILE1;
 var game_size = [1216, 576];
 
+var tick = 0
+
 var playerx = 0
 var playery = 300
 
@@ -84,6 +86,7 @@ function setup() {
 
 function draw() {
   
+  tick += 1
   image(BACKGROUND, 0,0);
   image(PLAYER, playerx, playery)
 
