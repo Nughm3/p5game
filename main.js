@@ -20,6 +20,8 @@ var levels = []
 var level = 0
 var level0 = [0,1,2,3,4,5,6,7,10,11,12,14,16,17,18,19,26,27,34,54]
 levels.push(level0)
+var level1 = [0,1,2,3,6,7,10,11,14,17,18,26,27,30,31,34,37,38,50,51,54,57,58,74,77,78,97,98]
+levels.push(level1)
 
 function preload() {
   PLAYER = loadImage('media/player.png');
@@ -106,9 +108,16 @@ function draw() {
     moveleft()
   }  
 
-  if (rightpressed == true && playerx < 1210)
+  if (rightpressed == true)
   {
     moveright()
+  }
+
+  if (playerx > 1200)
+  {
+    playerx = 0
+    playery = 300
+    level += 1
   }
 
   if (playeryvel < -3)
