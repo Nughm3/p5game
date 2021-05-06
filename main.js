@@ -95,16 +95,10 @@ function draw() {
     {
       tile -= 20
       row += 1
-      tiley -= (row * 64)
+      tiley = game_size[1] - 64 - (row * 64)
     }
     tilex = tile*64
     image(TILE1, tilex, tiley)
-    // if (levels[level][repeat] < 20)
-    //   image(TILE1, levels[level][repeat]*64, 512)
-    // else if (levels[level][repeat] < 40)
-    //   image(TILE1, (levels[level][repeat]-20)*64, 448)
-    // else if (levels[level][repeat] < 60)
-    //   image(TILE1, (levels[level][repeat]-40)*64, 384)
   }
 
   if (leftpressed == true && playerx > -12)
