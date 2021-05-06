@@ -87,17 +87,18 @@ function draw() {
 
   for (repeat = 0; repeat < levels[level].length; repeat++)
   {
-    var tilex = 0
+    var tile = levels[level][repeat]
+    var tilex = tile
     var tiley = 512
     var row = 0
-    while (levels[level][repeat] >= 20)
+    while (tilex >= 20)
     {
       tilex -= 20
-        row += 1
-        tiley -= (row * 64)
+      row += 1
+      tiley -= (row * 64)
     }
     tilex = levels[level][repeat]*64
-        image(TILE1, tilex, tiley)
+    image(TILE1, tilex, tiley)
     // if (levels[level][repeat] < 20)
     //   image(TILE1, levels[level][repeat]*64, 512)
     // else if (levels[level][repeat] < 40)
