@@ -1,5 +1,5 @@
 var PLAYER, BACKGROUND, TILE1;
-var game_size = [1216, 504];
+var game_size = [1216, 576];
 
 var playerx = 0
 var playery = 300
@@ -85,19 +85,32 @@ function draw() {
   image(BACKGROUND, 0,0);
   image(PLAYER, playerx, playery)
 
-  // for (repeat=0;repeat<20;repeat++)
-  // {
-  //   image(TILE1, repeat*64, 496)
-  // }
-
   for (repeat = 0; repeat < levels[level].length; repeat++)
   {
-    if (levels[level][repeat] < 20)
-      image(TILE1, levels[level][repeat]*64, 496)
-    else if (levels[level][repeat] < 40)
-      image(TILE1, (levels[level][repeat]-20)*64, 432)
-    else if (levels[level][repeat] < 60)
-      image(TILE1, (levels[level][repeat]-40)*64, 368)
+    var tilex = 0
+    var tiley = 512
+    var row = 0
+    while (true)
+    {
+      if (levels[level][repeat] < 20)
+      {
+        tilex = levels[level][repeat]*64
+        image(TILE1, tilex, tiley)
+        break
+      }
+      else
+      {
+        tilex -= 20
+        row += 1
+        tiley = tiley - (row * 64)
+      }x
+    }
+    // if (levels[level][repeat] < 20)
+    //   image(TILE1, levels[level][repeat]*64, 512)
+    // else if (levels[level][repeat] < 40)
+    //   image(TILE1, (levels[level][repeat]-20)*64, 448)
+    // else if (levels[level][repeat] < 60)
+    //   image(TILE1, (levels[level][repeat]-40)*64, 384)
   }
 
   if (leftpressed == true && playerx > -12)
