@@ -3,7 +3,7 @@ var game_size = [1216, 576];
 
 var tick = 0
 var dashtick
-var dashingtick
+var dashanimation = false
 
 var playerx = 0
 var playery = 300
@@ -56,20 +56,25 @@ function jump() {
 
 function dash()
 {
+  dashanimation = false
   allowdash = false
   playeryvel = 0
   dashtick = tick
-  dashingtick = tick
   for (repeat=0;repeat<13;repeat++)
   {
-    while(tick > dashingtick+1)
+    setTimeout(() => {dashanimation = true}, 100)
+    while (true)
     {
-      
+      if (dashanimation = true)
+      {
+        dashanimation = false
+        if (playerdirection == 1)
+          playerx += 10
+        else
+          playerx -= 10
+        break
+      }
     }
-    if (playerdirection == 1)
-      playerx += 10
-    else
-      playerx -= 10
   }
 }
 
