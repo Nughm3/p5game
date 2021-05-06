@@ -11,6 +11,9 @@ var gravity = 1
 
 var touchingground = false
 
+var allowmove = true
+var allowdash = true
+
 var allowjump = false
 var movementspeed = 6
 
@@ -44,6 +47,11 @@ function jump() {
   touchingground = false
   allowjump = false
   uppressed = false
+}
+
+function dash()
+{
+  
 }
 
 function setup() {
@@ -80,6 +88,12 @@ function setup() {
     if (event.key === 'ArrowUp' && allowjump == true) {
       uppressed = true
       allowjump = false
+    }
+  });
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === ' ' && allowdash == true) {
+      alert("ok")
     }
   });
 }
