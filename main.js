@@ -111,7 +111,7 @@ function draw() {
     moveright()
   }
 
-  if (playeryvel < -5)
+  if (playeryvel < -3)
     allowjump = true
 
   if (uppressed == true && allowjump == true)
