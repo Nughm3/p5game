@@ -2,6 +2,8 @@ var PLAYER, BACKGROUND, TILE1;
 var game_size = [1216, 576];
 
 var tick = 0
+var dashtick
+var dashingtick
 
 var playerx = 0
 var playery = 300
@@ -54,11 +56,21 @@ function jump() {
 
 function dash()
 {
-  if (playerdirection == 1)
-    playerx += 100
-  else
-    playerx -= 100
+  allowdash = false
   playeryvel = 0
+  dashtick = tick
+  dashingtick = tick
+  for (repeat=0;repeat<13;repeat++)
+  {
+    while(tick > dashingtick+1)
+    {
+      
+    }
+    if (playerdirection == 1)
+      playerx += 10
+    else
+      playerx -= 10
+  }
 }
 
 function setup() {
@@ -108,6 +120,7 @@ function setup() {
 function draw() {
   
   tick += 1
+
   image(BACKGROUND, 0,0);
   image(PLAYER, playerx, playery)
 
@@ -157,6 +170,9 @@ function draw() {
 
   playery -= playeryvel
   
+  if (tick - 40 > dashtick)
+    allowdash = true
+
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
