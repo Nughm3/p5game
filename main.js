@@ -5,6 +5,7 @@ var tick = 0
 
 var playerx = 0
 var playery = 300
+var playerdirection = 1
 
 var playeryvel = 0
 var gravity = 1
@@ -36,10 +37,12 @@ function preload() {
 
 function moveleft() {
   playerx -= movementspeed
+  playerdirection = 0
 }
 
 function moveright() {
   playerx += movementspeed
+  playerdirection = 1
 }
 
 function jump() {
@@ -51,7 +54,11 @@ function jump() {
 
 function dash()
 {
-  
+  if (playerdirection == 1)
+    playerx += 100
+  else
+    playerx -= 100
+  playeryvel = 0
 }
 
 function setup() {
@@ -93,7 +100,7 @@ function setup() {
 
   document.addEventListener("keydown", function(event) {
     if (event.key === ' ' && allowdash == true) {
-      alert("ok")
+      dash()
     }
   });
 }
@@ -137,7 +144,7 @@ function draw() {
     level += 1
   }
 
-  if (playeryvel < -3)
+  if (playeryvel < -1)
     allowjump = true
 
   if (uppressed == true && allowjump == true)
