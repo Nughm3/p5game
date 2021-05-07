@@ -35,6 +35,7 @@ levels.push(level2)
 
 function preload() { // art by isaac
   // PLAYER = loadImage('media/player.png');
+  // player ready means not dashed, player dash means dash is on cd
   PLAYER_READY_R = loadImage('media/players/rready.png');
   PLAYER_DASH_R = loadImage('media/players/rdash.png');
   PLAYER_READY_L = loadImage('media/players/lready.png');
