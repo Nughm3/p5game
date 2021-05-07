@@ -134,6 +134,11 @@ function setup() {
 
 function draw() {
   
+  if (level < 2)
+    allowdash = false
+  else
+    allowdash = true
+
   tick += 1
 
   image(BACKGROUND, 0,0);
