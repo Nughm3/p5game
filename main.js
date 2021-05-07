@@ -34,7 +34,7 @@ var level2 = [0,1,2,3,4,10,11,12,13,18]
 levels.push(level2)
 
 function preload() {
-  PLAYER = loadImage('media/player.png');
+  // PLAYER = loadImage('media/player.png');
   PLAYER_READY_R = loadImage('media/players/player1.png');
   PLAYER_DASH_R = loadImage('media/players/player2.png');
   PLAYER_READY_L = loadImage('media/players/player3.png');
@@ -146,7 +146,20 @@ function draw() {
   tick += 1
 
   image(BACKGROUND, 0,0);
-  image(PLAYER, playerx, playery)
+
+  // Change the sprite of the character based on its direction and whether dash is ready
+  if (playerdirection == 0) {
+    if (allowdash == true)
+      image(PLAYER_READY_L, playerx, playery)
+  } else {
+      image(PLAYER_DASH_L, playerx, playery)
+  }
+
+  if (playerdirection == 1) {
+      image(PLAYER_READY_R, playerx, playery)
+  } else {
+      image(PLAYER_DASH_R, playerx, playery)
+  }
 
   for (repeat = 0; repeat < levels[level].length; repeat++)
   {
