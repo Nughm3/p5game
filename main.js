@@ -34,11 +34,11 @@ var level2 = [0,1,2,3,4,10,11,12,13,18]
 levels.push(level2)
 
 function preload() {
-  // PLAYER = loadImage('media/player.png');
+  PLAYER = loadImage('media/player.png');
   PLAYER_READY_R = loadImage('media/players/player1.png');
-  PLAYER_DASH_R = loadImage('media/players/player2');
-  PLAYER_READY_L = loadImage('media/players/player3');
-  PLAYER_DASH_L = loadImage('media/players/player4');
+  PLAYER_DASH_R = loadImage('media/players/player2.png');
+  PLAYER_READY_L = loadImage('media/players/player3.png');
+  PLAYER_DASH_L = loadImage('media/players/player4.png');
   BACKGROUND = loadImage('media/background.png');
   TILE1 = loadImage('media/tile1.png');
 }
