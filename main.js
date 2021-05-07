@@ -35,10 +35,10 @@ levels.push(level2)
 
 function preload() {
   PLAYER = loadImage('media/player.png');
-  PLAYER_READY_R = loadImage('media/player1.png');
-  PLAYER_DASH_R = loadImage('media/player2');
-  PLAYER_READY_L = loadImage('media/player3');
-  PLAYER_DASH_L = loadImage('media/player4');
+  PLAYER_READY_R = loadImage('media/players/player1.png');
+  PLAYER_DASH_R = loadImage('media/players/player2');
+  PLAYER_READY_L = loadImage('media/players/player3');
+  PLAYER_DASH_L = loadImage('media/players/player4');
   BACKGROUND = loadImage('media/background.png');
   TILE1 = loadImage('media/tile1.png');
 }
