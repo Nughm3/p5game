@@ -61,11 +61,12 @@ function dash()
   allowdash = false
   playeryvel = 0
   dashamount = 0
+  dashtick = tick
   waitdash()
 }
 
 function waitdash() {
-  setTimeout(() => {movedash()}, 5)
+  setTimeout(() => {movedash()}, 7)
 }
 
 function movedash() {
@@ -74,16 +75,8 @@ function movedash() {
     playerx += 10
   else
     playerx -= 10
-  waitdash()
-  // if (dashamount < 14)
-  // {
-  //   if (playerdirection == 1)
-  //     playerx += 10
-  //   else
-  //     playerx -= 10
-  // }
-  // else
-  //   break
+  if (dashamount < 14)
+    waitdash()
 }
 
 function setup() {
