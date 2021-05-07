@@ -35,10 +35,10 @@ levels.push(level2)
 
 function preload() { // art by isaac
   // PLAYER = loadImage('media/player.png');
-  PLAYER_READY_R = loadImage('media/players/player1.png');
-  PLAYER_DASH_R = loadImage('media/players/player2.png');
-  PLAYER_READY_L = loadImage('media/players/player3.png');
-  PLAYER_DASH_L = loadImage('media/players/player4.png');
+  PLAYER_READY_R = loadImage('media/players/rready.png');
+  PLAYER_DASH_R = loadImage('media/players/rdash.png');
+  PLAYER_READY_L = loadImage('media/players/lready.png');
+  PLAYER_DASH_L = loadImage('media/players/ldash.png');
   BACKGROUND = loadImage('media/bg2.png');
   BACKGROUND2 = loadImage('media/bg1.png');
   MENU = loadImage('media/menu.png');
