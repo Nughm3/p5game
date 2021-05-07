@@ -24,6 +24,8 @@ var leftpressed = false;
 var rightpressed = false;
 var uppressed = false;
 
+var musicplaying = false;
+
 var levels = []
 var level = 0
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
@@ -44,6 +46,7 @@ function preload() {
   BACKGROUND2 = loadImage('media/bg1.png');
   MENU = loadImage('media/menu.png');
   TILE1 = loadImage('media/tile1.png');
+  OVERWORLD1 = loadSound('media/music/overworld1.mp3')
 }
 
 function moveleft() {
@@ -94,6 +97,20 @@ function movedash() {
       dashamount = 0
     }
   }
+  else
+  {
+    playeryvel = 0
+    allowmove = true
+    dashamount = 0
+  }
+}
+
+function overworld1() {
+  if (musicplaying == false)
+  {
+    musicplaying = true
+    OVERWORLD1.play()
+  }
 }
 
 function setup() {
@@ -142,6 +159,8 @@ function setup() {
 
 function draw() {
   
+  // overworld1()
+
   if (level < 2)
     allowdash = false
   else
@@ -152,21 +171,20 @@ function draw() {
   image(BACKGROUND, 0,0);
 
   // Change the sprite of the character based on its direction and whether dash is ready
-  // if (dashanimation > 0)
-  // {
-  //   if (playerdirection == 0)
-  //     image(PLAYER_DASH_L, playerx, playery)
-  //   else
-  //     image(PLAYER_DASH_R, playerx, playery)
-  // }
-  // else
-  // {
-  //   if (playerdirection == 0)
-  //     image(PLAYER_READY_R, playerx, playery)
-  //   else
-  //     image(PLAYER_DASH_R, playerx, playery)
-  // }
-  image(PLAYER_READY_R, playerx, playery)
+  if (dashamount > 0)
+  {
+    if (playerdirection == 1)
+      image(PLAYER_DASH_L, playerx, playery)
+    else
+      image(PLAYER_DASH_R, playerx, playery)
+  }
+  else
+  {
+    if (playerdirection == 0)
+      image(PLAYER_READY_L, playerx, playery)
+    else
+      image(PLAYER_READY_R, playerx, playery)
+  }
 
   for (repeat = 0; repeat < levels[level].length; repeat++)
   {
