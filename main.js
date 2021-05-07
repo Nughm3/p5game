@@ -30,7 +30,7 @@ var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
 var level1 = [0,1,2,3,6,7,10,11,14,17,18,26,27,30,31,34,37,38,50,51,54,57,58,74,77,78,97,98]
 levels.push(level1)
-var level2 = [0,1,2,3]
+var level2 = [0,1,2,3,4,10,11,12,13,18]
 levels.push(level2)
 
 function preload() {
@@ -58,6 +58,7 @@ function jump() {
 
 function dash()
 {
+  allowmove = false
   allowdash = false
   playeryvel = 0
   dashamount = 0
@@ -66,7 +67,7 @@ function dash()
 }
 
 function waitdash() {
-  setTimeout(() => {movedash()}, 7)
+  setTimeout(() => {movedash()}, 5)
 }
 
 function movedash() {
@@ -74,13 +75,16 @@ function movedash() {
   if (playerx > -12)
   {
     if (playerdirection == 1)
-      playerx += 10
+      playerx += 15
     else
-      playerx -= 10
+      playerx -= 15
     if (dashamount < 14)
       waitdash()
     else
+    {
       playeryvel = 0
+      allowmove = true
+    }
   }
 }
 
@@ -122,7 +126,7 @@ function setup() {
   });
 
   document.addEventListener("keydown", function(event) {
-    if (event.key === ' ' && allowdash == true) {
+    if (event.key === 'z' && allowdash == true) {
       dash()
     }
   });
@@ -151,12 +155,12 @@ function draw() {
     image(TILE1, tilex, tiley)
   }
 
-  if (leftpressed == true && playerx > -12)
+  if (leftpressed == true && playerx > -12 && allowmove == true)
   {
     moveleft()
   }  
 
-  if (rightpressed == true)
+  if (rightpressed == true && allowmove == true)
   {
     moveright()
   }
@@ -171,7 +175,7 @@ function draw() {
   if (playeryvel < -1)
     allowjump = true
 
-  if (uppressed == true && allowjump == true)
+  if (uppressed == true && allowjump == true && allowmove == true)
     jump()
 
   if (playeryvel > -15)
