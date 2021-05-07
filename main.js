@@ -33,7 +33,7 @@ levels.push(level1)
 var level2 = [0,1,2,3,4,10,11,12,13,18]
 levels.push(level2)
 
-function preload() { // art by isaac
+function preload() {
   // PLAYER = loadImage('media/player.png');
   // player ready means not dashed, player dash means dash is on cd
   PLAYER_READY_R = loadImage('media/players/rready.png');
