@@ -34,7 +34,7 @@ var level2 = [0,1,2,3,4,10,11,12,13,18]
 levels.push(level2)
 
 function preload() {
-  PLAYER = loadImage('media/player.png');
+  // PLAYER = loadImage('media/player.png');
   PLAYER_READY_R = loadImage('media/players/player1.png');
   PLAYER_DASH_R = loadImage('media/players/player2');
   PLAYER_READY_L = loadImage('media/players/player3');
