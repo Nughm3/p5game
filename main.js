@@ -71,12 +71,17 @@ function waitdash() {
 
 function movedash() {
   dashamount += 1
-  if (playerdirection == 1)
-    playerx += 10
-  else
-    playerx -= 10
-  if (dashamount < 14)
-    waitdash()
+  if (playerx > -12)
+  {
+    if (playerdirection == 1)
+      playerx += 10
+    else
+      playerx -= 10
+    if (dashamount < 14)
+      waitdash()
+    else
+      playeryvel = 0
+  }
 }
 
 function setup() {
