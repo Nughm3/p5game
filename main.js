@@ -91,6 +91,7 @@ function movedash() {
     {
       playeryvel = 0
       allowmove = true
+      dashamount = 0
     }
   }
 }
@@ -151,18 +152,21 @@ function draw() {
   image(BACKGROUND, 0,0);
 
   // Change the sprite of the character based on its direction and whether dash is ready
-  if (playerdirection == 0) {
-    if (allowdash == true)
-      image(PLAYER_READY_L, playerx, playery)
-  } else {
-      image(PLAYER_DASH_L, playerx, playery)
-  }
-
-  if (playerdirection == 1) {
-      image(PLAYER_READY_R, playerx, playery)
-  } else {
-      image(PLAYER_DASH_R, playerx, playery)
-  }
+  // if (dashanimation > 0)
+  // {
+  //   if (playerdirection == 0)
+  //     image(PLAYER_DASH_L, playerx, playery)
+  //   else
+  //     image(PLAYER_DASH_R, playerx, playery)
+  // }
+  // else
+  // {
+  //   if (playerdirection == 0)
+  //     image(PLAYER_READY_R, playerx, playery)
+  //   else
+  //     image(PLAYER_DASH_R, playerx, playery)
+  // }
+  image(PLAYER_READY_R, playerx, playery)
 
   for (repeat = 0; repeat < levels[level].length; repeat++)
   {
