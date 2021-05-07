@@ -46,7 +46,7 @@ function preload() {
   BACKGROUND2 = loadImage('media/bg1.png');
   MENU = loadImage('media/menu.png');
   TILE1 = loadImage('media/tile1.png');
-  OVERWORLD1 = loadSound('media/music/overworld1.mp3')
+  OVERWORLD1 = loadSound('media/music/overworld1.mp3');
 }
 
 function moveleft() {
@@ -109,7 +109,7 @@ function overworld1() {
   if (musicplaying == false)
   {
     musicplaying = true
-    OVERWORLD1.play()
+    OVERWORLD1.play();
   }
 }
 
