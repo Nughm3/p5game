@@ -35,6 +35,11 @@ levels.push(level1)
 var level2 = [0,1,2,3,4,10,11,12,13,18]
 levels.push(level2)
 
+var tilehitboxes = []
+var tiletophitboxes = []
+
+var topoftile = false
+
 function preload() {
   // PLAYER = loadImage('media/player.png');
   // player ready means not dashed, player dash means dash is on cd
@@ -200,6 +205,7 @@ function draw() {
     }
     tilex = tile*64
     image(TILE1, tilex, tiley)
+    tilehitboxes.push([tilex,tiley])
   }
 
   if (leftpressed == true && playerx > -12 && allowmove == true)
@@ -231,6 +237,24 @@ function draw() {
     playeryvel = -15
 
   playery -= playeryvel
+
+  // if (playery > 455)
+  //   playery += playeryvel
+
+  for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+  {
+    if (playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] + 128 && playery > tilehitboxes[repeat][1])
+    {
+      topoftile = true
+    }
+    else
+      topoftile = false
+  }
+
+  if (topoftile == true)
+  {
+    playery += playeryvel
+  }
   
   if (tick - 40 > dashtick)
     allowdash = true
@@ -238,4 +262,6 @@ function draw() {
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
+
+  // alert(tilehitboxes)
 }
