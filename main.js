@@ -108,6 +108,12 @@ function movedash() {
   }
 }
 
+function death() {
+  playerx = 0
+  playery = 300
+  playeryvel = 0
+}
+
 function overworld1() {
   if (musicplaying == false)
   {
@@ -149,7 +155,6 @@ function setup() {
   document.addEventListener("keydown", function(event) {
     if (event.key === 'ArrowUp' && touchingground == true) {
       uppressed = true
-      allowjump = false
     }
   });
 
@@ -234,14 +239,12 @@ function draw() {
 
   playery -= playeryvel
 
-  // if (playery > 455)
-  //   playery += playeryvel
-
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
     if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 64)
     {
       topoftile = true
+      playery = tilehitboxes[repeat][1] - 48
       break
     }
     else
@@ -260,6 +263,9 @@ function draw() {
   
   if (tick - 40 > dashtick)
     allowdash = true
+
+  if (playery > 576)
+    death()
 
   textAlign(CENTER, CENTER);
   textSize(40);
