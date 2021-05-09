@@ -33,7 +33,7 @@ var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
 var level1 = [0,1,2,3,6,7,10,11,14,17,18,26,27,30,31,34,37,38,50,51,54,57,58,74,77,78,97,98]
 levels.push(level1)
-var level2 = [0,1,2,3,4,10,11,12,13,18]
+var level2 = [0,1,2,3,4,10,11,12,17,18]
 levels.push(level2)
 
 var tilehitboxes = []
@@ -172,7 +172,8 @@ function setup() {
 function draw() {
   
   // overworld1()
-  playerx += playerxvel
+  if (playerx > -12 || playerxvel > 0)
+    playerx += playerxvel
 
   if (level < 2)
     allowdash = false
@@ -216,7 +217,7 @@ function draw() {
     tilehitboxes.push([tilex,tiley])
   }
 
-  if (leftpressed == true && playerx > -12 && allowmove == true)
+  if (leftpressed == true && allowmove == true)
   {
     moveleft()
   }  
@@ -229,10 +230,12 @@ function draw() {
   if (leftpressed == true && rightpressed == true && allowmove == true)
     playerxvel = 0
 
-  if (playerx > 1200)
+  if (playerx > 1190)
   {
     playerx = 0
     playery = 300
+    playerxvel = 0
+    playeryvel = 0
     level += 1
     tilehitboxes = []
   }
@@ -249,7 +252,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 64)
+    if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 64 && playery < tilehitboxes[repeat][1] - 32)
     {
       topoftile = true
       playery = tilehitboxes[repeat][1] - 48
