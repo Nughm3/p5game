@@ -295,7 +295,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 128 && playerx < tilehitboxes[repeat][0] + 52 && playerx > tilehitboxes[repeat][0] + 32)
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 128 && playerx < tilehitboxes[repeat][0] + 56 && playerx > tilehitboxes[repeat][0] + 24)
     {
       rightoftile = true
       break
