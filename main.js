@@ -2,11 +2,11 @@
 var game_size = [1216, 576];
 
 var tick = 0
-var dashtick
+var dashtick = 0
 var dashamount = 0
 
 var levelspawnpoints = [420,420,420,420]
-var level = 0
+var level = 2
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
@@ -30,6 +30,7 @@ var touchingground = false
 
 var allowmove = true
 var allowdash = true
+var dashing = false
 
 var movementspeed = 6
 
@@ -78,8 +79,10 @@ function jump() {
 
 function dash()
 {
+  dashing = true
   allowmove = false
   allowdash = false
+  playerxvel = 0
   playeryvel = 0
   dashamount = 0
   dashtick = tick
@@ -95,16 +98,28 @@ function movedash() {
   if (playerx > -12)
   {
     if (playerdirection == 1)
-      playerx += 15
+    {
+      playerx += 12
+      // if (leftoftile == true)
+      //   playerx -= 12
+    }
     else
-      playerx -= 15
-    if (dashamount < 10)
+    {
+      playerx -= 12
+      // if (rightoftile == true)
+      //   playerx += 12
+    }
+    if (dashamount < 12)
       waitdash()
     else
     {
       playeryvel = 0
       allowmove = true
       dashamount = 0
+      // if (leftoftile == true)
+      //   playerx -= 12
+      // if (rightoftile == true)
+      //   playerx += 12
     }
   }
   else
@@ -112,6 +127,7 @@ function movedash() {
     playeryvel = 0
     allowmove = true
     dashamount = 0
+    dashing = false
   }
 }
 
@@ -168,7 +184,7 @@ function setup() {
   });
 
   document.addEventListener("keydown", function(event) {
-    if (event.key === 'z' && allowdash == true) {
+    if (event.key === 'z' && allowdash == true && allowmove == true) {
       dash()
     }
   });
@@ -182,27 +198,25 @@ function draw() {
 
   if (level < 2)
     allowdash = false
-  else
-    allowdash = true
 
   tick += 1
 
   image(BACKGROUND, 0,0);
 
   // Change the sprite of the character based on its direction and whether dash is ready
-  if (dashamount > 0)
+  if (dashing == true)
   {
     if (playerdirection == 1)
-      image(PLAYER_DASH_L, playerx, playery)
-    else
       image(PLAYER_DASH_R, playerx, playery)
+    else
+      image(PLAYER_DASH_L, playerx, playery)
   }
   else
   {
-    if (playerdirection == 0)
-      image(PLAYER_READY_L, playerx, playery)
-    else
+    if (playerdirection == 1)
       image(PLAYER_READY_R, playerx, playery)
+    else
+      image(PLAYER_READY_L, playerx, playery)
   }
 
   for (repeat = 0; repeat < levels[level].length; repeat++)
@@ -328,18 +342,13 @@ function draw() {
     playeryvel *= -1
   }
   
-  if (tick - 40 > dashtick)
+  if (touchingground == true)
     allowdash = true
 
   if (playery > 576)
     death()
-
-  // if (playerxvel == -6)
-  //   playerx += movementspeed
   
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
-
-  // alert(tilehitboxes)
 }
