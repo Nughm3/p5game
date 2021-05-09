@@ -5,8 +5,18 @@ var tick = 0
 var dashtick
 var dashamount = 0
 
+var levelspawnpoints = [420,420,420]
+var level = 0
+var levels = []
+var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
+levels.push(level0)
+var level1 = [0,1,2,3,6,7,10,11,14,17,18,26,27,30,31,34,37,38,50,51,54,57,58,74,77,78,97,98]
+levels.push(level1)
+var level2 = [0,1,2,3,4,10,11,12,17,18]
+levels.push(level2)
+
 var playerx = 0
-var playery = 300
+var playery = levelspawnpoints[level]
 var playerdirection = 1
 
 var playerxvel = 0
@@ -27,19 +37,10 @@ var uppressed = false;
 
 var musicplaying = false;
 
-var levels = []
-var level = 0
-var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
-levels.push(level0)
-var level1 = [0,1,2,3,6,7,10,11,14,17,18,26,27,30,31,34,37,38,50,51,54,57,58,74,77,78,97,98]
-levels.push(level1)
-var level2 = [0,1,2,3,4,10,11,12,17,18]
-levels.push(level2)
-
 var tilehitboxes = []
-var tiletophitboxes = []
 
 var topoftile = false
+var leftoftile = false
 
 function preload() {
   // PLAYER = loadImage('media/player.png');
@@ -112,7 +113,7 @@ function movedash() {
 
 function death() {
   playerx = 0
-  playery = 300
+  playery = levelspawnpoints[level]
   playeryvel = 0
 }
 
@@ -232,11 +233,11 @@ function draw() {
 
   if (playerx > 1190)
   {
+    level += 1
     playerx = 0
-    playery = 300
+    playery = levelspawnpoints[level]
     playerxvel = 0
     playeryvel = 0
-    level += 1
     tilehitboxes = []
   }
 
