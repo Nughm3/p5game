@@ -42,6 +42,7 @@ var tilehitboxes = []
 var topoftile = false
 var leftoftile = false
 var rightoftile = false
+var bottomoftile = false
 
 function preload() {
   // PLAYER = loadImage('media/player.png');
@@ -257,7 +258,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 64 && playery < tilehitboxes[repeat][1] - 32)
+    if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 56 && playery < tilehitboxes[repeat][1] - 32)
     {
       topoftile = true
       playery = tilehitboxes[repeat][1] - 48
@@ -279,7 +280,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 128 && playerx > tilehitboxes[repeat][0] - 52 && playerx < tilehitboxes[repeat][0] - 20)
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 52 && playerx < tilehitboxes[repeat][0] - 20)
     {
       leftoftile = true
       break
@@ -295,7 +296,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 128 && playerx < tilehitboxes[repeat][0] + 56 && playerx > tilehitboxes[repeat][0] + 24)
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 56 && playerx > tilehitboxes[repeat][0] + 24)
     {
       rightoftile = true
       break
@@ -307,6 +308,22 @@ function draw() {
   if (rightoftile == true && playerxvel < 0)
   {
     playerx -= playerxvel
+  }
+
+  for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+  {
+    if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery < tilehitboxes[repeat][1] + 64 && playery > tilehitboxes[repeat][1] + 32)
+    {
+      bottomoftile = true
+      break
+    }
+    else
+      bottomoftile = false
+  }
+
+  if (bottomoftile == true)
+  {
+    playeryvel *= -1
   }
   
   if (tick - 40 > dashtick)
