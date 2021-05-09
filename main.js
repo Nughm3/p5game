@@ -41,6 +41,7 @@ var tilehitboxes = []
 
 var topoftile = false
 var leftoftile = false
+var rightoftile = false
 
 function preload() {
   // PLAYER = loadImage('media/player.png');
@@ -288,6 +289,22 @@ function draw() {
   }
 
   if (leftoftile == true && playerxvel > 0)
+  {
+    playerx -= playerxvel
+  }
+
+  for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+  {
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 128 && playerx < tilehitboxes[repeat][0] + 52 && playerx > tilehitboxes[repeat][0] + 32)
+    {
+      rightoftile = true
+      break
+    }
+    else
+      rightoftile = false
+  }
+
+  if (rightoftile == true && playerxvel < 0)
   {
     playerx -= playerxvel
   }
