@@ -17,7 +17,6 @@ var touchingground = false
 var allowmove = true
 var allowdash = true
 
-var allowjump = false
 var movementspeed = 6
 
 var leftpressed = false;
@@ -67,7 +66,6 @@ function moveright() {
 function jump() {
   playeryvel = 17
   touchingground = false
-  allowjump = false
   uppressed = false
 }
 
@@ -149,7 +147,7 @@ function setup() {
   });
 
   document.addEventListener("keydown", function(event) {
-    if (event.key === 'ArrowUp' && allowjump == true) {
+    if (event.key === 'ArrowUp' && touchingground == true) {
       uppressed = true
       allowjump = false
     }
@@ -223,12 +221,10 @@ function draw() {
     playerx = 0
     playery = 300
     level += 1
+    tilehitboxes = []
   }
 
-  if (playeryvel < -1)
-    allowjump = true
-
-  if (uppressed == true && allowjump == true && allowmove == true)
+  if (uppressed == true && touchingground == true && allowmove == true)
     jump()
 
   if (playeryvel > -15)
@@ -243,9 +239,10 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] + 128 && playery > tilehitboxes[repeat][1])
+    if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 64)
     {
       topoftile = true
+      break
     }
     else
       topoftile = false
@@ -254,6 +251,11 @@ function draw() {
   if (topoftile == true)
   {
     playery += playeryvel
+    touchingground = true
+  }
+  else
+  {
+    touchingground = false
   }
   
   if (tick - 40 > dashtick)
