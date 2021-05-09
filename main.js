@@ -9,6 +9,8 @@ var playerx = 0
 var playery = 300
 var playerdirection = 1
 
+var playerxvel = 0
+
 var playeryvel = 0
 var gravity = 1
 
@@ -54,12 +56,12 @@ function preload() {
 }
 
 function moveleft() {
-  playerx -= movementspeed
+  playerxvel = movementspeed * -1
   playerdirection = 0
 }
 
 function moveright() {
-  playerx += movementspeed
+  playerxvel = movementspeed
   playerdirection = 1
 }
 
@@ -91,7 +93,7 @@ function movedash() {
       playerx += 15
     else
       playerx -= 15
-    if (dashamount < 14)
+    if (dashamount < 10)
       waitdash()
     else
     {
@@ -137,6 +139,7 @@ function setup() {
   document.addEventListener("keyup", function(event) {
     if (event.key === 'ArrowLeft') {
       leftpressed = false
+      playerxvel = 0
     }
   });
 
@@ -149,6 +152,7 @@ function setup() {
   document.addEventListener("keyup", function(event) {
     if (event.key === 'ArrowRight') {
       rightpressed = false
+      playerxvel = 0
     }
   });
 
@@ -168,6 +172,7 @@ function setup() {
 function draw() {
   
   // overworld1()
+  playerx += playerxvel
 
   if (level < 2)
     allowdash = false
@@ -221,6 +226,9 @@ function draw() {
     moveright()
   }
 
+  if (leftpressed == true && rightpressed == true && allowmove == true)
+    playerxvel = 0
+
   if (playerx > 1200)
   {
     playerx = 0
@@ -267,6 +275,9 @@ function draw() {
   if (playery > 576)
     death()
 
+  // if (playerxvel == -6)
+  //   playerx += movementspeed
+  
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
