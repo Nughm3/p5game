@@ -248,7 +248,10 @@ function draw() {
   else
     playeryvel = -15
 
-  playery -= playeryvel
+  if (allowmove == true)
+    playery -= playeryvel
+  else
+    playeryvel = 0
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
