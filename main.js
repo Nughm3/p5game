@@ -275,6 +275,22 @@ function draw() {
   {
     touchingground = false
   }
+
+  for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+  {
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 128 && playerx > tilehitboxes[repeat][0] - 52 && playerx < tilehitboxes[repeat][0] - 20)
+    {
+      leftoftile = true
+      break
+    }
+    else
+      leftoftile = false
+  }
+
+  if (leftoftile == true && playerxvel > 0)
+  {
+    playerx -= playerxvel
+  }
   
   if (tick - 40 > dashtick)
     allowdash = true
