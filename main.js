@@ -4,7 +4,7 @@ var game_size = [1216, 576];
 var dashamount = 0
 
 var levelspawnpoints = [420,420,420,420,129]
-var level = 0
+var level = 3
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
@@ -97,17 +97,17 @@ function movedash() {
   {
     if (playerdirection == 1)
     {
-      playerx += 12
-      // if (leftoftile == true)
-      //   playerx -= 12
+      playerx += 8
+      if (leftoftile == true)
+        playerx -= 8
     }
     else
     {
-      playerx -= 12
-      // if (rightoftile == true)
-      //   playerx += 12
+      playerx -= 8
+      if (rightoftile == true)
+        playerx += 8
     }
-    if (dashamount < 12)
+    if (dashamount < 16)
       waitdash()
     else
     {
@@ -307,7 +307,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32)
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32  )
     {
       rightoftile = true
       break
