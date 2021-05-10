@@ -189,7 +189,7 @@ function setup() {
 
 function draw() {
   
-  // overworld1()
+  overworld1()
   if (playerx > -12 || playerxvel > 0)
     playerx += playerxvel
 
