@@ -1,8 +1,6 @@
 // var PLAYER, BACKGROUND, TILE1;
 var game_size = [1216, 576];
 
-var tick = 0
-var dashtick = 0
 var dashamount = 0
 
 var levelspawnpoints = [420,420,420,420,129]
@@ -16,7 +14,7 @@ var level2 = [0,1,2,3,4,10,11,12,17,18,137,138,155,156,157,158,172,173,174,175,1
 levels.push(level2)
 var level3 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,46,47,48,49,50,51,52,53,54,55,56,57,58,59,69,70,71,72,73,74,75,76,77,78,79,92,93,94,95,96,97,98,99,115,116,117,118,119,100,101,102,120,121,122,123,124,125,140,141,142,143,144,145,146,147,148,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179]
 levels.push(level3)
-var level4 = [100,101,102,62,63,64,20,21,22,23,24,25,26,27,28,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,56,92,93]
+var level4 = [100,101,102,62,63,64,20,21,22,23,24,25,26,27,28,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,56,92]
 levels.push(level4)
 
 var playerx = 0
@@ -81,13 +79,11 @@ function jump() {
 
 function dash()
 {
-  dashing = true
   allowmove = false
   allowdash = false
   playerxvel = 0
   playeryvel = 0
   dashamount = 0
-  dashtick = tick
   waitdash()
 }
 
@@ -129,7 +125,6 @@ function movedash() {
     playeryvel = 0
     allowmove = true
     dashamount = 0
-    dashing = false
   }
 }
 
@@ -200,8 +195,6 @@ function draw() {
 
   if (level < 2)
     allowdash = false
-
-  tick += 1
 
   image(BACKGROUND, 0,0);
 
@@ -298,7 +291,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 52 && playerx < tilehitboxes[repeat][0] - 20)
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32)
     {
       leftoftile = true
       break
@@ -314,7 +307,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 56 && playerx > tilehitboxes[repeat][0] + 24)
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32)
     {
       rightoftile = true
       break
@@ -344,8 +337,13 @@ function draw() {
     playeryvel *= -1
   }
   
-  if (touchingground == true)
+  if (touchingground == true && level > 1)
     allowdash = true
+
+  if (dashamount > 0)
+    dashing = true
+  else
+    dashing = false
 
   if (playery > 576)
     death()
