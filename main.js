@@ -4,7 +4,7 @@ var game_size = [1216, 576];
 var dashamount = 0
 
 var levelspawnpoints = [420,420,420,420,129]
-var level = 3
+var level = 0
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
@@ -79,54 +79,28 @@ function jump() {
 
 function dash()
 {
+  dashing = true
   allowmove = false
   allowdash = false
-  playerxvel = 0
+  if (playerdirection == 1)
+    playerxvel = 30
+  else
+    playerxvel = -30
   playeryvel = 0
-  dashamount = 0
   waitdash()
 }
 
 function waitdash() {
-  setTimeout(() => {movedash()}, 5)
+  setTimeout(() => {stopdash()}, 100)
 }
 
-function movedash() {
-  dashamount += 1
-  if (playerx > -12)
-  {
-    if (playerdirection == 1)
-    {
-      playerx += 8
-      if (leftoftile == true)
-        playerx -= 8
-    }
-    else
-    {
-      playerx -= 8
-      if (rightoftile == true)
-        playerx += 8
-    }
-    if (dashamount < 16)
-      waitdash()
-    else
-    {
-      playeryvel = 0
-      allowmove = true
-      dashamount = 0
-      // if (leftoftile == true)
-      //   playerx -= 12
-      // if (rightoftile == true)
-      //   playerx += 12
-    }
-  }
-  else
-  {
-    playeryvel = 0
-    allowmove = true
-    dashamount = 0
-  }
+function stopdash() {
+  playerxvel = 0
+  playeryvel = 0
+  allowmove = true
+  dashing = false
 }
+
 
 function death() {
   playerx = 0
@@ -135,14 +109,14 @@ function death() {
 }
 
 function overworld1() {
-  if (musicplaying == false)
-  {
-    musicplaying = true
     OVERWORLD1.play();
-  }
+    setTimeout(() => {overworld1()}, 25000)
 }
 
 function setup() {
+
+  setTimeout(() => {overworld1()}, 100)
+
   createCanvas(game_size[0], game_size[1]);
 
   BACKGROUND.resize(game_size[0], game_size[1]);
@@ -188,8 +162,7 @@ function setup() {
 }
 
 function draw() {
-  
-  overworld1()
+
   if (playerx > -12 || playerxvel > 0)
     playerx += playerxvel
 
@@ -252,6 +225,8 @@ function draw() {
     playerxvel = 0
     playeryvel = 0
     tilehitboxes = []
+    if (level > 1)
+      allowdash = true
   }
 
   if (uppressed == true && touchingground == true && allowmove == true)
@@ -323,7 +298,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery < tilehitboxes[repeat][1] + 64 && playery > tilehitboxes[repeat][1] + 32)
+    if (playerx > tilehitboxes[repeat][0] - 50 && playerx < tilehitboxes[repeat][0] + 50 && playery < tilehitboxes[repeat][1] + 64 && playery > tilehitboxes[repeat][1] + 32)
     {
       bottomoftile = true
       break
@@ -337,13 +312,13 @@ function draw() {
     playeryvel *= -1
   }
   
-  if (touchingground == true && level > 1)
-    allowdash = true
+  if (level < 2)
+  {
+    allowdash = false 
+  }
 
-  if (dashamount > 0)
-    dashing = true
-  else
-    dashing = false
+  if (touchingground == true && allowdash == false && level > 1)
+    allowdash = true
 
   if (playery > 576)
     death()
