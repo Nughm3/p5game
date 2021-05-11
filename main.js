@@ -47,6 +47,11 @@ var leftoftile = false
 var rightoftile = false
 var bottomoftile = false
 
+var allowtophitdetection = true
+var allowlefthitdetection = true
+var allowrighthitdetection = true
+var allowbottomhitdetection = true
+
 function preload() {
   // PLAYER = loadImage('media/player.png');
   // player ready means not dashed, player dash means dash is on cd
@@ -82,6 +87,8 @@ function dash()
   dashing = true
   allowmove = false
   allowdash = false
+  // allowtophitdetection = false
+  // allowbottomhitdetection = false
   if (playerdirection == 1)
     playerxvel = 30
   else
@@ -99,6 +106,8 @@ function stopdash() {
   playeryvel = 0
   allowmove = true
   dashing = false
+  // allowtophitdetection = true
+  // allowbottomhitdetection = true
 }
 
 
@@ -282,7 +291,7 @@ function draw() {
 
   for (repeat = 0; repeat < tilehitboxes.length; repeat++)
   {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32  )
+    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32)
     {
       rightoftile = true
       break
