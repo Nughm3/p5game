@@ -18,9 +18,9 @@ var level4 = [100,101,102,62,63,64,20,21,22,23,24,25,26,27,28,65,66,85,86,105,10
 levels.push(level4)
 
 var spikes = []
-var spikes0 = [13]
+var spikes0 = [[13,1]]
 spikes.push(spikes0)
-var spikes1 = [4,5,8,9,12,13,15,16]
+var spikes1 = [[4,1],[5,1],[8,1],[9,1],[12,1],[13,1],[15,1],[16,1]] // 1=up 2=left 3=right 4=down
 spikes.push(spikes1)
 var spikes2 = []
 spikes.push(spikes2)
@@ -53,6 +53,7 @@ var uppressed = false;
 var musicplaying = false;
 
 var tilehitboxes = []
+var spikehitboxes = []
 
 var topoftile = false
 var leftoftile = false
@@ -228,7 +229,7 @@ function draw() {
 
   for (repeat = 0; repeat < spikes[level].length; repeat++)
   {
-    var spike = spikes[level][repeat]
+    var spike = spikes[level][repeat][0]
     var spikex = 0
     var spikey = 512
     var spikerow = 0
@@ -239,8 +240,9 @@ function draw() {
       spikey = game_size[1] - 64 - (spikerow * 64)
     }
     spikex = spike*64
-    image(SPIKEUP, spikex, spikey)
-    // tilehitboxes.push([tilex,tiley])
+    if (spikes[level][repeat][1] == 1)
+      image(SPIKEUP, spikex, spikey)
+    spikehitboxes.push([spikex,spikey])
   }
 
   if (leftpressed == true && allowmove == true)
@@ -264,6 +266,7 @@ function draw() {
     playerxvel = 0
     playeryvel = 0
     tilehitboxes = []
+    spikehitboxes = []
     if (level > 1)
       allowdash = true
   }
@@ -358,6 +361,14 @@ function draw() {
 
   if (touchingground == true && allowdash == false && level > 1)
     allowdash = true
+
+  for (repeat = 0; repeat < spikehitboxes.length; repeat++)
+  {
+    if (playerx > spikehitboxes[repeat][0] - 60 && playerx < spikehitboxes[repeat][0] + 60 && playery > spikehitboxes[repeat][1] - 60 && playery < spikehitboxes[repeat][1] + 60)
+    {
+      death()
+    }
+  }
 
   if (playery > 576)
     death()
