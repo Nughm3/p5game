@@ -66,6 +66,7 @@ function preload() {
   BACKGROUND2 = loadImage('media/bg1.png');
   MENU = loadImage('media/menu.png');
   TILE1 = loadImage('media/tile1.png');
+  SPIKEUP = loadImage('media/spikeup.png');
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
 }
 
