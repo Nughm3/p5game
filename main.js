@@ -176,6 +176,8 @@ function setup() {
 
 function draw() {
 
+  image(SPIKEUP,0,0)
+
   if (playerx > -12 || playerxvel > 0)
     playerx += playerxvel
 
