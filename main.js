@@ -77,6 +77,9 @@ function preload() {
   MENU = loadImage('media/menu.png');
   TILE1 = loadImage('media/tile1.png');
   SPIKEUP = loadImage('media/spikeup.png');
+  SPIKEDOWN = loadImage('media/spikedown.png')
+  SPIKELEFT = loadImage('media/spikeleft.png')
+  SPIKERIGHT = loadImage('media/spikeright.png')
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
 }
 
