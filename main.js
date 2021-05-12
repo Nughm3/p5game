@@ -3,18 +3,18 @@ var game_size = [1216, 576];
 
 var dashamount = 0
 
-var levelspawnpoints = [420,420,420,420,129]
+var levelspawnpoints = [420,420,190,420,129]
 var level = 0
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
 var level1 = [0,1,2,3,6,7,10,11,14,17,18,26,27,30,31,34,37,38,50,51,54,57,58,74,77,78,97,98]
 levels.push(level1)
-var level2 = [0,1,2,3,4,10,11,12,17,18,137,138,155,156,157,158,172,173,174,175,176,177,178,179]
+var level2 = [80,81,60,61,40,41,20,21,0,1,2,3,4,10,11,12,17,18,137,138,155,156,157,158,172,173,174,175,176,177,178,179]
 levels.push(level2)
 var level3 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,46,47,48,49,50,51,52,53,54,55,56,57,58,59,69,70,71,72,73,74,75,76,77,78,79,92,93,94,95,96,97,98,99,115,116,117,118,119,100,101,102,120,121,122,123,124,125,140,141,142,143,144,145,146,147,148,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179]
 levels.push(level3)
-var level4 = [100,101,102,62,63,64,20,21,22,23,24,25,26,27,28,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,56,92]
+var level4 = [100,101,102,62,63,64,20,21,22,23,24,25,26,27,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,36,56,91,92]
 levels.push(level4)
 
 var spikes = []
@@ -22,7 +22,7 @@ var spikes0 = [[13,1]]
 spikes.push(spikes0)
 var spikes1 = [[4,1],[5,1],[8,1],[9,1],[12,1],[13,1],[15,1],[16,1]] // 1=up 2=left 3=right 4=down
 spikes.push(spikes1)
-var spikes2 = []
+var spikes2 = [[117,4],[118,4],[135,4],[136,4],[152,4],[153,4],[154,4],[5,1],[6,1],[7,1],[8,1],[9,1],[13,1],[14,1],[15,1],[16,1]]
 spikes.push(spikes2)
 var spikes3 = []
 spikes.push(spikes3)
@@ -77,9 +77,9 @@ function preload() {
   MENU = loadImage('media/menu.png');
   TILE1 = loadImage('media/tile1.png');
   SPIKEUP = loadImage('media/spikeup.png');
-  SPIKEDOWN = loadImage('media/spikedown.png')
-  SPIKELEFT = loadImage('media/spikeleft.png')
-  SPIKERIGHT = loadImage('media/spikeright.png')
+  SPIKEDOWN = loadImage('media/spikedown.png');
+  SPIKELEFT = loadImage('media/spikeleft.png');
+  SPIKERIGHT = loadImage('media/spikeright.png');
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
 }
 
@@ -132,6 +132,8 @@ function death() {
   playerx = 0
   playery = levelspawnpoints[level]
   playeryvel = 0
+  playerdirection = 1
+  stopdash()
 }
 
 function overworld1() {
@@ -245,6 +247,12 @@ function draw() {
     spikex = spike*64
     if (spikes[level][repeat][1] == 1)
       image(SPIKEUP, spikex, spikey)
+    else if (spikes[level][repeat][1] == 2)
+      image(SPIKELEFT, spikex, spikey)
+    else if (spikes[level][repeat][1] == 3)
+      image(SPIKERIGHT, spikex, spikey)
+    else if (spikes[level][repeat][1] == 4)
+      image(SPIKEDOWN, spikex, spikey)
     spikehitboxes.push([spikex,spikey])
   }
 
@@ -268,6 +276,8 @@ function draw() {
     playery = levelspawnpoints[level]
     playerxvel = 0
     playeryvel = 0
+    playerdirection = 1
+    stopdash()
     tilehitboxes = []
     spikehitboxes = []
     if (level > 1)
