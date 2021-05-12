@@ -17,6 +17,9 @@ levels.push(level3)
 var level4 = [100,101,102,62,63,64,20,21,22,23,24,25,26,27,28,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,56,92]
 levels.push(level4)
 
+var spikes = []
+var spikes0 = []
+
 var playerx = 0
 var playery = levelspawnpoints[level]
 var playerdirection = 1
