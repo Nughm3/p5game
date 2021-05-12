@@ -18,7 +18,16 @@ var level4 = [100,101,102,62,63,64,20,21,22,23,24,25,26,27,28,65,66,85,86,105,10
 levels.push(level4)
 
 var spikes = []
-var spikes0 = []
+var spikes0 = [13]
+spikes.push(spikes0)
+var spikes1 = [4,5,8,9,12,13,15,16]
+spikes.push(spikes1)
+var spikes2 = []
+spikes.push(spikes2)
+var spikes3 = []
+spikes.push(spikes3)
+var spikes4 = []
+spikes.push(spikes4)
 
 var playerx = 0
 var playery = levelspawnpoints[level]
@@ -176,8 +185,6 @@ function setup() {
 
 function draw() {
 
-  image(SPIKEUP,0,0)
-
   if (playerx > -12 || playerxvel > 0)
     playerx += playerxvel
 
@@ -217,6 +224,23 @@ function draw() {
     tilex = tile*64
     image(TILE1, tilex, tiley)
     tilehitboxes.push([tilex,tiley])
+  }
+
+  for (repeat = 0; repeat < spikes[level].length; repeat++)
+  {
+    var spike = spikes[level][repeat]
+    var spikex = 0
+    var spikey = 512
+    var spikerow = 0
+    while (spike >= 20)
+    {
+      spike -= 20
+      spikerow += 1
+      spikey = game_size[1] - 64 - (spikerow * 64)
+    }
+    spikex = spike*64
+    image(SPIKEUP, spikex, spikey)
+    // tilehitboxes.push([tilex,tiley])
   }
 
   if (leftpressed == true && allowmove == true)
