@@ -3,8 +3,8 @@ var game_size = [1216, 576];
 
 var dashamount = 0
 
-var levelspawnpoints = [420,420,190,420,129]
-var level = 4
+var levelspawnpoints = [420,420,190,420,129,129]
+var level = 0
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
@@ -16,6 +16,8 @@ var level3 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,23,24,25,26,27,2
 levels.push(level3)
 var level4 = [0,1,2,3,4,5,6,7,100,101,102,62,63,64,20,21,22,23,24,25,26,27,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,36,56,91,92]
 levels.push(level4)
+var level5 = [100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116]
+levels.push(level5)
 
 var spikes = []
 var spikesdirections = []
@@ -44,6 +46,11 @@ var spikes4 = [107,127,147,167,93,8,9,10,11,12,13]
 var spikes4directions = [3,3,3,3,3,1,1,1,1,1,1]
 spikes.push(spikes4)
 spikesdirections.push(spikes4directions)
+
+var spikes5 = [124,125,129,130]
+var spikes5directions = [1,1,1,1]
+spikes.push(spikes5)
+spikesdirections.push(spikes5directions)
 
 var playerx = 0
 var playery = levelspawnpoints[level]
@@ -110,7 +117,7 @@ function moveright() {
 }
 
 function jump() {
-  playeryvel = 17
+  playeryvel = 18
   touchingground = false
   uppressed = false
 }
@@ -393,7 +400,7 @@ function draw() {
 
   for (repeat = 0; repeat < spikehitboxes.length; repeat++)
   {
-    if (playerx > spikehitboxes[repeat][0] - 48 && playerx < spikehitboxes[repeat][0] + 48 && playery > spikehitboxes[repeat][1] - 48 && playery < spikehitboxes[repeat][1] + 48)
+    if (playerx > spikehitboxes[repeat][0] - 32 && playerx < spikehitboxes[repeat][0] + 32 && playery > spikehitboxes[repeat][1] - 48 && playery < spikehitboxes[repeat][1] + 48)
     {
       death()
     }
