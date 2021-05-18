@@ -5,7 +5,12 @@ var dashamount = 0
 var dashtouchingleft = false
 
 var levelspawnpoints = [420,420,190,420,129,129]
-var level = 0
+
+if (localStorage.getItem("level"))
+  var level = parseInt(localStorage.getItem("level"))
+else
+  var level = 0
+
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
@@ -150,6 +155,20 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
+function nextlevel() {
+  level += 1
+  playerx = 0
+  playery = levelspawnpoints[level]
+  playerxvel = 0
+  playeryvel = 0
+  playerdirection = 1
+  stopdash()
+  tilehitboxes = []
+  spikehitboxes = []
+  if (level > 1)
+    allowdash = true
+  localStorage.setItem("level",level)
+}
 
 function death() {
   playerx = 0
@@ -211,6 +230,13 @@ function setup() {
   document.addEventListener("keydown", function(event) {
     if (event.key === 'z' && allowdash == true && allowmove == true) {
       dash()
+    }
+  });
+
+  document.addEventListener("keypress", function(event) {
+    if (event.key === 'r') {
+      level = -1
+      nextlevel()
     }
   });
 }
@@ -297,17 +323,7 @@ function draw() {
 
   if (playerx > 1190)
   {
-    level += 1
-    playerx = 0
-    playery = levelspawnpoints[level]
-    playerxvel = 0
-    playeryvel = 0
-    playerdirection = 1
-    stopdash()
-    tilehitboxes = []
-    spikehitboxes = []
-    if (level > 1)
-      allowdash = true
+    nextlevel()
   }
 
   if (uppressed == true && touchingground == true && allowmove == true)
