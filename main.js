@@ -5,7 +5,7 @@ var dashamount = 0
 var dashtouchingleft = false
 
 var levelspawnpoints = [420,420,190,420,129,129]
-var level = 3
+var level = 0
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
