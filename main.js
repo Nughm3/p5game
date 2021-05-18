@@ -75,6 +75,8 @@ var uppressed = false;
 
 var musicplaying = false;
 
+var dashindicator = false;
+
 var tilehitboxes = []
 var spikehitboxes = []
 
@@ -104,6 +106,7 @@ function preload() {
   SPIKELEFT = loadImage('media/spikeleft.png');
   SPIKERIGHT = loadImage('media/spikeright.png');
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
+  DASH = loadImage('media/dashindicator.png');
 }
 
 function moveleft() {
@@ -157,6 +160,9 @@ function death() {
   playeryvel = 0
   playerdirection = 1
   stopdash()
+  if (level == 2) {
+    dashindicator = true
+  }
 }
 
 function overworld1() {
@@ -406,9 +412,14 @@ function draw() {
     }
   }
 
-  if (playery > 576)
-    death()
-  
+  if (playery > 576) {
+      death()
+  }
+
+  if (dashindicator == true && level == 2) {
+      image(DASH, 450, 400)
+  }
+    
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
