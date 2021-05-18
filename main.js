@@ -16,7 +16,7 @@ var level3 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,23,24,25,26,27,2
 levels.push(level3)
 var level4 = [0,1,2,3,4,5,6,7,100,101,102,62,63,64,20,21,22,23,24,25,26,27,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,36,56,91,92]
 levels.push(level4)
-var level5 = [100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116]
+var level5 = [80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,58,78,98,118,138,158,178,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
 levels.push(level5)
 
 var spikes = []
@@ -47,8 +47,8 @@ var spikes4directions = [3,3,3,3,3,1,1,1,1,1,1]
 spikes.push(spikes4)
 spikesdirections.push(spikes4directions)
 
-var spikes5 = [124,125,129,130]
-var spikes5directions = [1,1,1,1]
+var spikes5 = [103,104,105,106,110,111,112,165,166,170,171,172]
+var spikes5directions = [1,1,1,1,1,1,1,4,4,4,4,4]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
@@ -387,7 +387,7 @@ function draw() {
 
   if (bottomoftile == true)
   {
-    playeryvel *= -1
+    playeryvel = abs(playeryvel) * -1
   }
   
   if (level < 2)
