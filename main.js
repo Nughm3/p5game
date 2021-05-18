@@ -2,9 +2,10 @@
 var game_size = [1216, 576];
 
 var dashamount = 0
+var dashtouchingleft = false
 
 var levelspawnpoints = [420,420,190,420,129,129]
-var level = 0
+var level = 3
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
@@ -47,8 +48,8 @@ var spikes4directions = [3,3,3,3,3,1,1,1,1,1,1]
 spikes.push(spikes4)
 spikesdirections.push(spikes4directions)
 
-var spikes5 = [103,104,105,106,110,111,112,165,166,170,171,172]
-var spikes5directions = [1,1,1,1,1,1,1,4,4,4,4,4]
+var spikes5 = [103,104,105,106,111,112,165,166,171,172]
+var spikes5directions = [1,1,1,1,1,1,4,4,4,4]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
@@ -132,10 +133,6 @@ function dash()
   allowdash = false
   allowtophitdetection = false
   allowbottomhitdetection = false
-  if (playerdirection == 1)
-    playerxvel = 30
-  else
-    playerxvel = -30
   playeryvel = 0
   waitdash()
 }
@@ -414,6 +411,25 @@ function draw() {
 
   if (playery > 576) {
       death()
+  }
+
+  if (dashing == true)
+  {
+    for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+    {
+      if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true)
+      {
+        dashtouchingleft = true
+        break
+      }
+    }
+    if (dashtouchingleft == false)
+    {
+      if (playerdirection == 1)
+        playerxvel = 30
+      else
+        playerxvel = -30
+    }
   }
 
   if (dashindicator == true && level == 2) {
