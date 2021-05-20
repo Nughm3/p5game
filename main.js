@@ -17,12 +17,10 @@ if (localStorage.getItem("deaths"))
 else
   var deathcount = 0
 
-var elapsedmin = 0
-var elapsedsec = 0
-var elapseddec = 0
-var displaytime = 0
+var time = 0
 
 var levelspawnpoints = [420,420,190,420,129,184]
+var levelbiomes = [1,1,2,2,2,3] // 1=orange 2=blue 3=green
 
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
@@ -112,8 +110,7 @@ var allowrighthitdetection = true
 var allowbottomhitdetection = true
 
 function preload() {
-  // Players
-  // Player ready means not dashed, player dash means dash is on cd
+  // Players: Player ready means not dashed, player dash means dash is on cd
   PLAYER_READY_R = loadImage('media/players/rready.png'); //B
   PLAYER_DASH_R = loadImage('media/players/rdash.png'); //R
   PLAYER_READY_L = loadImage('media/players/lready.png'); //B
@@ -189,27 +186,13 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
-function timer() {
-  var elapsedmin = setInterval(() => {
-    elapsedmin += 1
-  }, 60000);
-  
-  var elapsedsec = setInterval(() => {
-    elapsedsec += 1
-  }, 1000);
-  
-  var elapseddec = setInterval(() => {
-    elapseddec += 1
-  }, 100);
-
-  if (elapsedmin.toString().length == 1)
-    elapsedmin = '0' + elapsedmin.toString()
-  if (elapsedsec.toString().length == 1)
-    elapsedsec = '0' + elapsedsec.toString()
-  displaytime = elapsedmin.toString()+':'+elapsedsec.toString()+':'+elapseddec.toString();
-}
+var time = setInterval(() => {
+  time += 1
+}, 1000);
 
 function gameover(){
+  var displaytime = floor(time/60)+':'+time%60
+
   endscreen = true;
   image(ENDSCREEN, 0, 0);
   fill(255, 255, 255);
@@ -221,7 +204,8 @@ function gameover(){
   text('Completed in '+displaytime, 13, 102);
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
-  textSize(36);
+  deathcount = 0
+  localStorage.removeItem("deaths")
 }
 
 function nextlevel() {
@@ -368,8 +352,6 @@ function setup() {
   });
 }
 
-timer()
-
 function draw() {
   if (endscreen == false) {
     fill(255, 255, 255);
@@ -383,15 +365,12 @@ function draw() {
     if (level < 2)
       allowdash = false
 
-    if (level <= 1) {
-      image(BACKGROUND, 0, 0);
-    } else {
-      if (level < 5) {
-        image(BACKGROUND1, 0, 0);
-      } else {
-        image(BACKGROUND2, 0, 0);
-      }
-    }
+    if (levelbiomes[level] == 1)
+      image(BACKGROUND, 0, 0)
+    if (levelbiomes[level] == 2)
+      image(BACKGROUND1, 0, 0)
+    if (levelbiomes[level] == 3)
+      image(BACKGROUND2, 0, 0)
 
     if (dashing == true)
     {
@@ -439,35 +418,35 @@ function draw() {
       }
       spikex = spike*64
       if (spikesdirections[level][repeat] == 1) {
-        if (level <= 1)
+        if (levelbiomes[level] == 1)
           image(SPIKEUP1, spikex, spikey)
-        else if (level < 5)
+        if (levelbiomes[level] == 2)
           image(SPIKEUP2, spikex, spikey)
-        else
+        if (levelbiomes[level] == 3)        
           image(SPIKEUP3, spikex, spikey)
       }
       else if (spikesdirections[level][repeat] == 2) {
-        if (level <= 1)
+        if (levelbiomes[level] == 1)
           image(SPIKELEFT1, spikex, spikey)
-        else if (level < 5)
+        if (levelbiomes[level] == 2)
           image(SPIKELEFT2, spikex, spikey)
-        else
+        if (levelbiomes[level] == 3)        
           image(SPIKELEFT3, spikex, spikey)
       }
       else if (spikesdirections[level][repeat] == 3) {
-        if (level <= 1)
+        if (levelbiomes[level] == 1)
           image(SPIKERIGHT1, spikex, spikey)
-        else if (level < 5)
+        if (levelbiomes[level] == 2)
           image(SPIKERIGHT2, spikex, spikey)
-        else
+        if (levelbiomes[level] == 3)        
           image(SPIKERIGHT3, spikex, spikey)
       }
       else if (spikesdirections[level][repeat] == 4) {
-        if (level <= 1)
+        if (levelbiomes[level] == 1)
           image(SPIKEDOWN1, spikex, spikey)
-        else if (level < 5)
+        if (levelbiomes[level] == 2)
           image(SPIKEDOWN2, spikex, spikey)
-        else
+        if (levelbiomes[level] == 3)
           image(SPIKEDOWN3, spikex, spikey)
       }
       spikehitboxes.push([spikex,spikey])
