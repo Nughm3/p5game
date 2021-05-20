@@ -6,6 +6,8 @@ var dashtouchingleft = false
 
 var allowdeath = true
 
+var endscreen = false
+
 if (localStorage.getItem("level"))
   var level = parseInt(localStorage.getItem("level"))
 else
@@ -185,17 +187,28 @@ function stopdash() {
 }
 
 function gameover(){
-  if (deathcount == 0)
-    alert("Game Complete! You didn't die, well done!")
-  else if (deathcount == 1)
-    alert('Game Complete! You died 1 time!')
-  else
-    alert('Game Complete! You died '+deathcount+' times!')
+  // if (deathcount == 0)
+  //   alert("Game Complete! You didn't die, well done!")
+  // else if (deathcount == 1)
+  //   alert('Game Complete! You died 1 time!')
+  // else
+  //   alert('Game Complete! You died '+deathcount+' times!')
   playerx = 0
   playery = levelspawnpoints[level]
-  allowmove = false
-  // Render end screen
-  image(ENDSCREEN, 0, 0)
+  // Render end 
+  endscreen = true;
+  image(ENDSCREEN, 0, 0);
+  fill(255, 255, 255);
+  textSize(48);
+  textFont(ENDFONT);
+  text('Game Complete!', 10, 50);
+  textSize(24);
+  text('Deaths: '+deathcount, 13, 77)
+  text('AdminTroller', 1035, 544);
+  text('ToxicFscyther', 1020, 566);
+  textSize(36);
+  fill(170, 170, 170)
+  text('Well Done!', 10, 565)
 }
 
 function nextlevel() {
@@ -339,250 +352,247 @@ function setup() {
 }
 
 function draw() {
+  if (endscreen == false) {
+    if (playerx > -12 || playerxvel > 0)
+      playerx += playerxvel
 
-  if (playerx > -12 || playerxvel > 0)
-    playerx += playerxvel
+    if (level < 2)
+      allowdash = false
 
-  if (level < 2)
-    allowdash = false
-
-  if (level <= 1) {
-    image(BACKGROUND, 0, 0);
-  } else {
-    if (level < 5) {
-      image(BACKGROUND1, 0, 0);
+    if (level <= 1) {
+      image(BACKGROUND, 0, 0);
     } else {
-      image(BACKGROUND2, 0, 0);
+      if (level < 5) {
+        image(BACKGROUND1, 0, 0);
+      } else {
+        image(BACKGROUND2, 0, 0);
+      }
     }
-  }
-  
+    
 
-  // Change the sprite of the character based on its direction and whether dash is ready
-  if (dashing == true)
-  {
-    if (playerdirection == 1)
-      image(PLAYER_DASH_R, playerx, playery)
-    else
-      image(PLAYER_DASH_L, playerx, playery)
-  }
-  else
-  {
-    if (playerdirection == 1)
-      image(PLAYER_READY_R, playerx, playery)
-    else
-      image(PLAYER_READY_L, playerx, playery)
-  }
-
-  for (repeat = 0; repeat < levels[level].length; repeat++)
-  {
-    var tile = levels[level][repeat]
-    var tilex = 0
-    var tiley = 512
-    var row = 0
-    while (tile >= 20)
+    // Change the sprite of the character based on its direction and whether dash is ready
+    if (dashing == true)
     {
-      tile -= 20
-      row += 1
-      tiley = game_size[1] - 64 - (row * 64)
-    }
-    tilex = tile*64
-    image(TILE1, tilex, tiley)
-    tilehitboxes.push([tilex,tiley])
-  }
-
-  for (repeat = 0; repeat < spikes[level].length; repeat++)
-  {
-    var spike = spikes[level][repeat]
-    var spikex = 0
-    var spikey = 512
-    var spikerow = 0
-    while (spike >= 20)
-    {
-      spike -= 20
-      spikerow += 1
-      spikey = game_size[1] - 64 - (spikerow * 64)
-    }
-    spikex = spike*64
-    if (spikesdirections[level][repeat] == 1) {
-      if (level <= 1)
-        image(SPIKEUP1, spikex, spikey)
-      else if (level < 5)
-        image(SPIKEUP2, spikex, spikey)
+      if (playerdirection == 1)
+        image(PLAYER_DASH_R, playerx, playery)
       else
-        image(SPIKEUP3, spikex, spikey)
+        image(PLAYER_DASH_L, playerx, playery)
     }
-    else if (spikesdirections[level][repeat] == 2) {
-      if (level <= 1)
-        image(SPIKELEFT1, spikex, spikey)
-      else if (level < 5)
-        image(SPIKELEFT2, spikex, spikey)
+    else
+    {
+      if (playerdirection == 1)
+        image(PLAYER_READY_R, playerx, playery)
       else
-        image(SPIKELEFT3, spikex, spikey)
+        image(PLAYER_READY_L, playerx, playery)
     }
-    else if (spikesdirections[level][repeat] == 3) {
-      if (level <= 1)
-        image(SPIKERIGHT1, spikex, spikey)
-      else if (level < 5)
-        image(SPIKERIGHT2, spikex, spikey)
+
+    for (repeat = 0; repeat < levels[level].length; repeat++)
+    {
+      var tile = levels[level][repeat]
+      var tilex = 0
+      var tiley = 512
+      var row = 0
+      while (tile >= 20)
+      {
+        tile -= 20
+        row += 1
+        tiley = game_size[1] - 64 - (row * 64)
+      }
+      tilex = tile*64
+      image(TILE1, tilex, tiley)
+      tilehitboxes.push([tilex,tiley])
+    }
+
+    for (repeat = 0; repeat < spikes[level].length; repeat++)
+    {
+      var spike = spikes[level][repeat]
+      var spikex = 0
+      var spikey = 512
+      var spikerow = 0
+      while (spike >= 20)
+      {
+        spike -= 20
+        spikerow += 1
+        spikey = game_size[1] - 64 - (spikerow * 64)
+      }
+      spikex = spike*64
+      if (spikesdirections[level][repeat] == 1) {
+        if (level <= 1)
+          image(SPIKEUP1, spikex, spikey)
+        else if (level < 5)
+          image(SPIKEUP2, spikex, spikey)
+        else
+          image(SPIKEUP3, spikex, spikey)
+      }
+      else if (spikesdirections[level][repeat] == 2) {
+        if (level <= 1)
+          image(SPIKELEFT1, spikex, spikey)
+        else if (level < 5)
+          image(SPIKELEFT2, spikex, spikey)
+        else
+          image(SPIKELEFT3, spikex, spikey)
+      }
+      else if (spikesdirections[level][repeat] == 3) {
+        if (level <= 1)
+          image(SPIKERIGHT1, spikex, spikey)
+        else if (level < 5)
+          image(SPIKERIGHT2, spikex, spikey)
+        else
+          image(SPIKERIGHT3, spikex, spikey)
+      }
+      else if (spikesdirections[level][repeat] == 4) {
+        if (level <= 1)
+          image(SPIKEDOWN1, spikex, spikey)
+        else if (level < 5)
+          image(SPIKEDOWN2, spikex, spikey)
+        else
+          image(SPIKEDOWN3, spikex, spikey)
+      }
+      spikehitboxes.push([spikex,spikey])
+    }
+
+    if (leftpressed == true && allowmove == true)
+    {
+      moveleft()
+    }  
+
+    if (rightpressed == true && allowmove == true)
+    {
+      moveright()
+    }
+
+    if (leftpressed == true && rightpressed == true && allowmove == true)
+      playerxvel = 0
+
+    if (playerx > 1190)
+    {
+      nextlevel()
+    }
+
+    if (uppressed == true && touchingground == true && allowmove == true)
+      jump()
+
+    if (playeryvel > -15)
+      playeryvel -= gravity
+    else
+      playeryvel = -15
+
+    if (allowmove == true)
+      playery -= playeryvel
+    else
+      playeryvel = 0
+
+    for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+    {
+      if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 56 && playery < tilehitboxes[repeat][1] - 32 && allowtophitdetection == true)
+      {
+        topoftile = true
+        playery = tilehitboxes[repeat][1] - 48
+        break
+      }
       else
-        image(SPIKERIGHT3, spikex, spikey)
+        topoftile = false
     }
-    else if (spikesdirections[level][repeat] == 4) {
-      if (level <= 1)
-        image(SPIKEDOWN1, spikex, spikey)
-      else if (level < 5)
-        image(SPIKEDOWN2, spikex, spikey)
-      else
-        image(SPIKEDOWN3, spikex, spikey)
-    }
-    spikehitboxes.push([spikex,spikey])
-  }
 
-  if (leftpressed == true && allowmove == true)
-  {
-    moveleft()
-  }  
-
-  if (rightpressed == true && allowmove == true)
-  {
-    moveright()
-  }
-
-  if (leftpressed == true && rightpressed == true && allowmove == true)
-    playerxvel = 0
-
-  if (playerx > 1190)
-  {
-    nextlevel()
-  }
-
-  if (uppressed == true && touchingground == true && allowmove == true)
-    jump()
-
-  if (playeryvel > -15)
-    playeryvel -= gravity
-  else
-    playeryvel = -15
-
-  if (allowmove == true)
-    playery -= playeryvel
-  else
-    playeryvel = 0
-
-  for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-  {
-    if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 56 && playery < tilehitboxes[repeat][1] - 32 && allowtophitdetection == true)
+    if (topoftile == true)
     {
-      topoftile = true
-      playery = tilehitboxes[repeat][1] - 48
-      break
+      playery += playeryvel
+      touchingground = true
     }
     else
-      topoftile = false
-  }
-
-  if (topoftile == true)
-  {
-    playery += playeryvel
-    touchingground = true
-  }
-  else
-  {
-    touchingground = false
-  }
-
-  for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-  {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true)
     {
-      leftoftile = true
-      break
+      touchingground = false
     }
-    else
-      leftoftile = false
-  }
 
-  if (leftoftile == true && playerxvel > 0)
-  {
-    playerx -= playerxvel
-  }
-
-  for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-  {
-    if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32 && allowrighthitdetection == true)
-    {
-      rightoftile = true
-      break
-    }
-    else
-      rightoftile = false
-  }
-
-  if (rightoftile == true && playerxvel < 0)
-  {
-    playerx -= playerxvel
-  }
-
-  for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-  {
-    if (playerx > tilehitboxes[repeat][0] - 50 && playerx < tilehitboxes[repeat][0] + 50 && playery < tilehitboxes[repeat][1] + 64 && playery > tilehitboxes[repeat][1] + 32 && allowbottomhitdetection == true)
-    {
-      bottomoftile = true
-      break
-    }
-    else
-      bottomoftile = false
-  }
-
-  if (bottomoftile == true)
-  {
-    playeryvel = abs(playeryvel) * -1
-  }
-  
-  if (level < 2)
-  {
-    allowdash = false 
-  }
-
-  if (touchingground == true && allowdash == false && level > 1)
-    allowdash = true
-
-  for (repeat = 0; repeat < spikehitboxes.length; repeat++)
-  {
-    if (allowdeath == true && playerx > spikehitboxes[repeat][0] - 32 && playerx < spikehitboxes[repeat][0] + 32 && playery > spikehitboxes[repeat][1] - 48 && playery < spikehitboxes[repeat][1] + 48)
-    {
-      death()
-    }
-  }
-
-  if (playery > 576 && allowdeath == true) {
-      death()
-  }
-
-  if (dashing == true)
-  {
     for (repeat = 0; repeat < tilehitboxes.length; repeat++)
     {
       if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true)
       {
-        dashtouchingleft = true
+        leftoftile = true
         break
       }
-    }
-    if (dashtouchingleft == false)
-    {
-      if (playerdirection == 1)
-        playerxvel = 30
       else
-        playerxvel = -30
+        leftoftile = false
     }
-  }
 
-  if (dashindicator == true && level == 2) {
-      image(DASH, 450, 400)
-  }
+    if (leftoftile == true && playerxvel > 0)
+    {
+      playerx -= playerxvel
+    }
+
+    for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+    {
+      if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32 && allowrighthitdetection == true)
+      {
+        rightoftile = true
+        break
+      }
+      else
+        rightoftile = false
+    }
+
+    if (rightoftile == true && playerxvel < 0)
+    {
+      playerx -= playerxvel
+    }
+
+    for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+    {
+      if (playerx > tilehitboxes[repeat][0] - 50 && playerx < tilehitboxes[repeat][0] + 50 && playery < tilehitboxes[repeat][1] + 64 && playery > tilehitboxes[repeat][1] + 32 && allowbottomhitdetection == true)
+      {
+        bottomoftile = true
+        break
+      }
+      else
+        bottomoftile = false
+    }
+
+    if (bottomoftile == true)
+    {
+      playeryvel = abs(playeryvel) * -1
+    }
     
-  textAlign(CENTER, CENTER);
-  textSize(40);
-  fill(255);
+    if (level < 2)
+    {
+      allowdash = false 
+    }
+
+    if (touchingground == true && allowdash == false && level > 1)
+      allowdash = true
+
+    for (repeat = 0; repeat < spikehitboxes.length; repeat++)
+    {
+      if (allowdeath == true && playerx > spikehitboxes[repeat][0] - 32 && playerx < spikehitboxes[repeat][0] + 32 && playery > spikehitboxes[repeat][1] - 48 && playery < spikehitboxes[repeat][1] + 48)
+      {
+        death()
+      }
+    }
+
+    if (playery > 576 && allowdeath == true) {
+        death()
+    }
+
+    if (dashing == true)
+    {
+      for (repeat = 0; repeat < tilehitboxes.length; repeat++)
+      {
+        if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true)
+        {
+          dashtouchingleft = true
+          break
+        }
+      }
+      if (dashtouchingleft == false)
+      {
+        if (playerdirection == 1)
+          playerxvel = 30
+        else
+          playerxvel = -30
+      }
+    }
+
+    if (dashindicator == true && level == 2) {
+        image(DASH, 450, 400)
+    }
+  }    
 }
