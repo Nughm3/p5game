@@ -5,14 +5,18 @@ var dashamount = 0
 var dashtouchingleft = false
 
 var allowdeath = true
-var deathcount = 0
-
-var levelspawnpoints = [420,420,190,420,129,184]
 
 if (localStorage.getItem("level"))
   var level = parseInt(localStorage.getItem("level"))
 else
   var level = 0
+
+if (localStorage.getItem("deaths"))
+  var deathcount = parseInt(localStorage.getItem("deaths"))
+else
+  var deathcount = 0
+
+var levelspawnpoints = [420,420,190,420,129,184]
 
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
@@ -103,18 +107,21 @@ var allowbottomhitdetection = true
 
 function preload() {
   // Players
-  // player ready means not dashed, player dash means dash is on cd
-  PLAYER_READY_R = loadImage('media/players/rready.png');
-  PLAYER_DASH_R = loadImage('media/players/rdash.png');
-  PLAYER_READY_L = loadImage('media/players/lready.png');
-  PLAYER_DASH_L = loadImage('media/players/ldash.png');
+  // Player ready means not dashed, player dash means dash is on cd
+  PLAYER_READY_R = loadImage('media/players/rready.png'); //B
+  PLAYER_DASH_R = loadImage('media/players/rdash.png'); //R
+  PLAYER_READY_L = loadImage('media/players/lready.png'); //B
+  PLAYER_DASH_L = loadImage('media/players/ldash.png'); //R
   // Backgrounds
-  BACKGROUND = loadImage('media/bg/sunset.png');
-  BACKGROUND1 = loadImage('media/bg/city.png');
-  BACKGROUND2 = loadImage('media/bg/neon.png');
-  // Tiles
+  BACKGROUND = loadImage('media/bg/sunset.png'); // Orange
+  BACKGROUND1 = loadImage('media/bg/city.png'); // Deep blue
+  BACKGROUND2 = loadImage('media/bg/neon.png'); // Green
+  ENDSCREEN = loadImage('media/bg/endscreen.png'); // Dimmed background to show stats
+  // Tiles: Stage 1 tiles are ORANGE, 2 are BLUE, 3 are GREEN
   TILE1 = loadImage('media/tile/tile1.png');
-  DASH = loadImage('media/tile/dashindicator.png');
+  TILE2 = loadImage('media/tile/tile2.png');
+  TILE3 = loadImage('media/tile/tile3.png');
+  DASH = loadImage('media/tile/dashindicator.png'); // Helps the player know to press Z to dash
   // Effects
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/spikes1/spikeup.png');
@@ -131,6 +138,10 @@ function preload() {
   SPIKERIGHT3 = loadImage('media/spikes3/spikeright.png');
   // Sounds & Music
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
+  // OVERWORLD2 = loadSound('media/music/overworld3.mp3');
+  // OVERWORLD3 = loadSound('media/music/overworld3.mp3');
+  // Fonts: Used for End Screen
+  ENDFONT = loadFont('media/fonts/mono.ttf');
 }
 
 function moveleft() {
@@ -173,19 +184,25 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
+function gameover(){
+  if (deathcount == 0)
+    alert("Game Complete! You didn't die, well done!")
+  else if (deathcount == 1)
+    alert('Game Complete! You died 1 time!')
+  else
+    alert('Game Complete! You died '+deathcount+' times!')
+  playerx = 0
+  playery = levelspawnpoints[level]
+  allowmove = false
+  // Render end screen
+  image(ENDSCREEN, 0, 0)
+}
+
 function nextlevel() {
   if (level > levelcount) {
-    if (deathcount == 0) {
-      alert("Game Complete! You didn't die, well done!")
-    } else {
-        if (deathcount == 1) {
-          alert('Game Complete! You died 1 time!')
-        } else {
-          alert('Game Complete! You died ' + deathcount + ' times!')
-        }
-    }
-    // temp, maybe an end screen?
-  } else {
+    gameover()
+  }
+  else {
     level += 1
     playerx = 0
     playery = levelspawnpoints[level]
@@ -197,7 +214,8 @@ function nextlevel() {
     spikehitboxes = []
     if (level > 1)
       allowdash = true
-    localStorage.setItem("level",level)
+    localStorage.setItem("level", level)
+    localStorage.setItem("deaths", deathcount)
   }
 }
 
