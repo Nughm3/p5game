@@ -109,19 +109,27 @@ function preload() {
   PLAYER_READY_L = loadImage('media/players/lready.png');
   PLAYER_DASH_L = loadImage('media/players/ldash.png');
   // Backgrounds
-  BACKGROUND = loadImage('media/sunset.png');
-  BACKGROUND1 = loadImage('media/background.png');
-  BACKGROUND2 = loadImage('media/neon.png');
-  MENU = loadImage('media/menu.png');
+  BACKGROUND = loadImage('media/bg/sunset.png');
+  BACKGROUND1 = loadImage('media/bg/city.png');
+  BACKGROUND2 = loadImage('media/bg/neon.png');
   // Tiles
-  TILE1 = loadImage('media/tile1.png');
-  SPIKEUP = loadImage('media/spikeup.png');
-  SPIKEDOWN = loadImage('media/spikedown.png');
-  SPIKELEFT = loadImage('media/spikeleft.png');
-  SPIKERIGHT = loadImage('media/spikeright.png');
-  DASH = loadImage('media/dashindicator.png');
+  TILE1 = loadImage('media/tile/tile1.png');
+  DASH = loadImage('media/tile/dashindicator.png');
   // Effects
 
+  // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
+  SPIKEUP1 = loadImage('media/spikes1/spikeup.png');
+  SPIKEDOWN1 = loadImage('media/spikes1/spikedown.png');
+  SPIKELEFT1 = loadImage('media/spikes1/spikeleft.png');
+  SPIKERIGHT1 = loadImage('media/spikes1/spikeright.png');
+  SPIKEUP2 = loadImage('media/spikes2/spikeup.png');
+  SPIKEDOWN2 = loadImage('media/spikes2/spikedown.png');
+  SPIKELEFT2 = loadImage('media/spikes2/spikeleft.png');
+  SPIKERIGHT2 = loadImage('media/spikes2/spikeright.png');
+  SPIKEUP3 = loadImage('media/spikes3/spikeup.png');
+  SPIKEDOWN3 = loadImage('media/spikes3/spikedown.png');
+  SPIKELEFT3 = loadImage('media/spikes3/spikeleft.png');
+  SPIKERIGHT3 = loadImage('media/spikes3/spikeright.png');
   // Sounds & Music
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
 }
@@ -376,14 +384,38 @@ function draw() {
       spikey = game_size[1] - 64 - (spikerow * 64)
     }
     spikex = spike*64
-    if (spikesdirections[level][repeat] == 1)
-      image(SPIKEUP, spikex, spikey)
-    else if (spikesdirections[level][repeat] == 2)
-      image(SPIKELEFT, spikex, spikey)
-    else if (spikesdirections[level][repeat] == 3)
-      image(SPIKERIGHT, spikex, spikey)
-    else if (spikesdirections[level][repeat] == 4)
-      image(SPIKEDOWN, spikex, spikey)
+    if (spikesdirections[level][repeat] == 1) {
+      if (level <= 1)
+        image(SPIKEUP1, spikex, spikey)
+      else if (level < 5)
+        image(SPIKEUP2, spikex, spikey)
+      else
+        image(SPIKEUP3, spikex, spikey)
+    }
+    else if (spikesdirections[level][repeat] == 2) {
+      if (level <= 1)
+        image(SPIKELEFT1, spikex, spikey)
+      else if (level < 5)
+        image(SPIKELEFT2, spikex, spikey)
+      else
+        image(SPIKELEFT3, spikex, spikey)
+    }
+    else if (spikesdirections[level][repeat] == 3) {
+      if (level <= 1)
+        image(SPIKERIGHT1, spikex, spikey)
+      else if (level < 5)
+        image(SPIKERIGHT2, spikex, spikey)
+      else
+        image(SPIKERIGHT3, spikex, spikey)
+    }
+    else if (spikesdirections[level][repeat] == 4) {
+      if (level <= 1)
+        image(SPIKEDOWN1, spikex, spikey)
+      else if (level < 5)
+        image(SPIKEDOWN2, spikex, spikey)
+      else
+        image(SPIKEDOWN3, spikex, spikey)
+    }
     spikehitboxes.push([spikex,spikey])
   }
 
