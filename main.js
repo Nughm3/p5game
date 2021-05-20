@@ -4,7 +4,7 @@ var game_size = [1216, 576];
 var dashamount = 0
 var dashtouchingleft = false
 
-var levelspawnpoints = [420,420,190,420,129,129]
+var levelspawnpoints = [420,420,190,420,129,184]
 
 if (localStorage.getItem("level"))
   var level = parseInt(localStorage.getItem("level"))
@@ -170,6 +170,21 @@ function nextlevel() {
   localStorage.setItem("level",level)
 }
 
+function previouslevel() {
+  level -= 1
+  playerx = 0
+  playery = levelspawnpoints[level]
+  playerxvel = 0
+  playeryvel = 0
+  playerdirection = 1
+  stopdash()
+  tilehitboxes = []
+  spikehitboxes = []
+  if (level < 2)
+    allowdash = false
+  localStorage.setItem("level",level)
+}
+
 function death() {
   playerx = 0
   playery = levelspawnpoints[level]
@@ -237,6 +252,18 @@ function setup() {
     if (event.key === 'r') {
       level = -1
       nextlevel()
+    }
+  });
+
+  document.addEventListener("keypress", function(event) {
+    if (event.key === ']') {
+      nextlevel()
+    }
+  });
+
+  document.addEventListener("keypress", function(event) {
+    if (event.key === '[') {
+      previouslevel()
     }
   });
 }
