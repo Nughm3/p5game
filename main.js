@@ -187,15 +187,6 @@ function stopdash() {
 }
 
 function gameover(){
-  // if (deathcount == 0)
-  //   alert("Game Complete! You didn't die, well done!")
-  // else if (deathcount == 1)
-  //   alert('Game Complete! You died 1 time!')
-  // else
-  //   alert('Game Complete! You died '+deathcount+' times!')
-  playerx = 0
-  playery = levelspawnpoints[level]
-  // Render end 
   endscreen = true;
   image(ENDSCREEN, 0, 0);
   fill(255, 255, 255);
