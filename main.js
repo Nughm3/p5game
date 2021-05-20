@@ -278,6 +278,7 @@ function death() {
   stopdash()
 
   deathcount += 1
+  localStorage.setItem("deaths",deathcount)
 
   if (level == 2) {
     dashindicator = true
