@@ -119,8 +119,8 @@ function preload() {
   ENDSCREEN = loadImage('media/bg/endscreen.png'); // Dimmed background to show stats
   // Tiles: Stage 1 tiles are ORANGE, 2 are BLUE, 3 are GREEN
   TILE1 = loadImage('media/tile/tile1.png');
-  TILE2 = loadImage('media/tile/tile2.png');
-  TILE3 = loadImage('media/tile/tile3.png');
+  // TILE2 = loadImage('media/tile/tile2.png');
+  // TILE3 = loadImage('media/tile/tile3.png');
   DASH = loadImage('media/tile/dashindicator.png'); // Helps the player know to press Z to dash
   // Effects
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
@@ -320,6 +320,8 @@ function setup() {
     if (event.key === 'r') {
       level = -1
       nextlevel()
+      deathcount = 0
+      localStorage.setItem("deaths", 0)
     }
   });
 
