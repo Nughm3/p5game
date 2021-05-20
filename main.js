@@ -116,7 +116,6 @@ function preload() {
   TILE1 = loadImage('media/tile/tile1.png');
   DASH = loadImage('media/tile/dashindicator.png');
   // Effects
-
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/spikes1/spikeup.png');
   SPIKEDOWN1 = loadImage('media/spikes1/spikedown.png');
