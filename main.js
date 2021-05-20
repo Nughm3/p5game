@@ -27,6 +27,8 @@ levels.push(level4)
 var level5 = [80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,58,78,98,118,138,158,178,0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,40,41,42,48,49,50,51,52,53,54,55,56,57,20,21,22]
 levels.push(level5)
 
+const levelcount = 5 // update this upon adding new levels, used for game complete detection
+
 var spikes = []
 var spikesdirections = []
 
@@ -158,18 +160,23 @@ function stopdash() {
 }
 
 function nextlevel() {
-  level += 1
-  playerx = 0
-  playery = levelspawnpoints[level]
-  playerxvel = 0
-  playeryvel = 0
-  playerdirection = 1
-  stopdash()
-  tilehitboxes = []
-  spikehitboxes = []
-  if (level > 1)
-    allowdash = true
-  localStorage.setItem("level",level)
+  if (level > levelcount) {
+    alert('Game Complete!')
+    // temp
+  } else {
+    level += 1
+    playerx = 0
+    playery = levelspawnpoints[level]
+    playerxvel = 0
+    playeryvel = 0
+    playerdirection = 1
+    stopdash()
+    tilehitboxes = []
+    spikehitboxes = []
+    if (level > 1)
+      allowdash = true
+    localStorage.setItem("level",level)
+  }
 }
 
 function previouslevel() {
