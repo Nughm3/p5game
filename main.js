@@ -180,18 +180,21 @@ function nextlevel() {
 }
 
 function previouslevel() {
-  level -= 1
-  playerx = 0
-  playery = levelspawnpoints[level]
-  playerxvel = 0
-  playeryvel = 0
-  playerdirection = 1
-  stopdash()
-  tilehitboxes = []
-  spikehitboxes = []
-  if (level < 2)
-    allowdash = false
-  localStorage.setItem("level",level)
+  if (level > 0)
+  {
+    level -= 1
+    playerx = 0
+    playery = levelspawnpoints[level]
+    playerxvel = 0
+    playeryvel = 0
+    playerdirection = 1
+    stopdash()
+    tilehitboxes = []
+    spikehitboxes = []
+    if (level < 2)
+      allowdash = false
+    localStorage.setItem("level",level)
+  } 
 }
 
 function death() {
