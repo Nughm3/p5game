@@ -359,7 +359,6 @@ function draw() {
         image(BACKGROUND2, 0, 0);
       }
     }
-    
 
     // Change the sprite of the character based on its direction and whether dash is ready
     if (dashing == true)
