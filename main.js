@@ -101,22 +101,28 @@ var allowrighthitdetection = true
 var allowbottomhitdetection = true
 
 function preload() {
-  // PLAYER = loadImage('media/player.png');
+  // Players
   // player ready means not dashed, player dash means dash is on cd
   PLAYER_READY_R = loadImage('media/players/rready.png');
   PLAYER_DASH_R = loadImage('media/players/rdash.png');
   PLAYER_READY_L = loadImage('media/players/lready.png');
   PLAYER_DASH_L = loadImage('media/players/ldash.png');
-  BACKGROUND = loadImage('media/bg2.png');
-  BACKGROUND2 = loadImage('media/bg1.png');
+  // Backgrounds
+  BACKGROUND = loadImage('media/background.png');
+  BACKGROUND1 = loadImage('media/bg1.png');
+  BACKGROUND2 = loadImage('media/bg2.png');
   MENU = loadImage('media/menu.png');
+  // Tiles
   TILE1 = loadImage('media/tile1.png');
   SPIKEUP = loadImage('media/spikeup.png');
   SPIKEDOWN = loadImage('media/spikedown.png');
   SPIKELEFT = loadImage('media/spikeleft.png');
   SPIKERIGHT = loadImage('media/spikeright.png');
-  OVERWORLD1 = loadSound('media/music/overworld1.mp3');
   DASH = loadImage('media/dashindicator.png');
+  // Effects
+
+  // Sounds & Music
+  OVERWORLD1 = loadSound('media/music/overworld1.mp3');
 }
 
 function moveleft() {
