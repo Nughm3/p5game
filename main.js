@@ -4,6 +4,8 @@ var game_size = [1216, 576];
 var dashamount = 0
 var dashtouchingleft = false
 
+var allowdeath = true
+
 var levelspawnpoints = [420,420,190,420,129,184]
 
 if (localStorage.getItem("level"))
@@ -186,6 +188,13 @@ function previouslevel() {
 }
 
 function death() {
+  allowtophitdetection = false
+  allowbottomhitdetection = false
+  allowlefthitdetection = false
+  allowrighthitdetection = false
+  allowdeath = false
+  playeryvel = 15
+
   playerx = 0
   playery = levelspawnpoints[level]
   playeryvel = 0
@@ -194,6 +203,12 @@ function death() {
   if (level == 2) {
     dashindicator = true
   }
+  
+  allowtophitdetection = true
+  allowbottomhitdetection = true
+  allowlefthitdetection = true
+  allowrighthitdetection = true
+  allowdeath = true
 }
 
 function overworld1() {
@@ -446,13 +461,13 @@ function draw() {
 
   for (repeat = 0; repeat < spikehitboxes.length; repeat++)
   {
-    if (playerx > spikehitboxes[repeat][0] - 32 && playerx < spikehitboxes[repeat][0] + 32 && playery > spikehitboxes[repeat][1] - 48 && playery < spikehitboxes[repeat][1] + 48)
+    if (allowdeath == true && playerx > spikehitboxes[repeat][0] - 32 && playerx < spikehitboxes[repeat][0] + 32 && playery > spikehitboxes[repeat][1] - 48 && playery < spikehitboxes[repeat][1] + 48)
     {
       death()
     }
   }
 
-  if (playery > 576) {
+  if (playery > 576 && allowdeath == true) {
       death()
   }
 
