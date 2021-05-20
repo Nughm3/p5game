@@ -5,7 +5,6 @@ var dashamount = 0
 var dashtouchingleft = false
 
 var allowdeath = true
-
 var endscreen = false
 
 if (localStorage.getItem("level"))
@@ -17,6 +16,11 @@ if (localStorage.getItem("deaths"))
   var deathcount = parseInt(localStorage.getItem("deaths"))
 else
   var deathcount = 0
+
+var elapsedmin = 0
+var elapsedsec = 0
+var elapseddec = 0
+var displaytime = 0
 
 var levelspawnpoints = [420,420,190,420,129,184]
 
@@ -142,8 +146,8 @@ function preload() {
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
   // OVERWORLD2 = loadSound('media/music/overworld3.mp3');
   // OVERWORLD3 = loadSound('media/music/overworld3.mp3');
-  // Fonts: Used for End Screen
-  ENDFONT = loadFont('media/fonts/mono.ttf');
+  // Fonts
+  FONT = loadFont('media/fonts/mono.ttf');
 }
 
 function moveleft() {
@@ -186,20 +190,46 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
+function timer() {
+  var elapsedmin = setInterval(() => {
+    elapsedmin += 1
+  }, 60000);
+  
+  var elapsedsec = setInterval(() => {
+    elapsedsec += 1
+  }, 1000);
+  
+  var elapseddec = setInterval(() => {
+    elapseddec += 1
+  }, 100);
+
+  if (elapsedmin.toString().length == 1)
+    elapsedmin = concat('0', elapsedmin.toString())
+  if (elapsedsec.toString().length == 1)
+    elapsedsec = concat('0', elapsedsec.toString())
+  displaytime = concat(elapsedmin, ':', elapsedsec, ':', elapseddec.toString());
+
+  fill(255, 255, 255);
+  textSize(36);
+  textFont(FONT);
+  text(displaytime, 100, 100);
+}
+
 function gameover(){
   endscreen = true;
   image(ENDSCREEN, 0, 0);
   fill(255, 255, 255);
   textSize(48);
-  textFont(ENDFONT);
+  textFont(FONT);
   text('Game Complete!', 10, 50);
   textSize(24);
-  text('Deaths: '+deathcount, 13, 77)
+  text(deathcount+' Deaths', 13, 77);
+  text('Completed in '+displaytime, 13, 100);
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
   textSize(36);
-  fill(170, 170, 170)
-  text('Well Done!', 10, 565)
+  fill(170, 170, 170);
+  text('Well Done!', 10, 565);
 }
 
 function nextlevel() {
@@ -274,7 +304,6 @@ function overworld1() {
 }
 
 function setup() {
-
   setTimeout(() => {overworld1()}, 100)
 
   createCanvas(game_size[0], game_size[1]);
@@ -344,6 +373,7 @@ function setup() {
 
 function draw() {
   if (endscreen == false) {
+
     if (playerx > -12 || playerxvel > 0)
       playerx += playerxvel
 
@@ -360,7 +390,6 @@ function draw() {
       }
     }
 
-    // Change the sprite of the character based on its direction and whether dash is ready
     if (dashing == true)
     {
       if (playerdirection == 1)
