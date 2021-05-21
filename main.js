@@ -16,11 +16,6 @@ if (localStorage.getItem("deaths"))
 else
   var deathcount = 0
 
-var elapsedmin = 0
-var elapsedsec = 0
-var elapseddec = 0
-var displaytime = 0
-
 var levelspawnpoints = [420,420,190,420,129,184]
 
 var levels = []
@@ -188,26 +183,6 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
-function timer() {
-  var elapsedmin = setInterval(() => {
-    elapsedmin += 1
-  }, 60000);
-  
-  var elapsedsec = setInterval(() => {
-    elapsedsec += 1
-  }, 1000);
-  
-  var elapseddec = setInterval(() => {
-    elapseddec += 1
-  }, 100);
-
-  if (elapsedmin.toString().length == 1)
-    elapsedmin = '0' + elapsedmin.toString()
-  if (elapsedsec.toString().length == 1)
-    elapsedsec = '0' + elapsedsec.toString()
-  displaytime = elapsedmin.toString()+':'+elapsedsec.toString()+':'+elapseddec.toString();
-}
-
 function gameover(){
   endscreen = true;
   image(ENDSCREEN, 0, 0);
@@ -216,8 +191,10 @@ function gameover(){
   textFont(FONT);
   text('Game Complete!', 10, 50);
   textSize(24);
-  text(deathcount+' Deaths', 13, 77);
-  text('Completed in '+displaytime, 13, 102);
+  if (deathcount == 1)
+    text('1 Death');
+  else
+    text(deathcount+' Deaths', 13, 77);
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
   textSize(36);
@@ -346,10 +323,6 @@ function setup() {
       level = -1
       nextlevel()
       deathcount = 0
-      elapsedmin = 0
-      elapsedsec = 0
-      elapseddec = 0
-      displaytime = 0
       localStorage.setItem("deaths", 0)
     }
   });
@@ -367,15 +340,8 @@ function setup() {
   });
 }
 
-timer()
-
 function draw() {
   if (endscreen == false) {
-    fill(255, 255, 255);
-    textSize(36);
-    textFont(FONT);
-    text(displaytime, 100, 100);
-
     if (playerx > -12 || playerxvel > 0)
       playerx += playerxvel
 
