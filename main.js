@@ -190,7 +190,7 @@ function gameover(){
   fill(255, 255, 255);
   textSize(48);
   textFont(FONT);
-  text('Game Complete!', 10, 50);
+  text('Game Complete! (Press R to reset)', 10, 50);
   textSize(24);
   if (deathcount == 1)
     text('1 Death');
@@ -268,13 +268,9 @@ function death() {
   allowdeath = true
 }
 
-function overworld1() {
-    OVERWORLD1.play();
-    setTimeout(() => {overworld1()}, 25000)
-}
-
 function setup() {
-  setTimeout(() => {overworld1()}, 100)
+
+  OVERWORLD1.loop()
 
   createCanvas(game_size[0], game_size[1]);
 
@@ -325,6 +321,7 @@ function setup() {
       nextlevel()
       deathcount = 0
       localStorage.setItem("deaths", 0)
+      endscreen = false
     }
   });
 
@@ -342,6 +339,7 @@ function setup() {
 }
 
 function draw() {
+
   if (endscreen == false) {
     if (playerx > -12 || playerxvel > 0)
       playerx += playerxvel
@@ -582,5 +580,8 @@ function draw() {
     if (dashindicator == true && level == 2) {
         image(DASH, 450, 400)
     }
+
+    if (level == 0)
+      image(ARROWS,355,100)
   }    
 }
