@@ -122,6 +122,7 @@ function preload() {
   // TILE2 = loadImage('media/tile/tile2.png');
   // TILE3 = loadImage('media/tile/tile3.png');
   DASH = loadImage('media/tile/dashindicator.png'); // Helps the player know to press Z to dash
+  ARROWS = loadImage('media/tile/arrows.png')
   // Effects
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/spikes1/spikeup.png');
