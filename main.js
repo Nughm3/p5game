@@ -4,13 +4,16 @@ var dashamount = 0
 var dashtouchingleft = false
 
 var allowdeath = true
-var endscreen = false
+var endscreen = false // Menu screen in next block
 var playermoved = false
 
-if (localStorage.getItem("level"))
+if (localStorage.getItem("level")) {
   var level = parseInt(localStorage.getItem("level"))
+  var menuscreen = false
+}
 else
   var level = 0
+  var menuscreen = true
 
 if (localStorage.getItem("deaths"))
   var deathcount = parseInt(localStorage.getItem("deaths"))
@@ -187,7 +190,20 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
-function gameover(){
+function menu() {
+  menuscreen = true;
+  image(ENDSCREEN, 0, 0);
+  fill(255, 255, 255);
+  textSize(48);
+  textFont(FONT);
+  text('Robot Platformer', 10, 50);
+  textSize(24);
+  text('Press R to start!');
+  text('AdminTroller', 1035, 544);
+  text('ToxicFscyther', 1020, 566);
+}
+
+function gameover() {
   endscreen = true;
   image(ENDSCREEN, 0, 0);
   fill(255, 255, 255);
@@ -202,7 +218,6 @@ function gameover(){
   text('Press R to reset...', 13, 103)
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
-  textSize(36);
 }
 
 function nextlevel() {
@@ -282,6 +297,8 @@ function setup() {
   OVERWORLD1.loop()
 
   createCanvas(game_size[0], game_size[1]);
+  if (menuscreen == true)
+    menu()
 
   BACKGROUND.resize(game_size[0], game_size[1]);
   frameRate(60);
@@ -341,6 +358,7 @@ function setup() {
       deathcount = 0
       localStorage.setItem("deaths", 0)
       endscreen = false
+      menuscreen = false
       dashindicator = false
     }
   });
@@ -359,8 +377,7 @@ function setup() {
 }
 
 function draw() {
-
-  if (endscreen == false) {
+  if (endscreen == false && menuscreen == false) {
     if (playerx > -12 || playerxvel > 0)
       playerx += playerxvel
 
@@ -571,4 +588,6 @@ function draw() {
     if (level == 0 && playermoved == false)
       image(ARROWS,30,380)
   }
+  else if (menuscreen == true && endscreen == false)
+    menu()
 }
