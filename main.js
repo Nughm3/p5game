@@ -68,7 +68,10 @@ var spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
-var playerx = 0
+if (level == 0)
+  var playerx = 92
+else
+  var playerx = 0
 var playery = levelspawnpoints[level]
 var playerdirection = 1
 
@@ -191,12 +194,13 @@ function gameover(){
   fill(255, 255, 255);
   textSize(48);
   textFont(FONT);
-  text('Game Complete! (Press R to reset)', 10, 50);
+  text('Game Complete!', 10, 50);
   textSize(24);
   if (deathcount == 1)
-    text('1 Death');
+    text('1 Death', 13, 77);
   else
     text(deathcount+' Deaths', 13, 77);
+  text('Press R to reset...', 13, 103)
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
   textSize(36);
@@ -212,6 +216,8 @@ function nextlevel() {
       playerx = 92
     else
       playerx = 0
+    if (level == 3)
+      dashindicator = false
     playery = levelspawnpoints[level]
     playerxvel = 0
     playeryvel = 0
@@ -336,6 +342,7 @@ function setup() {
       deathcount = 0
       localStorage.setItem("deaths", 0)
       endscreen = false
+      dashindicator = false
     }
   });
 
@@ -452,22 +459,16 @@ function draw() {
     }
 
     if (leftpressed == true && allowmove == true)
-    {
       moveleft()
-    }  
 
-    if (rightpressed == true && allowmove == true)
-    {
+    if (rightpressed == true && allowmove == true) 
       moveright()
-    }
 
     if (leftpressed == true && rightpressed == true && allowmove == true)
       playerxvel = 0
 
     if (playerx > 1190)
-    {
       nextlevel()
-    }
 
     if (uppressed == true && touchingground == true && allowmove == true)
       jump()
@@ -482,10 +483,8 @@ function draw() {
     else
       playeryvel = 0
 
-    for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-    {
-      if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 56 && playery < tilehitboxes[repeat][1] - 32 && allowtophitdetection == true)
-      {
+    for (repeat = 0; repeat < tilehitboxes.length; repeat++) {
+      if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 56 && playery < tilehitboxes[repeat][1] - 32 && allowtophitdetection == true) {
         topoftile = true
         playery = tilehitboxes[repeat][1] - 48
         break
@@ -494,18 +493,14 @@ function draw() {
         topoftile = false
     }
 
-    if (topoftile == true)
-    {
+    if (topoftile == true) {
       playery += playeryvel
       touchingground = true
     }
     else
-    {
       touchingground = false
-    }
 
-    for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-    {
+    for (repeat = 0; repeat < tilehitboxes.length; repeat++) {
       if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true)
       {
         leftoftile = true
@@ -516,14 +511,10 @@ function draw() {
     }
 
     if (leftoftile == true && playerxvel > 0)
-    {
       playerx -= playerxvel
-    }
 
-    for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-    {
-      if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32 && allowrighthitdetection == true)
-      {
+    for (repeat = 0; repeat < tilehitboxes.length; repeat++) {
+      if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 64 && playerx > tilehitboxes[repeat][0] + 32 && allowrighthitdetection == true) {
         rightoftile = true
         break
       }
@@ -532,14 +523,10 @@ function draw() {
     }
 
     if (rightoftile == true && playerxvel < 0)
-    {
       playerx -= playerxvel
-    }
 
-    for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-    {
-      if (playerx > tilehitboxes[repeat][0] - 50 && playerx < tilehitboxes[repeat][0] + 50 && playery < tilehitboxes[repeat][1] + 64 && playery > tilehitboxes[repeat][1] + 32 && allowbottomhitdetection == true)
-      {
+    for (repeat = 0; repeat < tilehitboxes.length; repeat++) {
+      if (playerx > tilehitboxes[repeat][0] - 50 && playerx < tilehitboxes[repeat][0] + 50 && playery < tilehitboxes[repeat][1] + 64 && playery > tilehitboxes[repeat][1] + 32 && allowbottomhitdetection == true) {
         bottomoftile = true
         break
       }
@@ -548,42 +535,30 @@ function draw() {
     }
 
     if (bottomoftile == true)
-    {
       playeryvel = abs(playeryvel) * -1
-    }
     
     if (level < 2)
-    {
       allowdash = false 
-    }
 
     if (touchingground == true && allowdash == false && level > 1)
       allowdash = true
 
-    for (repeat = 0; repeat < spikehitboxes.length; repeat++)
-    {
+    for (repeat = 0; repeat < spikehitboxes.length; repeat++) {
       if (allowdeath == true && playerx > spikehitboxes[repeat][0] - 32 && playerx < spikehitboxes[repeat][0] + 32 && playery > spikehitboxes[repeat][1] - 48 && playery < spikehitboxes[repeat][1] + 48)
-      {
-        death()
-      }
-    }
-
-    if (playery > 576 && allowdeath == true) {
         death()
     }
 
-    if (dashing == true)
-    {
-      for (repeat = 0; repeat < tilehitboxes.length; repeat++)
-      {
-        if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true)
-        {
+    if (playery > 576 && allowdeath == true)
+        death()
+
+    if (dashing == true) {
+      for (repeat = 0; repeat < tilehitboxes.length; repeat++) {
+        if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true) {
           dashtouchingleft = true
           break
         }
       }
-      if (dashtouchingleft == false)
-      {
+      if (dashtouchingleft == false) {
         if (playerdirection == 1)
           playerxvel = 30
         else
@@ -591,11 +566,10 @@ function draw() {
       }
     }
 
-    if (dashindicator == true && level == 2) {
-        image(DASH, 450, 400)
-    }
+    if (dashindicator == true && level == 2)
+      image(DASH, 450, 400)
 
     if (level == 0 && playermoved == false)
       image(ARROWS,30,380)
-  }    
+  }
 }
