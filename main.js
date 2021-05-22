@@ -377,6 +377,10 @@ function setup() {
 }
 
 function draw() {
+  rungame()
+}
+
+function rungame() {
   if (endscreen == false && menuscreen == false) {
     if (playerx > -12 || playerxvel > 0)
       playerx += playerxvel
