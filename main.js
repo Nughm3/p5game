@@ -5,6 +5,7 @@ var dashtouchingleft = false
 
 var allowdeath = true
 var endscreen = false
+var playermoved = false
 
 if (localStorage.getItem("level"))
   var level = parseInt(localStorage.getItem("level"))
@@ -207,7 +208,10 @@ function nextlevel() {
   }
   else {
     level += 1
-    playerx = 0
+    if (level == 0 && playermoved == false)
+      playerx = 92
+    else
+      playerx = 0
     playery = levelspawnpoints[level]
     playerxvel = 0
     playeryvel = 0
@@ -280,6 +284,8 @@ function setup() {
   document.addEventListener("keydown", function(event) {
     if (event.key === 'ArrowLeft') {
       leftpressed = true
+      if (playermoved == false)
+        playermoved = true
     }
   });
 
@@ -287,12 +293,16 @@ function setup() {
     if (event.key === 'ArrowLeft') {
       leftpressed = false
       playerxvel = 0
+      if (playermoved == false)
+        playermoved = true
     }
   });
 
   document.addEventListener("keydown", function(event) {
     if (event.key === 'ArrowRight') {
       rightpressed = true
+      if (playermoved == false)
+        playermoved = true
     }
   });
 
@@ -300,12 +310,16 @@ function setup() {
     if (event.key === 'ArrowRight') {
       rightpressed = false
       playerxvel = 0
+      if (playermoved == false)
+        playermoved = true
     }
   });
 
   document.addEventListener("keydown", function(event) {
     if (event.key === 'ArrowUp' && touchingground == true) {
       uppressed = true
+      if (playermoved == false)
+        playermoved = true
     }
   });
 
@@ -581,7 +595,7 @@ function draw() {
         image(DASH, 450, 400)
     }
 
-    if (level == 0)
-      image(ARROWS,355,100)
+    if (level == 0 && playermoved == false)
+      image(ARROWS,30,380)
   }    
 }
