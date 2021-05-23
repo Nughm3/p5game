@@ -72,6 +72,15 @@ var spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
+var bossmsg = [
+  '','','','','','','','','','','','','','','', // up to level 15 (index 14) before boss starts
+  'That is enough, fool! Adventurers! Be careful of who you are messing with. Before I have to deal with you myself.', // Phase 1
+  'Get back here!', // Phase 2
+  'ANOTHER TRAP!! YOUR TRICKS ARE FUTILE!', // Phase 3
+  'Can"t you just explode already! Some decency!', // Phase 4
+  'All this, for nothing, I understand your words now, my master. The Catacombs, are no more.'  // Final Phase
+]
+
 if (level == 0)
   var playerx = 92
 else
@@ -589,5 +598,16 @@ function draw() {
 
     if (level == 0 && playermoved == false)
       image(ARROWS, 30, 380)
+    
+    if (!bossmsg[level] == '') {
+      textSize(30)
+      textFont(FONT)
+      fill(237, 34, 93)
+      text(bossmsg[level], 100, 50)
+    }
+  textSize(30)
+  textFont(FONT)
+  fill(237, 34, 93)
+  text('debug', 200, 200)
   }
 }
