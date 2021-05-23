@@ -1,4 +1,8 @@
-var game_size = [1216, 576];
+// P5GAME by AdminTroller and ToxicFscyther
+
+/* VARIABLE DEFINITIONS */
+
+var game_size = [1216, 576]
 
 var dashamount = 0
 var dashtouchingleft = false
@@ -68,6 +72,14 @@ var spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
+var bossdialogue = [
+  "",
+  "",
+  "",
+  "",
+  ""
+]
+
 if (level == 0)
   var playerx = 92
 else
@@ -108,6 +120,8 @@ var allowtophitdetection = true
 var allowlefthitdetection = true
 var allowrighthitdetection = true
 var allowbottomhitdetection = true
+
+/* ASSET LOADING */
 
 function preload() {
   // Players
@@ -156,6 +170,8 @@ function preload() {
   FONT = loadFont('media/fonts/mono.ttf');
 }
 
+/* PLAYER FUNCTIONS */
+
 function moveleft() {
   playerxvel = movementspeed * -1
   playerdirection = 0
@@ -195,7 +211,41 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
-function gameover(){
+function death() {
+  allowtophitdetection = false
+  allowbottomhitdetection = false
+  allowlefthitdetection = false
+  allowrighthitdetection = false
+  allowdeath = false
+  playeryvel = 15
+
+  playerx = 0
+  playery = levelspawnpoints[level]
+  playeryvel = 0
+  playerdirection = 1
+  stopdash()
+
+  deathcount += 1
+  localStorage.setItem("deaths",deathcount)
+
+  if (level == 2) {
+    dashindicator = true
+  }
+  
+  allowtophitdetection = true
+  allowbottomhitdetection = true
+  allowlefthitdetection = true
+  allowrighthitdetection = true
+  allowdeath = true
+}
+
+/* GAME FUNCTIONS */
+
+// function menu() {
+  
+// }
+
+function gameover() {
   endscreen = true;
   image(ENDSCREEN, 0, 0);
   fill(255, 255, 255);
@@ -254,46 +304,30 @@ function previouslevel() {
     if (level < 2)
       allowdash = false
     localStorage.setItem("level",level)
-  } 
-}
-
-function death() {
-  allowtophitdetection = false
-  allowbottomhitdetection = false
-  allowlefthitdetection = false
-  allowrighthitdetection = false
-  allowdeath = false
-  playeryvel = 15
-
-  playerx = 0
-  playery = levelspawnpoints[level]
-  playeryvel = 0
-  playerdirection = 1
-  stopdash()
-
-  deathcount += 1
-  localStorage.setItem("deaths",deathcount)
-
-  if (level == 2) {
-    dashindicator = true
   }
-  
-  allowtophitdetection = true
-  allowbottomhitdetection = true
-  allowlefthitdetection = true
-  allowrighthitdetection = true
-  allowdeath = true
 }
+
+function dialogue(message) {
+  textFont(FONT);
+  textSize(24);
+  fill(237, 34, 93);
+  var textx = null
+  var texty = null
+  text(message, textx, texty);
+}
+
+/* CANVAS */
 
 function setup() {
-
+  // Music
   OVERWORLD1.loop()
 
+  // Canvas
   createCanvas(game_size[0], game_size[1]);
-
   BACKGROUND.resize(game_size[0], game_size[1]);
   frameRate(60);
 
+  // Listeners
   document.addEventListener("keydown", function(event) {
     if (event.key === 'ArrowLeft') {
       leftpressed = true
@@ -365,6 +399,8 @@ function setup() {
     }
   });
 }
+
+/* RENDERER */
 
 function draw() {
 
