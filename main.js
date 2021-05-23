@@ -111,11 +111,10 @@ var allowbottomhitdetection = true
 
 function preload() {
   // Players
-  // Player ready means not dashed, player dash means dash is on cd
-  PLAYER_READY_R = loadImage('media/players/rready.png'); //B
-  PLAYER_DASH_R = loadImage('media/players/rdash.png'); //R
-  PLAYER_READY_L = loadImage('media/players/lready.png'); //B
-  PLAYER_DASH_L = loadImage('media/players/ldash.png'); //R
+  PLAYER_IDLE_R = loadImage('media/players/idleR.png');
+  PLAYER_DASH_R = loadImage('media/players/dashingR.png');
+  PLAYER_IDLE_L = loadImage('media/players/idleL.png');
+  PLAYER_DASH_L = loadImage('media/players/dashingL.png');
   // Backgrounds
   BACKGROUND = loadImage('media/bg/sunset.png'); // Orange
   BACKGROUND1 = loadImage('media/bg/city.png'); // Deep blue
@@ -141,10 +140,18 @@ function preload() {
   SPIKEDOWN3 = loadImage('media/spikes3/spikedown.png');
   SPIKELEFT3 = loadImage('media/spikes3/spikeleft.png');
   SPIKERIGHT3 = loadImage('media/spikes3/spikeright.png');
-  // Sounds & Music
+  // Background music
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
-  // OVERWORLD2 = loadSound('media/music/overworld3.mp3');
+  // OVERWORLD2 = loadSound('media/music/overworld2.mp3');
   // OVERWORLD3 = loadSound('media/music/overworld3.mp3');
+  BOSS = loadSound('media/music/boss.mp3');
+  // Sounds
+  // DASH = loadSound('media/sounds/dash.mp3');
+  // LAND = loadSound('media/sounds/land.mp3');
+  // DEATH = loadSound('media/sounds/death.mp3');
+  // TRANSITION = loadSound('media/sounds/transition.mp3');
+  // BOSSATTACK = loadSound('media/sounds/bossattack.mp3');
+  SWITCH = loadSound('media/sounds/switch.mp3');
   // Fonts
   FONT = loadFont('media/fonts/mono.ttf');
 }
@@ -378,29 +385,25 @@ function draw() {
       }
     }
 
-    if (dashing == true)
-    {
+    if (dashing == true) {
       if (playerdirection == 1)
-        image(PLAYER_DASH_R, playerx, playery)
+        image(PLAYER_DASH_R, playerx - 64, playery) // the dash image is 128x64
       else
         image(PLAYER_DASH_L, playerx, playery)
     }
-    else
-    {
+    else {
       if (playerdirection == 1)
-        image(PLAYER_READY_R, playerx, playery)
+        image(PLAYER_IDLE_R, playerx, playery)
       else
-        image(PLAYER_READY_L, playerx, playery)
+        image(PLAYER_IDLE_L, playerx, playery)
     }
 
-    for (repeat = 0; repeat < levels[level].length; repeat++)
-    {
+    for (repeat = 0; repeat < levels[level].length; repeat++) {
       var tile = levels[level][repeat]
       var tilex = 0
       var tiley = 512
       var row = 0
-      while (tile >= 20)
-      {
+      while (tile >= 20) {
         tile -= 20
         row += 1
         tiley = game_size[1] - 64 - (row * 64)
@@ -410,14 +413,12 @@ function draw() {
       tilehitboxes.push([tilex,tiley])
     }
 
-    for (repeat = 0; repeat < spikes[level].length; repeat++)
-    {
+    for (repeat = 0; repeat < spikes[level].length; repeat++) {
       var spike = spikes[level][repeat]
       var spikex = 0
       var spikey = 512
       var spikerow = 0
-      while (spike >= 20)
-      {
+      while (spike >= 20) {
         spike -= 20
         spikerow += 1
         spikey = game_size[1] - 64 - (spikerow * 64)
