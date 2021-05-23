@@ -112,9 +112,9 @@ var allowbottomhitdetection = true
 function preload() {
   // Players
   PLAYER_IDLE_R = loadImage('media/players/idleR.png');
-  PLAYER_DASH_R = loadImage('media/players/dashingR.png');
+  PLAYER_DASH_R = loadImage('media/fx/dashingR.png');
   PLAYER_IDLE_L = loadImage('media/players/idleL.png');
-  PLAYER_DASH_L = loadImage('media/players/dashingL.png');
+  PLAYER_DASH_L = loadImage('media/fx/dashingL.png');
   // Backgrounds
   BACKGROUND = loadImage('media/bg/sunset.png'); // Orange
   BACKGROUND1 = loadImage('media/bg/city.png'); // Deep blue
