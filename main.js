@@ -167,7 +167,7 @@ function preload() {
   // BOSSATTACK = loadSound('media/sounds/bossattack.mp3');
   SWITCH = loadSound('media/sounds/switch.mp3');
   // Fonts
-  FONT = loadFont('media/fonts/mono.ttf');
+  FONT = loadFont('media/fonts/JetBrains Mono.ttf');
 }
 
 /* PLAYER FUNCTIONS */
@@ -310,10 +310,9 @@ function previouslevel() {
 function dialogue(message) {
   textFont(FONT);
   textSize(24);
+  textAlign(CENTER);
   fill(237, 34, 93);
-  var textx = null
-  var texty = null
-  text(message, textx, texty);
+  text(message, 100, 50);
 }
 
 /* CANVAS */
