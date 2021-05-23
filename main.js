@@ -1,4 +1,4 @@
-const game_size = [1216, 576];
+var game_size = [1216, 576];
 
 var dashamount = 0
 var dashtouchingleft = false
@@ -17,20 +17,20 @@ if (localStorage.getItem("deaths"))
 else
   var deathcount = 0
 
-const levelspawnpoints = [420,420,190,420,129,184]
+var levelspawnpoints = [420,420,190,420,129,184]
 
-const levels = []
-const level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
+var levels = []
+var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
 levels.push(level0)
-const level1 = [0,1,2,3,6,7,10,11,14,17,18,26,27,30,31,34,37,38,50,51,54,57,58,74,77,78,97,98]
+var level1 = [0,1,2,3,6,7,10,11,14,17,18,26,27,30,31,34,37,38,50,51,54,57,58,74,77,78,97,98]
 levels.push(level1)
-const level2 = [80,81,60,61,40,41,20,21,0,1,2,3,4,10,11,12,17,18,137,138,155,156,157,158,172,173,174,175,176,177,178,179]
+var level2 = [80,81,60,61,40,41,20,21,0,1,2,3,4,10,11,12,17,18,137,138,155,156,157,158,172,173,174,175,176,177,178,179]
 levels.push(level2)
-const level3 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,46,47,48,49,50,51,52,53,54,55,56,57,58,59,69,70,71,72,73,74,75,76,77,78,79,92,93,94,95,96,97,98,99,115,116,117,118,119,100,101,102,120,121,122,123,124,125,140,141,142,143,144,145,146,147,148,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179]
+var level3 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,46,47,48,49,50,51,52,53,54,55,56,57,58,59,69,70,71,72,73,74,75,76,77,78,79,92,93,94,95,96,97,98,99,115,116,117,118,119,100,101,102,120,121,122,123,124,125,140,141,142,143,144,145,146,147,148,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179]
 levels.push(level3)
-const level4 = [0,1,2,3,4,5,6,7,100,101,102,62,63,64,20,21,22,23,24,25,26,27,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,36,56,91,92]
+var level4 = [0,1,2,3,4,5,6,7,100,101,102,62,63,64,20,21,22,23,24,25,26,27,65,66,85,86,105,106,125,126,145,146,160,161,162,163,164,165,166,17,18,37,38,57,58,77,78,97,98,117,118,14,15,16,36,56,91,92]
 levels.push(level4)
-const level5 = [80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,58,78,98,118,138,158,178,0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,40,41,42,48,49,50,51,52,53,54,55,56,57,20,21,22]
+var level5 = [80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,58,78,98,118,138,158,178,0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,40,41,42,48,49,50,51,52,53,54,55,56,57,20,21,22]
 levels.push(level5)
 
 const levelcount = 4 // update this upon adding new levels, used for game complete detection [levels - 1]
@@ -38,33 +38,33 @@ const levelcount = 4 // update this upon adding new levels, used for game comple
 var spikes = []
 var spikesdirections = []
 
-const spikes0 = [13]
-const spikes0directions = [1] // 1=up 2=left 3=right 4=down
+var spikes0 = [13]
+var spikes0directions = [1] // 1=up 2=left 3=right 4=down
 spikes.push(spikes0)
 spikesdirections.push(spikes0directions)
 
-const spikes1 = [4,5,8,9,12,13,15,16]
-const spikes1directions = [1,1,1,1,1,1,1,1]
+var spikes1 = [4,5,8,9,12,13,15,16]
+var spikes1directions = [1,1,1,1,1,1,1,1]
 spikes.push(spikes1)
 spikesdirections.push(spikes1directions)
 
-const spikes2 = [117,118,135,136,152,153,154,5,6,7,8,9,13,14,15,16]
-const spikes2directions = [4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,1]
+var spikes2 = [117,118,135,136,152,153,154,5,6,7,8,9,13,14,15,16]
+var spikes2directions = [4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,1]
 spikes.push(spikes2)
 spikesdirections.push(spikes2directions)
 
-const spikes3 = []
-const spikes3directions = []
+var spikes3 = []
+var spikes3directions = []
 spikes.push(spikes3)
 spikesdirections.push(spikes3directions)
 
-const spikes4 = [107,127,147,167,93,8,9,10,11,12,13]
-const spikes4directions = [3,3,3,3,3,1,1,1,1,1,1]
+var spikes4 = [107,127,147,167,93,8,9,10,11,12,13]
+var spikes4directions = [3,3,3,3,3,1,1,1,1,1,1]
 spikes.push(spikes4)
 spikesdirections.push(spikes4directions)
 
-const spikes5 = [103,104,105,106,111,112,165,166,171,172,43,23,47,77,97,117,137,157,177]
-const spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
+var spikes5 = [103,104,105,106,111,112,165,166,171,172,43,23,47,77,97,117,137,157,177]
+var spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
@@ -175,8 +175,9 @@ function dash() {
   waitdash()
 }
 
-function waitdash()
+function waitdash() {
   setTimeout(() => {stopdash()}, 125)
+}
 
 function stopdash() {
   playerxvel = 0
@@ -187,7 +188,7 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
-function gameover() {
+function gameover(){
   endscreen = true;
   image(ENDSCREEN, 0, 0);
   fill(255, 255, 255);
@@ -232,7 +233,8 @@ function nextlevel() {
 }
 
 function previouslevel() {
-  if (level > 0) {
+  if (level > 0)
+  {
     level -= 1
     playerx = 0
     playery = levelspawnpoints[level]
@@ -358,6 +360,7 @@ function setup() {
 }
 
 function draw() {
+
   if (endscreen == false) {
     if (playerx > -12 || playerxvel > 0)
       playerx += playerxvel
