@@ -187,7 +187,7 @@ function stopdash() {
   allowbottomhitdetection = true
 }
 
-function gameover(){
+function gameover() {
   endscreen = true;
   image(ENDSCREEN, 0, 0);
   fill(255, 255, 255);
@@ -232,8 +232,7 @@ function nextlevel() {
 }
 
 function previouslevel() {
-  if (level > 0)
-  {
+  if (level > 0) {
     level -= 1
     playerx = 0
     playery = levelspawnpoints[level]
@@ -359,7 +358,6 @@ function setup() {
 }
 
 function draw() {
-
   if (endscreen == false) {
     if (playerx > -12 || playerxvel > 0)
       playerx += playerxvel
@@ -569,6 +567,6 @@ function draw() {
       image(DASH, 450, 400)
 
     if (level == 0 && playermoved == false)
-      image(ARROWS,30,380)
+      image(ARROWS, 30, 380)
   }
 }
