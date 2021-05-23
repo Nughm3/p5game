@@ -72,14 +72,6 @@ var spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
-var bossdialogue = [
-  "",
-  "",
-  "",
-  "",
-  ""
-]
-
 if (level == 0)
   var playerx = 92
 else
@@ -260,7 +252,6 @@ function gameover() {
   text('Press R to reset...', 13, 103)
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
-  textSize(36);
 }
 
 function nextlevel() {
@@ -290,8 +281,7 @@ function nextlevel() {
 }
 
 function previouslevel() {
-  if (level > 0)
-  {
+  if (level > 0) {
     level -= 1
     playerx = 0
     playery = levelspawnpoints[level]
@@ -307,15 +297,7 @@ function previouslevel() {
   }
 }
 
-function dialogue(message) {
-  textFont(FONT);
-  textSize(24);
-  textAlign(CENTER);
-  fill(237, 34, 93);
-  text(message, 100, 50);
-}
-
-/* CANVAS */
+/* CANVAS & EVENT LISTENERS */
 
 function setup() {
   // Music
