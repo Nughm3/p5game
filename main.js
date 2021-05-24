@@ -37,7 +37,8 @@ levels.push(level4)
 var level5 = [80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,58,78,98,118,138,158,178,0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,40,41,42,48,49,50,51,52,53,54,55,56,57,20,21,22]
 levels.push(level5)
 
-const levelcount = 4 // update this upon adding new levels, used for game complete detection [levels - 1]
+var levelcount = 5 // update this upon adding new levels, used for game complete detection
+levelcount -= 1 // to account for the way the level system works
 
 var spikes = []
 var spikesdirections = []
@@ -127,9 +128,7 @@ var allowbottomhitdetection = true
 function preload() {
   // Players
   PLAYER_IDLE_R = loadImage('media/players/idleR.png');
-  PLAYER_DASH_R = loadImage('media/fx/dashingR.png');
   PLAYER_IDLE_L = loadImage('media/players/idleL.png');
-  PLAYER_DASH_L = loadImage('media/fx/dashingL.png');
   // Backgrounds
   BACKGROUND = loadImage('media/bg/sunset.png'); // Orange
   BACKGROUND1 = loadImage('media/bg/city.png'); // Deep blue
@@ -142,6 +141,9 @@ function preload() {
   DASH = loadImage('media/tile/dashindicator.png'); // Helps the player know to press Z to dash
   ARROWS = loadImage('media/tile/arrows.png')
   // Effects
+  TRANSITION = loadImage('media/fx/transition.png');
+  PLAYER_DASH_R = loadImage('media/fx/dashingR.png');
+  PLAYER_DASH_L = loadImage('media/fx/dashingL.png');
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/spikes1/spikeup.png');
   SPIKEDOWN1 = loadImage('media/spikes1/spikedown.png');
@@ -304,6 +306,43 @@ function previouslevel() {
       allowdash = false
     localStorage.setItem("level",level)
   }
+}
+
+function transition() {
+  if (level > levelcount) {
+    gameover()
+  }
+  else {
+    level += 1
+    if (level == 0 && playermoved == false)
+      playerx = 92
+    else
+      playerx = 0
+    if (level == 3)
+      dashindicator = false
+    playery = levelspawnpoints[level]
+    playerxvel = 0
+    playeryvel = 0
+    playerdirection = 1
+    stopdash()
+    tilehitboxes = []
+    spikehitboxes = []
+    if (level > 1)
+      allowdash = true
+    localStorage.setItem("level", level)
+    localStorage.setItem("deaths", deathcount)
+    /* IN TESTING (yikes)
+    var relx = game_size[0]/2
+    var rely = game_size[1]/2
+    var scale = 5
+    setInterval(() => {
+      if (scale >= 0.1)
+        scale -= 0.1
+      else
+        break
+    }, 1);
+    image(TRANSITION, relx, rely, scale*game_size[0], scale*game_size[1])
+    */
 }
 
 /* CANVAS & EVENT LISTENERS */
@@ -607,4 +646,4 @@ function draw() {
       text(bossmsg[level], 608, 70)
     }
   }
-}
+}}
