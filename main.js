@@ -159,7 +159,7 @@ function preload() {
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
   // OVERWORLD2 = loadSound('media/music/overworld2.mp3');
   // OVERWORLD3 = loadSound('media/music/overworld3.mp3');
-  BOSS = loadSound('media/music/boss.mp3');
+  BOSS1 = loadSound('media/music/boss1.mp3');
   // Sounds
   // DASH = loadSound('media/sounds/dash.mp3');
   // LAND = loadSound('media/sounds/land.mp3');
@@ -388,6 +388,13 @@ function setup() {
   document.addEventListener("keypress", function(event) {
     if (event.key === '[') {
       previouslevel()
+    }
+  });
+
+  document.addEventListener("keypress", function(event) {
+    if (event.key === 'm') {
+      OVERWORLD1.pause()
+      BOSS1.loop()
     }
   });
 }
