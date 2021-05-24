@@ -394,6 +394,7 @@ function setup() {
   document.addEventListener("keypress", function(event) {
     if (event.key === 'm') {
       OVERWORLD1.pause()
+      BOSS1.stop()
       BOSS1.loop()
     }
   });
