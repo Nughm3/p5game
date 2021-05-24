@@ -93,6 +93,7 @@ var playerxvel = 0
 
 var playeryvel = 0
 var gravity = 1
+var bobbing = false
 
 var touchingground = false
 
@@ -102,13 +103,13 @@ var dashing = false
 
 var movementspeed = 6
 
-var leftpressed = false;
-var rightpressed = false;
-var uppressed = false;
+var leftpressed = false
+var rightpressed = false
+var uppressed = false
 
-var musicplaying = false;
+var musicplaying = false
 
-var dashindicator = false;
+var dashindicator = false
 
 var tilehitboxes = []
 var spikehitboxes = []
@@ -127,50 +128,52 @@ var allowbottomhitdetection = true
 
 function preload() {
   // Players
-  PLAYER_IDLE_R = loadImage('media/players/idleR.png');
-  PLAYER_IDLE_L = loadImage('media/players/idleL.png');
+  PLAYER_IDLE_R = loadImage('media/players/idleR.png')
+  PLAYER_IDLE_L = loadImage('media/players/idleL.png')
+  PLAYER_ANIM_R = loadImage('media/players/idleRanim.png')
+  PLAYER_ANIM_L = loadImage('media/players/idleLanim.png')
   // Backgrounds
-  BACKGROUND = loadImage('media/bg/sunset.png'); // Orange
-  BACKGROUND1 = loadImage('media/bg/city.png'); // Deep blue
-  BACKGROUND2 = loadImage('media/bg/neon.png'); // Green
-  ENDSCREEN = loadImage('media/bg/endscreen.png'); // Dimmed background to show stats
+  BACKGROUND = loadImage('media/bg/sunset.png') // Orange
+  BACKGROUND1 = loadImage('media/bg/city.png') // Deep blue
+  BACKGROUND2 = loadImage('media/bg/neon.png') // Green
+  ENDSCREEN = loadImage('media/bg/endscreen.png') // Dimmed background to show stats
   // Tiles: Stage 1 tiles are ORANGE, 2 are BLUE, 3 are GREEN
   TILE1 = loadImage('media/tile/tile1.png');
   // TILE2 = loadImage('media/tile/tile2.png');
   // TILE3 = loadImage('media/tile/tile3.png');
-  DASH = loadImage('media/tile/dashindicator.png'); // Helps the player know to press Z to dash
+  DASH = loadImage('media/tile/dashindicator.png') // Helps the player know to press Z to dash
   ARROWS = loadImage('media/tile/arrows.png')
   // Effects
-  TRANSITION = loadImage('media/fx/transition.png');
-  PLAYER_DASH_R = loadImage('media/fx/dashingR.png');
-  PLAYER_DASH_L = loadImage('media/fx/dashingL.png');
+  TRANSITION = loadImage('media/fx/transition.png')
+  PLAYER_DASH_R = loadImage('media/fx/dashingR.png')
+  PLAYER_DASH_L = loadImage('media/fx/dashingL.png')
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
-  SPIKEUP1 = loadImage('media/spikes1/spikeup.png');
-  SPIKEDOWN1 = loadImage('media/spikes1/spikedown.png');
-  SPIKELEFT1 = loadImage('media/spikes1/spikeleft.png');
-  SPIKERIGHT1 = loadImage('media/spikes1/spikeright.png');
-  SPIKEUP2 = loadImage('media/spikes2/spikeup.png');
-  SPIKEDOWN2 = loadImage('media/spikes2/spikedown.png');
-  SPIKELEFT2 = loadImage('media/spikes2/spikeleft.png');
-  SPIKERIGHT2 = loadImage('media/spikes2/spikeright.png');
-  SPIKEUP3 = loadImage('media/spikes3/spikeup.png');
-  SPIKEDOWN3 = loadImage('media/spikes3/spikedown.png');
-  SPIKELEFT3 = loadImage('media/spikes3/spikeleft.png');
-  SPIKERIGHT3 = loadImage('media/spikes3/spikeright.png');
+  SPIKEUP1 = loadImage('media/spikes1/spikeup.png')
+  SPIKEDOWN1 = loadImage('media/spikes1/spikedown.png')
+  SPIKELEFT1 = loadImage('media/spikes1/spikeleft.png')
+  SPIKERIGHT1 = loadImage('media/spikes1/spikeright.png')
+  SPIKEUP2 = loadImage('media/spikes2/spikeup.png')
+  SPIKEDOWN2 = loadImage('media/spikes2/spikedown.png')
+  SPIKELEFT2 = loadImage('media/spikes2/spikeleft.png')
+  SPIKERIGHT2 = loadImage('media/spikes2/spikeright.png')
+  SPIKEUP3 = loadImage('media/spikes3/spikeup.png')
+  SPIKEDOWN3 = loadImage('media/spikes3/spikedown.png')
+  SPIKELEFT3 = loadImage('media/spikes3/spikeleft.png')
+  SPIKERIGHT3 = loadImage('media/spikes3/spikeright.png')
   // Background music
-  OVERWORLD1 = loadSound('media/music/overworld1.mp3');
-  // OVERWORLD2 = loadSound('media/music/overworld2.mp3');
-  // OVERWORLD3 = loadSound('media/music/overworld3.mp3');
-  BOSS = loadSound('media/music/boss.mp3');
+  OVERWORLD1 = loadSound('media/music/overworld1.mp3')
+  // OVERWORLD2 = loadSound('media/music/overworld2.mp3')
+  // OVERWORLD3 = loadSound('media/music/overworld3.mp3')
+  BOSS = loadSound('media/music/boss.mp3')
   // Sounds
-  // DASH = loadSound('media/sounds/dash.mp3');
-  // LAND = loadSound('media/sounds/land.mp3');
-  // DEATH = loadSound('media/sounds/death.mp3');
-  // TRANSITION = loadSound('media/sounds/transition.mp3');
-  // BOSSATTACK = loadSound('media/sounds/bossattack.mp3');
-  SWITCH = loadSound('media/sounds/switch.mp3');
+  // DASH = loadSound('media/sounds/dash.mp3')
+  // LAND = loadSound('media/sounds/land.mp3')
+  // DEATH = loadSound('media/sounds/death.mp3')
+  // TRANSITION = loadSound('media/sounds/transition.mp3')
+  // BOSSATTACK = loadSound('media/sounds/bossattack.mp3')
+  SWITCH = loadSound('media/sounds/switch.mp3')
   // Fonts
-  FONT = loadFont('media/fonts/JetBrains Mono.ttf');
+  FONT = loadFont('media/fonts/JetBrains Mono.ttf')
 }
 
 /* PLAYER FUNCTIONS */
@@ -450,6 +453,9 @@ function draw() {
       }
     }
 
+    bobbing = setInterval(() => {
+      bobbing = !bobbing
+    }, 1500);
     if (dashing == true) {
       if (playerdirection == 1)
         image(PLAYER_DASH_R, playerx - 64, playery) // the dash image is 128x64
@@ -458,9 +464,15 @@ function draw() {
     }
     else {
       if (playerdirection == 1)
-        image(PLAYER_IDLE_R, playerx, playery)
+        if (bobbing == true && playerxvel == 0 && playeryvel == 0)
+          image(PLAYER_ANIM_R)
+        else
+          image(PLAYER_IDLE_R, playerx, playery)
       else
-        image(PLAYER_IDLE_L, playerx, playery)
+        if (bobbing == true && playerxvel == 0 && playeryvel == 0)
+          image(PLAYER_ANIM_L)
+        else
+          image(PLAYER_IDLE_L, playerx, playery)
     }
 
     for (repeat = 0; repeat < levels[level].length; repeat++) {
