@@ -254,7 +254,9 @@ function gameover() {
   textFont(FONT);
   text('Game Complete!', 10, 50);
   textSize(24);
-  if (deathcount == 1)
+  if (deathcount == 0)
+    text('No Deaths', 13, 77)
+  else if (deathcount == 1)
     text('1 Death', 13, 77);
   else
     text(deathcount+' Deaths', 13, 77);
