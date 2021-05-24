@@ -600,14 +600,11 @@ function draw() {
       image(ARROWS, 30, 380)
     
     if (!bossmsg[level] == '') {
-      textSize(30)
+      textSize(24)
       textFont(FONT)
+      textAlign(CENTER)
       fill(237, 34, 93)
-      text(bossmsg[level], 100, 50)
+      text(bossmsg[level], 608, 70)
     }
-  textSize(30)
-  textFont(FONT)
-  fill(237, 34, 93)
-  text('debug', 200, 200)
   }
 }
