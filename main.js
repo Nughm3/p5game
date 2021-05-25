@@ -178,8 +178,14 @@ function preload() {
   DASH = loadImage('media/tile/misc/dash.png'); // Helps the player know to press Z to dash
   ARROWS = loadImage('media/tile/misc/arrows.png'); // Helps the player know to use arrow keys
   // Effects
-  DASHRIGHT = loadImage('media/fx/dashingR.png');
-  DASHLEFT = loadImage('media/fx/dashingL.png');
+  DASHRIGHT = loadImage('media/fx/dash/dashR.png');
+  DASHLEFT = loadImage('media/fx/dash/dashL.png');
+  DUST1 = loadImage('media/fx/dust/dust1.png')
+  DUST2 = loadImage('media/fx/dust/dust2.png')
+  DUST3 = loadImage('media/fx/dust/dust3.png')
+  DUST4 = loadImage('media/fx/dust/dust4.png')
+  CLOUD1 = loadImage('media/fx/dust/dustcloud1.png')
+  CLOUD2 = loadImage('media/fx/dust/dustcloud2.png')
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/tile/spikes1/spikeup.png');
   SPIKEDOWN1 = loadImage('media/spikes1/spikedown.png');
@@ -484,6 +490,21 @@ function draw() {
       else
         image(PLAYER_IDLE_L, playerx, playery)
     }
+/*
+    if (!playerxvel == 0) {
+      var randdust = random(1, 5)
+      if (randdust == 1)
+        image(DUST1, )
+      if (randdust == 2)
+        image(DUST2, )
+      if (randdust == 3)
+        image(DUST3, )
+      if (randdust == 4)
+        image(DUST4, )
+      if (randdust == 5)
+        image(DUST5, )
+    }
+*/
 
     for (repeat = 0; repeat < levels[level].length; repeat++) {
       var tile = levels[level][repeat]
