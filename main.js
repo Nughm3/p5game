@@ -127,8 +127,10 @@ var allowbottomhitdetection = true
 function preload() {
   // Players
   PLAYER_IDLE_R = loadImage('media/players/idleR.png');
-  PLAYER_DASH_R = loadImage('media/fx/dashingR.png');
   PLAYER_IDLE_L = loadImage('media/players/idleL.png');
+  PLAYER_ANIM_R = loadImage('media/players/animR.png');
+  PLAYER_ANIM_L = loadImage('media/players/animL.png');
+  PLAYER_DASH_R = loadImage('media/fx/dashingR.png');
   PLAYER_DASH_L = loadImage('media/fx/dashingL.png');
   // Backgrounds
   BACKGROUND = loadImage('media/bg/sunset.png'); // Orange
@@ -140,8 +142,10 @@ function preload() {
   // TILE2 = loadImage('media/tile/tile2.png');
   // TILE3 = loadImage('media/tile/tile3.png');
   DASH = loadImage('media/tile/dashindicator.png'); // Helps the player know to press Z to dash
-  ARROWS = loadImage('media/tile/arrows.png')
+  ARROWS = loadImage('media/tile/arrows.png');
   // Effects
+  DASHRIGHT = loadImage('media/fx/dashingR.png');
+  DASHLEFT = loadImage('media/fx/dashingL.png');
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/spikes1/spikeup.png');
   SPIKEDOWN1 = loadImage('media/spikes1/spikedown.png');
@@ -430,10 +434,14 @@ function draw() {
     }
 
     if (dashing == true) {
-      if (playerdirection == 1)
-        image(PLAYER_DASH_R, playerx - 64, playery) // the dash image is 128x64
-      else
+      if (playerdirection == 1) {
+        image(PLAYER_DASH_R, playerx, playery)
+        image(DASHRIGHT, playerx - 64, playery)
+      }
+      else {
         image(PLAYER_DASH_L, playerx, playery)
+        image(DASHLEFT, playerx + 64, playery)
+      }
     }
     else {
       if (playerdirection == 1)
