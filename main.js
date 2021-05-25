@@ -7,6 +7,9 @@ var game_size = [1216, 576]
 var dashamount = 0
 var dashtouchingleft = false
 
+var rungame = true
+
+var allowrespawn = true
 var allowdeath = true
 var endscreen = false
 var playermoved = false
@@ -208,7 +211,7 @@ function preload() {
   // Sounds
   // DASH = loadSound('media/sounds/dash.mp3');
   // LAND = loadSound('media/sounds/land.mp3');
-  // DEATH = loadSound('media/sounds/death.mp3');
+  DEATH = loadSound('media/sounds/death.mp3');
   // RESPAWN = loadSound('media/sounds/respawn.mp3');
   // TRANSITION = loadSound('media/sounds/transition.mp3');
   // BOSSATTACK = loadSound('media/sounds/bossattack.mp3');
@@ -239,7 +242,6 @@ function dash() {
   dashing = true
   allowmove = false
   allowdash = false
-  allowtophitdetection = false
   allowbottomhitdetection = false
   playeryvel = 0
   waitdash()
@@ -265,25 +267,38 @@ function death() {
   allowrighthitdetection = false
   allowdeath = false
   playeryvel = 15
-
-  playerx = 0
-  playery = levelspawnpoints[level]
-  playeryvel = 0
-  playerdirection = 1
-  stopdash()
-
   deathcount += 1
   localStorage.setItem("deaths",deathcount)
+  stopdash()
 
-  if (level == 2) {
-    dashindicator = true
-  }
+  allowmove = false
+  playeryvel = 20
+  OVERWORLD1.stop()
+  BOSS1.stop()
   
-  allowtophitdetection = true
-  allowbottomhitdetection = true
-  allowlefthitdetection = true
-  allowrighthitdetection = true
-  allowdeath = true
+  DEATH.play()
+  setTimeout(() => {
+    respawn()
+  }, 2500);
+}
+
+function respawn() {
+    playerx = 0
+    playery = levelspawnpoints[level]
+    playeryvel = 0
+    playerdirection = 1
+
+    if (level == 2) {
+      dashindicator = true
+    }
+
+    allowtophitdetection = true
+    allowbottomhitdetection = true
+    allowlefthitdetection = true
+    allowrighthitdetection = true
+    allowdeath = true
+    allowmove = true
+    OVERWORLD1.loop()
 }
 
 /* GAME FUNCTIONS */
@@ -419,7 +434,7 @@ function setup() {
   });
 
   document.addEventListener("keypress", function(event) {
-    if (event.key === 'r') {
+    if (event.key === 'r' && allowdeath == true) {
       level = -1
       nextlevel()
       deathcount = 0
@@ -434,19 +449,19 @@ function setup() {
   });
 
   document.addEventListener("keypress", function(event) {
-    if (event.key === ']') {
+    if (event.key === ']' && allowdeath == true) {
       nextlevel()
     }
   });
 
   document.addEventListener("keypress", function(event) {
-    if (event.key === '[') {
+    if (event.key === '[' && allowdeath == true) {
       previouslevel()
     }
   });
 
   document.addEventListener("keypress", function(event) {
-    if (event.key === 'm') {
+    if (event.key === 'm' && allowdeath == true) {
       OVERWORLD1.pause()
       BOSS1.stop()
       BOSS1.loop()
@@ -457,6 +472,14 @@ function setup() {
 /* RENDERER */
 
 function draw() {
+  if (rungame == true)
+  {
+    gameloop()
+  }
+
+}
+
+function gameloop() {
 
   if (endscreen == false) {
     if (playerx > -12 || playerxvel > 0)
@@ -588,15 +611,13 @@ function draw() {
     else
       playeryvel = -15
 
-    if (allowmove == true)
       playery -= playeryvel
-    else
-      playeryvel = 0
 
     for (repeat = 0; repeat < tilehitboxes.length; repeat++) {
       if (playerx > tilehitboxes[repeat][0] - 48 && playerx < tilehitboxes[repeat][0] + 48 && playery > tilehitboxes[repeat][1] - 56 && playery < tilehitboxes[repeat][1] - 32 && allowtophitdetection == true) {
         topoftile = true
         playery = tilehitboxes[repeat][1] - 48
+        // image(DUST1,playerx+24,playery+48,16,16)
         break
       }
       else
