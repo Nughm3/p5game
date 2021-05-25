@@ -312,7 +312,7 @@ function previouslevel() {
 
 function setup() {
   // Music
-  OVERWORLD1.loop()
+  
 
   // Canvas
   createCanvas(game_size[0], game_size[1]);
@@ -403,6 +403,11 @@ function setup() {
 /* RENDERER */
 
 function draw() {
+
+  while (!OVERWORLD1.isPlaying())
+  {
+    OVERWORLD1.play()
+  }
 
   if (endscreen == false) {
     if (playerx > -12 || playerxvel > 0)
