@@ -21,6 +21,8 @@ if (localStorage.getItem("deaths"))
 else
   var deathcount = 0
 
+frameCount = localStorage.getItem("frame")
+
 var levelspawnpoints = [420,420,190,420,129,184]
 
 var levels = []
@@ -265,12 +267,14 @@ function gameover() {
   else
     text(deathcount+' Deaths', 13, 77);
   text('Press R to reset...', 13, 103)
+  text('Completed in ' + parseFloat(frameCount/60).toFixed(2) + ' seconds', 13, 129)
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
 }
 
 function nextlevel() {
   if (level > levelcount) {
+    localStorage.setItem("frame", frameCount)
     gameover()
   }
   else {
@@ -292,6 +296,7 @@ function nextlevel() {
       allowdash = true
     localStorage.setItem("level", level)
     localStorage.setItem("deaths", deathcount)
+    localStorage.setItem("frame", frameCount)
   }
 }
 
@@ -312,19 +317,12 @@ function previouslevel() {
   }
 }
 
-function backupOVERWORLD1() {
-  if (!OVERWORLD1.isPlaying())
-    OVERWORLD1.play()
-}
-
 /* CANVAS & EVENT LISTENERS */
 
 function setup() {
   // Music
+  OVERWORLD1.stop()
   OVERWORLD1.loop()
-  setTimeout(() => {
-    backupOVERWORLD1()
-  }, 1000);
 
   // Canvas
   createCanvas(game_size[0], game_size[1]);
@@ -388,6 +386,9 @@ function setup() {
       localStorage.setItem("deaths", 0)
       endscreen = false
       dashindicator = false
+      frameCount = 0
+      OVERWORLD1.stop()
+      OVERWORLD1.loop()
     }
   });
 
