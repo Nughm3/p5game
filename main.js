@@ -308,11 +308,19 @@ function previouslevel() {
   }
 }
 
+function backupOVERWORLD1() {
+  if (!OVERWORLD1.isPlaying())
+    OVERWORLD1.play()
+}
+
 /* CANVAS & EVENT LISTENERS */
 
 function setup() {
   // Music
-  
+  OVERWORLD1.loop()
+  setTimeout(() => {
+    backupOVERWORLD1()
+  }, 1000);
 
   // Canvas
   createCanvas(game_size[0], game_size[1]);
@@ -403,11 +411,6 @@ function setup() {
 /* RENDERER */
 
 function draw() {
-
-  while (!OVERWORLD1.isPlaying())
-  {
-    OVERWORLD1.play()
-  }
 
   if (endscreen == false) {
     if (playerx > -12 || playerxvel > 0)
