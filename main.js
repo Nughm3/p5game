@@ -252,12 +252,14 @@ function waitdash() {
 }
 
 function stopdash() {
-  playerxvel = 0
-  playeryvel = 0
-  allowmove = true
-  dashing = false
-  allowtophitdetection = true
-  allowbottomhitdetection = true
+  if (allowdeath == true)
+  {
+    playerxvel = 0
+    playeryvel = 0
+    allowmove = true
+    dashing = false
+    allowbottomhitdetection = true
+  }
 }
 
 function death() {
@@ -266,10 +268,12 @@ function death() {
   allowlefthitdetection = false
   allowrighthitdetection = false
   allowdeath = false
-  playeryvel = 15
   deathcount += 1
   localStorage.setItem("deaths",deathcount)
-  stopdash()
+  
+  playerxvel = 0
+  playeryvel = 0
+  dashing = false
 
   allowmove = false
   playeryvel = 20
@@ -277,6 +281,7 @@ function death() {
   BOSS1.stop()
   
   DEATH.play()
+
   setTimeout(() => {
     respawn()
   }, 2500);
