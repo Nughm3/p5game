@@ -429,6 +429,7 @@ function setup() {
       frameCount = 0
       OVERWORLD1.stop()
       OVERWORLD1.loop()
+      BOSS1.stop()
     }
   });
 
