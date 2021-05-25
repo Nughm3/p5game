@@ -266,8 +266,8 @@ function gameover() {
     text('1 Death', 13, 77);
   else
     text(deathcount+' Deaths', 13, 77);
-  text('Press R to reset...', 13, 103)
-  text('Completed in ' + parseFloat(frameCount/60).toFixed(2) + ' seconds', 13, 129)
+    text('Completed in ' + parseFloat(frameCount/60).toFixed(2) + ' seconds', 13, 103)
+    text('Press R to reset... (for debugging purposes)', 13, 129)
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
 }
@@ -620,8 +620,16 @@ function draw() {
       }
     }
 
-    if (dashindicator == true && level == 2)
-      image(DASH, 450, 400)
+    if (dashindicator == true && level == 2) {
+      if (dashing == true)
+        dashindicator = false
+      image(DASH, 400, 400);
+      fill(255, 255, 255);
+      textFont(FONT);
+      textSize(40);
+      textStyle(BOLD);
+      text('DASH', 475, 447);
+    }
 
     if (level == 0 && playermoved == false)
       image(ARROWS, 30, 380)
