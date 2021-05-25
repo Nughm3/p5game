@@ -1,4 +1,4 @@
-# p5game [game title tbd]
+# p5game
 
 ## A basic p5.js game for a project
 
