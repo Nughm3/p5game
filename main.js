@@ -258,6 +258,7 @@ function stopdash() {
     playeryvel = 0
     allowmove = true
     dashing = false
+    allowdash = false
     allowbottomhitdetection = true
   }
 }
