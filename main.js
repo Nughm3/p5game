@@ -74,6 +74,37 @@ var spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
+var switches = []
+
+// [switch location, door location 1, door location 2, 3, etc.]
+
+var switches6 = []
+switches.push(switches6)
+
+var switches7 = []
+switches.push(switches7)
+
+var switches8 = []
+switches.push(switches8)
+
+var switches9 = []
+switches.push(switches9)
+
+var switches10 = []
+switches.push(switches10)
+
+var switches11 = []
+switches.push(switches11)
+
+var switches12 = []
+switches.push(switches12)
+
+var switches13 = []
+switches.push(switches13)
+
+var switches14 = []
+switches.push(switches14)
+
 var bossmsg = [
   '','','','','','','','','','','','','','','', // up to level 15 (index 14) before boss starts
   'That is enough, fool! Adventurers! Be careful of who you are messing with. Before I have to deal with you myself.', // Phase 1
@@ -140,36 +171,39 @@ function preload() {
   BACKGROUND2 = loadImage('media/bg/neon.png'); // Green
   ENDSCREEN = loadImage('media/bg/endscreen.png'); // Dimmed background to show stats
   // Tiles: Stage 1 tiles are ORANGE, 2 are BLUE, 3 are GREEN
-  TILE1 = loadImage('media/tile/tile1.png');
-  // TILE2 = loadImage('media/tile/tile2.png');
-  // TILE3 = loadImage('media/tile/tile3.png');
-  DASH = loadImage('media/tile/dashindicator.png'); // Helps the player know to press Z to dash
-  ARROWS = loadImage('media/tile/arrows.png');
+  TILE1 = loadImage('media/tile/tile/tile1.png');
+  // TILE2 = loadImage('media/tile/tile/tile2.png');
+  // TILE3 = loadImage('media/tile/tile/tile3.png');
+  // Misc tiles
+  DASH = loadImage('media/tile/misc/dash.png'); // Helps the player know to press Z to dash
+  ARROWS = loadImage('media/tile/misc/arrows.png'); // Helps the player know to use arrow keys
   // Effects
   DASHRIGHT = loadImage('media/fx/dashingR.png');
   DASHLEFT = loadImage('media/fx/dashingL.png');
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
-  SPIKEUP1 = loadImage('media/spikes1/spikeup.png');
+  SPIKEUP1 = loadImage('media/tile/spikes1/spikeup.png');
   SPIKEDOWN1 = loadImage('media/spikes1/spikedown.png');
-  SPIKELEFT1 = loadImage('media/spikes1/spikeleft.png');
-  SPIKERIGHT1 = loadImage('media/spikes1/spikeright.png');
-  SPIKEUP2 = loadImage('media/spikes2/spikeup.png');
-  SPIKEDOWN2 = loadImage('media/spikes2/spikedown.png');
-  SPIKELEFT2 = loadImage('media/spikes2/spikeleft.png');
-  SPIKERIGHT2 = loadImage('media/spikes2/spikeright.png');
-  SPIKEUP3 = loadImage('media/spikes3/spikeup.png');
-  SPIKEDOWN3 = loadImage('media/spikes3/spikedown.png');
-  SPIKELEFT3 = loadImage('media/spikes3/spikeleft.png');
-  SPIKERIGHT3 = loadImage('media/spikes3/spikeright.png');
+  SPIKELEFT1 = loadImage('media/tile/spikes1/spikeleft.png');
+  SPIKERIGHT1 = loadImage('media/tile/spikes1/spikeright.png');
+  SPIKEUP2 = loadImage('media/tile/spikes2/spikeup.png');
+  SPIKEDOWN2 = loadImage('media/tile/spikes2/spikedown.png');
+  SPIKELEFT2 = loadImage('media/tile/spikes2/spikeleft.png');
+  SPIKERIGHT2 = loadImage('media/tile/spikes2/spikeright.png');
+  SPIKEUP3 = loadImage('media/tile/spikes3/spikeup.png');
+  SPIKEDOWN3 = loadImage('media/tile/spikes3/spikedown.png');
+  SPIKELEFT3 = loadImage('media/tile/spikes3/spikeleft.png');
+  SPIKERIGHT3 = loadImage('media/tile/spikes3/spikeright.png');
   // Background music
   OVERWORLD1 = loadSound('media/music/overworld1.mp3');
   // OVERWORLD2 = loadSound('media/music/overworld2.mp3');
   // OVERWORLD3 = loadSound('media/music/overworld3.mp3');
   BOSS1 = loadSound('media/music/boss1.mp3');
+  // VICTORY = loadSound('media/music/victory.mp3');
   // Sounds
   // DASH = loadSound('media/sounds/dash.mp3');
   // LAND = loadSound('media/sounds/land.mp3');
   // DEATH = loadSound('media/sounds/death.mp3');
+  // RESPAWN = loadSound('media/sounds/respawn.mp3');
   // TRANSITION = loadSound('media/sounds/transition.mp3');
   // BOSSATTACK = loadSound('media/sounds/bossattack.mp3');
   SWITCH = loadSound('media/sounds/switch.mp3');
