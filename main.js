@@ -471,14 +471,14 @@ function setup() {
   });
 
   document.addEventListener("keypress", function(event) {
-    if (event.key === ']' && allowdeath == true) {
+    if (event.key === ']' && allowdeath == true && endscreen == false) {
       nextlevel()
       verified = false
     }
   });
 
   document.addEventListener("keypress", function(event) {
-    if (event.key === '[' && allowdeath == true) {
+    if (event.key === '[' && allowdeath == true && endscreen == false) {
       previouslevel()
       verified = false
     }
