@@ -689,18 +689,20 @@ function gameloop() {
         death()
 
     if (dashing == true) {
-      for (repeat = 0; repeat < tilehitboxes.length; repeat++) {
-        if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true) {
-          dashtouchingleft = true
-          break
-        }
-      }
-      if (dashtouchingleft == false) {
         if (playerdirection == 1)
-          playerxvel = 30
+        {
+          if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 128 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true)
+            playerxvel = 0
+          else
+            playerxvel = 30
+        }
         else
-          playerxvel = -30
-      }
+        {
+          if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx < tilehitboxes[repeat][0] + 128 && playerx > tilehitboxes[repeat][0] + 32 && allowrighthitdetection == true)
+            playerxvel = 0
+          else
+            playerxvel = -30
+        }
     }
 
     if (dashindicator == true && level == 2) {
