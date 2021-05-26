@@ -681,7 +681,7 @@ function gameloop() {
       allowdash = true
 
     for (repeat = 0; repeat < spikehitboxes.length; repeat++) {
-      if (allowdeath == true && playerx > spikehitboxes[repeat][0] - 32 && playerx < spikehitboxes[repeat][0] + 32 && playery > spikehitboxes[repeat][1] - 48 && playery < spikehitboxes[repeat][1] + 48)
+      if (allowdeath == true && playerx > spikehitboxes[repeat][0] - 32 && playerx < spikehitboxes[repeat][0] + 32 && playery > spikehitboxes[repeat][1] - 40 && playery < spikehitboxes[repeat][1] + 48)
         death()
     }
 
@@ -703,7 +703,7 @@ function gameloop() {
           else
             playerxvel = -30
         }
-    }
+    } 
 
     if (dashindicator == true && level == 2) {
       if (dashing == true)
