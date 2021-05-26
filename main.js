@@ -90,8 +90,8 @@ var spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
-var spikes6 = [23,45,27,84,87,88,28,127,121,50,112,132]
-var spikes6directions = [1,1,1,4,4,4,1,1,4,4,2,2]
+var spikes6 = [23,45,27,84,87,88,28,127,121,50,112,132,167]
+var spikes6directions = [1,1,1,4,4,4,1,1,4,4,2,2,4]
 spikes.push(spikes6)
 spikesdirections.push(spikes6directions)
 
