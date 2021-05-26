@@ -384,7 +384,6 @@ function nextlevel() {
     localStorage.setItem("level", level)
     localStorage.setItem("deaths", deathcount)
     localStorage.setItem("frame", frameCount)
-    SWITCH.play() // temp
   }
 }
 
@@ -401,7 +400,7 @@ function previouslevel() {
     spikehitboxes = []
     if (level < 2)
       allowdash = false
-    localStorage.setItem("level",level)
+    localStorage.setItem("level", level)
   }
 }
 
