@@ -356,7 +356,7 @@ function gameover() {
   if (verified == false)
     text('Run Unverified', 13, 155);
   text('AdminTroller', 1035, 544);
-  text('ToxicFscyther', 1020, 566);
+  text('ToxicFscyther',1020, 566);
 }
 
 function nextlevel() {
@@ -384,6 +384,7 @@ function nextlevel() {
     localStorage.setItem("level", level)
     localStorage.setItem("deaths", deathcount)
     localStorage.setItem("frame", frameCount)
+    SWITCH.play() // temp
   }
 }
 
