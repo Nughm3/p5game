@@ -46,7 +46,7 @@ var level4 = [0,1,2,3,4,5,6,7,100,101,102,62,63,64,20,21,22,23,24,25,26,27,65,66
 levels.push(level4)
 var level5 = [80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,58,78,98,118,138,158,178,0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,40,41,42,48,49,50,51,52,53,54,55,56,57,20,21,22]
 levels.push(level5)
-var level6 = [0,1,2,3,4,5,6,7,8,9,10,11,12,25,104,107,108,13,33,53,73,93,113,133,32,70,141]
+var level6 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,25,104,107,108,13,33,53,73,93,113,133,32,70,140,141,134,118,98,77,78]
 levels.push(level6)
 
 const levelcount = 5 // update this upon adding new levels, used for game complete detection [levels - 1]
@@ -90,8 +90,8 @@ var spikes5directions = [1,1,1,1,1,1,4,4,4,4,3,3,2,2,2,2,2,2,2]
 spikes.push(spikes5)
 spikesdirections.push(spikes5directions)
 
-var spikes6 = [23,45,27,84,87,88,28,127,121,50,112,132,167]
-var spikes6directions = [1,1,1,4,4,4,1,1,4,4,2,2,4]
+var spikes6 = [23,45,27,84,87,88,28,127,120,121,50,112,132,167,76,97,117,138,158,178,34,54,74,94,114,135]
+var spikes6directions = [1,1,1,4,4,4,1,1,4,4,4,2,2,4,2,2,2,2,2,2,3,3,3,3,3,3]
 spikes.push(spikes6)
 spikesdirections.push(spikes6directions)
 
@@ -769,6 +769,12 @@ function gameloop() {
     {
       document.write("woo a secret (reload page lol)")
       playerx = 500
+    }
+
+    if (level == 6 && playery < 64 && playerx < 64)
+    {
+      document.write("woo a secret (reload page lol)")
+      playery = 420
     }
   }
 }
