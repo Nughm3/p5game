@@ -168,6 +168,8 @@ function preload() {
   PLAYER_ANIM_L = loadImage('media/players/animL.png');
   PLAYER_DASH_R = loadImage('media/players/dashingR.png');
   PLAYER_DASH_L = loadImage('media/players/dashingL.png');
+  PLAYER_DEAD_R = loadImage('media/players/deadR.png'); 
+  PLAYER_DEAD_L = loadImage('media/players/deadL.png');
   // Backgrounds
   BACKGROUND = loadImage('media/bg/sunset.png'); // Orange
   BACKGROUND1 = loadImage('media/bg/city.png'); // Deep blue
@@ -183,12 +185,12 @@ function preload() {
   // Effects
   DASHRIGHT = loadImage('media/fx/dash/dashR.png');
   DASHLEFT = loadImage('media/fx/dash/dashL.png');
-  DUST1 = loadImage('media/fx/dust/dust1.png')
-  DUST2 = loadImage('media/fx/dust/dust2.png')
-  DUST3 = loadImage('media/fx/dust/dust3.png')
-  DUST4 = loadImage('media/fx/dust/dust4.png')
-  CLOUD1 = loadImage('media/fx/dust/dustcloud1.png')
-  CLOUD2 = loadImage('media/fx/dust/dustcloud2.png')
+  DUST1 = loadImage('media/fx/dust/dust1.png');
+  DUST2 = loadImage('media/fx/dust/dust2.png');
+  DUST3 = loadImage('media/fx/dust/dust3.png');
+  DUST4 = loadImage('media/fx/dust/dust4.png');
+  CLOUD1 = loadImage('media/fx/dust/dustcloud1.png');
+  CLOUD2 = loadImage('media/fx/dust/dustcloud2.png');
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/tile/spikes1/spikeup.png');
   SPIKEDOWN1 = loadImage('media/tile/spikes1/spikedown.png');
@@ -270,7 +272,7 @@ function death() {
   allowrighthitdetection = false
   allowdeath = false
   deathcount += 1
-  localStorage.setItem("deaths",deathcount)
+  localStorage.setItem("deaths", deathcount)
   
   playerxvel = 0
   playeryvel = 0
@@ -294,9 +296,8 @@ function respawn() {
     playeryvel = 0
     playerdirection = 1
 
-    if (level == 2) {
+    if (level == 2)
       dashindicator = true
-    }
 
     allowtophitdetection = true
     allowbottomhitdetection = true
@@ -479,10 +480,7 @@ function setup() {
 
 function draw() {
   if (rungame == true)
-  {
     gameloop()
-  }
-
 }
 
 function gameloop() {
@@ -503,22 +501,28 @@ function gameloop() {
         image(BACKGROUND2, 0, 0);
       }
     }
-
-    if (dashing == true) {
-      if (playerdirection == 1) {
-        image(PLAYER_DASH_R, playerx, playery)
-        image(DASHRIGHT, playerx - 64, playery)
+    if (allowdeath == true) {
+      if (dashing == true) {
+        if (playerdirection == 1) {
+          image(PLAYER_DASH_R, playerx, playery)
+          image(DASHRIGHT, playerx - 64, playery)
+        }
+        else {
+          image(PLAYER_DASH_L, playerx, playery)
+          image(DASHLEFT, playerx + 64, playery)
+        }
       }
       else {
-        image(PLAYER_DASH_L, playerx, playery)
-        image(DASHLEFT, playerx + 64, playery)
+        if (playerdirection == 1)
+          image(PLAYER_IDLE_R, playerx, playery)
+        else
+          image(PLAYER_IDLE_L, playerx, playery)
       }
-    }
-    else {
+    } else {
       if (playerdirection == 1)
-        image(PLAYER_IDLE_R, playerx, playery)
+        image(PLAYER_DEAD_R, playerx, playery)
       else
-        image(PLAYER_IDLE_L, playerx, playery)
+        image(PLAYER_DEAD_L, playerx, playery)
     }
 /*
     if (!playerxvel == 0) {
@@ -638,8 +642,7 @@ function gameloop() {
       touchingground = false
 
     for (repeat = 0; repeat < tilehitboxes.length; repeat++) {
-      if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true)
-      {
+      if (playery > tilehitboxes[repeat][1] - 48 && playery < tilehitboxes[repeat][1] + 48 && playerx > tilehitboxes[repeat][0] - 64 && playerx < tilehitboxes[repeat][0] - 32 && allowlefthitdetection == true) {
         leftoftile = true
         break
       }
