@@ -273,8 +273,7 @@ function waitdash() {
 }
 
 function stopdash() {
-  if (allowdeath == true)
-  {
+  if (allowdeath == true) {
     playerxvel = 0
     playeryvel = 0
     allowmove = true
@@ -484,15 +483,15 @@ function setup() {
 
   document.addEventListener("keypress", function(event) {
     if (event.key === ']' && allowdeath == true && endscreen == false) {
-      nextlevel()
       verified = false
+      nextlevel()
     }
   });
 
   document.addEventListener("keypress", function(event) {
     if (event.key === '[' && allowdeath == true && endscreen == false) {
-      previouslevel()
       verified = false
+      previouslevel()
     }
   });
 
