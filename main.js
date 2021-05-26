@@ -16,10 +16,13 @@ var allowdeath = true
 var endscreen = false
 var playermoved = false
 
-if (localStorage.getItem("level"))
+if (localStorage.getItem("level")) {
   var level = parseInt(localStorage.getItem("level"))
-else
+  var verified = false
+} else {
   var level = 0
+  var verified = true
+}
 
 if (localStorage.getItem("deaths"))
   var deathcount = parseInt(localStorage.getItem("deaths"))
@@ -47,6 +50,12 @@ var level6 = [0,1,2,3,4,5,6,7,8,12,25]
 levels.push(level6)
 
 const levelcount = 5 // update this upon adding new levels, used for game complete detection [levels - 1]
+
+var secrets = []
+var secret1 = []
+secrets.push(level1)
+var secret2 = []
+secrets.push(level2)
 
 var spikes = []
 var spikesdirections = []
@@ -329,7 +338,10 @@ function respawn() {
 function gameover() {
   endscreen = true;
   image(ENDSCREEN, 0, 0);
-  fill(255, 255, 255);
+  if (verified == true)
+    fill(255, 255, 255);
+  else
+    fill(237, 34, 93);
   textSize(48);
   textFont(FONT);
   text('Game Complete!', 10, 50);
@@ -340,8 +352,10 @@ function gameover() {
     text('1 Death', 13, 77);
   else
     text(deathcount+' Deaths', 13, 77);
-    text('Completed in ' + parseFloat(frameCount/60).toFixed(2) + ' seconds', 13, 103)
-    text('Press R to reset... (for debugging purposes)', 13, 129)
+  text('Completed in ' + parseFloat(frameCount/60).toFixed(2) + ' seconds', 13, 103);
+  text('Press R to reset...', 13, 129);
+  if (verified == false)
+    text('Run Unverified', 13, 155);
   text('AdminTroller', 1035, 544);
   text('ToxicFscyther', 1020, 566);
 }
@@ -461,6 +475,7 @@ function setup() {
       endscreen = false
       dashindicator = false
       frameCount = 0
+      verified = true
       OVERWORLD1.stop()
       OVERWORLD1.loop()
       BOSS1.stop()
@@ -470,12 +485,14 @@ function setup() {
   document.addEventListener("keypress", function(event) {
     if (event.key === ']' && allowdeath == true) {
       nextlevel()
+      verified = false
     }
   });
 
   document.addEventListener("keypress", function(event) {
     if (event.key === '[' && allowdeath == true) {
       previouslevel()
+      verified = false
     }
   });
 
