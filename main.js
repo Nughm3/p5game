@@ -511,7 +511,7 @@ function setup() {
 
 setInterval(() => {
   bobbing = !bobbing
-}, 2000);
+}, 1250);
 
 /* RENDERER */
 
