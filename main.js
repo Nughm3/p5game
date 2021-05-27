@@ -211,6 +211,7 @@ function preload() {
   DUST4 = loadImage('media/fx/dust/dust4.png');
   CLOUD1 = loadImage('media/fx/dust/dustcloud1.png');
   CLOUD2 = loadImage('media/fx/dust/dustcloud2.png');
+  TRANSITION = loadImage('media/fx/transition.png');
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/tile/spikes1/spikeup.png');
   SPIKEDOWN1 = loadImage('media/tile/spikes1/spikedown.png');
