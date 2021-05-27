@@ -147,6 +147,8 @@ var playerxvel = 0
 var playeryvel = 0
 var gravity = 1
 
+var bobbing = false
+
 var touchingground = false
 
 var allowmove = true
@@ -415,6 +417,7 @@ function setup() {
   createCanvas(game_size[0], game_size[1]);
   BACKGROUND.resize(game_size[0], game_size[1]);
   frameRate(60);
+  textFont(FONT);
 
   // Listeners
   document.addEventListener("keydown", function(event) {
@@ -504,6 +507,12 @@ function setup() {
   });
 }
 
+/* TIMERS */
+
+setInterval(() => {
+  bobbing = !bobbing
+}, 2000);
+
 /* RENDERER */
 
 function draw() {
@@ -540,13 +549,20 @@ function gameloop() {
           image(DASHLEFT, playerx + 64, playery)
         }
       }
+      else if (bobbing == true && playerxvel == 0 && playeryvel == -15) {
+        if (playerdirection == 1)
+          image(PLAYER_ANIM_R, playerx, playery)
+        else
+          image(PLAYER_ANIM_L, playerx, playery)
+      }
       else {
         if (playerdirection == 1)
           image(PLAYER_IDLE_R, playerx, playery)
         else
           image(PLAYER_IDLE_L, playerx, playery)
       }
-    } else {
+    }
+    else if (allowdeath == false) {
       if (playerdirection == 1)
         image(PLAYER_DEAD_R, playerx, playery)
       else
