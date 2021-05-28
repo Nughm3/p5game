@@ -196,9 +196,10 @@ function preload() {
   BACKGROUND2 = loadImage('media/bg/neon.png'); // Green
   ENDSCREEN = loadImage('media/bg/endscreen.png'); // Dimmed background to show stats
   // Tiles: Stage 1 tiles are ORANGE, 2 are BLUE, 3 are GREEN
+  // TODO change the tile texture
   TILE1 = loadImage('media/tile/tile/tile1.png');
-  // TILE2 = loadImage('media/tile/tile/tile2.png');
-  // TILE3 = loadImage('media/tile/tile/tile3.png');
+  TILE2 = loadImage('media/tile/tile/tile2.png');
+  TILE3 = loadImage('media/tile/tile/tile3.png');
   // Misc tiles
   DASH = loadImage('media/tile/misc/dash.png'); // Helps the player know to press Z to dash
   ARROWS = loadImage('media/tile/misc/arrows.png'); // Helps the player know to use arrow keys
@@ -596,7 +597,12 @@ function gameloop() {
         tiley = game_size[1] - 64 - (row * 64)
       }
       tilex = tile*64
-      image(TILE1, tilex, tiley)
+      if (level <= 1)
+        image(TILE1, tilex, tiley)
+      else if (level < 5)
+        image(TILE2, tilex, tiley)
+      else
+        image(TILE3, tilex, tiley)
       tilehitboxes.push([tilex,tiley])
     }
 
