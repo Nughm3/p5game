@@ -333,7 +333,7 @@ function respawn() {
 
 /* GAME FUNCTIONS */
 
-// function menu() {
+// TODO function menu() {
   
 // }
 
@@ -569,7 +569,7 @@ function gameloop() {
       else
         image(PLAYER_DEAD_L, playerx, playery)
     }
-/*
+/* TODO
     if (!playerxvel == 0) {
       var randdust = random(1, 5)
       if (randdust == 1)
