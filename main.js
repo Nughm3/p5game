@@ -2,6 +2,13 @@
 
 /* VARIABLE DEFINITIONS */
 
+/*
+TODO more levels
+TODO secret levels
+TODO implement switches
+TODO boss levels/boss dialogue
+*/
+
 var game_size = [1216, 576]
 
 var dashamount = 0
@@ -180,6 +187,12 @@ var allowbottomhitdetection = true
 
 /* ASSET LOADING */
 
+/*
+TODO change tile texture
+TODO add particle effects
+TODO add sounds
+*/
+
 function preload() {
   // Players
   PLAYER_IDLE_R = loadImage('media/players/idleR.png');
@@ -206,12 +219,15 @@ function preload() {
   // Effects
   DASHRIGHT = loadImage('media/fx/dash/dashR.png');
   DASHLEFT = loadImage('media/fx/dash/dashL.png');
+  // TODO particle effects
   DUST1 = loadImage('media/fx/dust/dust1.png');
   DUST2 = loadImage('media/fx/dust/dust2.png');
   DUST3 = loadImage('media/fx/dust/dust3.png');
   DUST4 = loadImage('media/fx/dust/dust4.png');
+  // TODO dust clouds on land
   CLOUD1 = loadImage('media/fx/dust/dustcloud1.png');
   CLOUD2 = loadImage('media/fx/dust/dustcloud2.png');
+  // TODO transition
   TRANSITION = loadImage('media/fx/transition.png');
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage('media/tile/spikes1/spikeup.png');
@@ -245,6 +261,11 @@ function preload() {
 }
 
 /* PLAYER FUNCTIONS */
+
+/*
+TODO better death animation
+TODO interact
+*/
 
 function moveleft() {
   playerxvel = movementspeed * -1
@@ -334,9 +355,9 @@ function respawn() {
 
 /* GAME FUNCTIONS */
 
-// TODO function menu() {
-  
-// }
+/*
+TODO menu
+*/
 
 function gameover() {
   endscreen = true;
