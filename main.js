@@ -16,6 +16,11 @@ var dashtouchingleft = false
 
 var rungame = true
 
+var debugx = 0
+var debugy = 0
+var debugtile = 0
+var debugrow = 0
+
 var allowgravity = true
 
 var allowrespawn = true
@@ -632,12 +637,6 @@ function gameloop() {
         image(TILE2, tilex, tiley)
       else
         image(TILE3, tilex, tiley)
-      // if (debugmode == true) {
-      //   textFont(FONT)
-      //   textSize(24)
-      //   fill(230,230,230)
-      //   text("levels")
-      // }
       tilehitboxes.push([tilex,tiley])
     }
 
@@ -686,7 +685,26 @@ function gameloop() {
       }
       spikehitboxes.push([spikex,spikey])
     }
-
+    if (debugmode == true)
+    {
+      for (repeat=0;repeat<180;repeat++)
+      {
+        debugrow = 0
+        debugtile = repeat
+        while (debugtile > 19)
+        {
+          debugtile -= 20
+          debugrow += 1
+        }
+        debugx = debugtile*64 + 28
+        debugy = 556 - (debugrow*64)
+        textAlign(CENTER)
+        textSize(30)
+        fill(255,255,255)
+        text(repeat,debugx,debugy)
+      }
+    }
+    
     if (leftpressed == true && allowmove == true)
       moveleft()
 
