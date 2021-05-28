@@ -385,6 +385,7 @@ function gameover() {
     fill(237, 34, 93);
   textSize(48);
   textFont(FONT);
+  textAlign(LEFT);
   text('Game Complete!', 10, 50);
   textSize(24);
   if (deathcount == 0)
@@ -584,6 +585,7 @@ function gameloop() {
         image(BACKGROUND2, 0, 0);
       }
     }
+
     if (allowdeath == true) {
       if (dashing == true) {
         if (playerdirection == 1) {
@@ -695,14 +697,12 @@ function gameloop() {
       }
       spikehitboxes.push([spikex,spikey])
     }
-    if (debugmode == true)
-    {
-      for (repeat=0;repeat<180;repeat++)
-      {
+
+    if (debugmode == true) {
+      for (repeat=0;repeat<180;repeat++) {
         debugrow = 0
         debugtile = repeat
-        while (debugtile > 19)
-        {
+        while (debugtile > 19) {
           debugtile -= 20
           debugrow += 1
         }
