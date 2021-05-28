@@ -185,6 +185,8 @@ var allowlefthitdetection = true
 var allowrighthitdetection = true
 var allowbottomhitdetection = true
 
+var debugmode = false
+
 /* ASSET LOADING */
 
 /*
@@ -522,6 +524,12 @@ function setup() {
   });
 
   document.addEventListener("keypress", function(event) {
+    if (event.key === 'n') {
+      debugmode = !debugmode
+    }
+  });
+
+  document.addEventListener("keypress", function(event) {
     if (event.key === 'm' && allowdeath == true) {
       OVERWORLD1.pause()
       BOSS1.stop()
@@ -624,6 +632,12 @@ function gameloop() {
         image(TILE2, tilex, tiley)
       else
         image(TILE3, tilex, tiley)
+      // if (debugmode == true) {
+      //   textFont(FONT)
+      //   textSize(24)
+      //   fill(230,230,230)
+      //   text("levels")
+      // }
       tilehitboxes.push([tilex,tiley])
     }
 
