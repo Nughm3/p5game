@@ -699,6 +699,7 @@ function gameloop() {
     }
 
     if (debugmode == true) {
+      verified = false
       for (repeat=0;repeat<180;repeat++) {
         debugrow = 0
         debugtile = repeat
