@@ -58,11 +58,21 @@ levels.push(level6)
 
 const levelcount = 5 // update this upon adding new levels, used for game complete detection [levels - 1]
 
-var secrets = []
+var secrets = [] // secret rooms
 var secret1 = []
-secrets.push(level1)
+secrets.push(secret1)
 var secret2 = []
-secrets.push(level2)
+secrets.push(secret2)
+var secret3 = []
+secrets.push(secret3)
+
+var secspikes = [] // secrets spikes
+var secspike1 = []
+secspikes.push(secspike1)
+var secspike2 = []
+secspikes.push(secspike2)
+var secspike3 = []
+secspikes.push(secspike3)
 
 var spikes = []
 var spikesdirections = []
