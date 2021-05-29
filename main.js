@@ -9,6 +9,15 @@ TODO implement switches
 TODO boss levels/boss dialogue
 */
 
+/*
+? Instructions for adding levels
+* Add level<level#> array
+* Add spikes<level#> and spikes<level#>directions arrays
+* Add a spawnpoint (default 420) into the levelspanwnpoints array
+! Make sure to increase var levelcount by 1
+TODO add switches
+*/
+
 var game_size = [1216, 576]
 
 var dashamount = 0
@@ -16,6 +25,7 @@ var dashtouchingleft = false
 
 var rungame = true
 
+var debugmode = false
 var debugx = 0
 var debugy = 0
 var debugtile = 0
@@ -43,7 +53,7 @@ else
 
 frameCount = localStorage.getItem("frame")
 
-var levelspawnpoints = [420,420,190,420,129,184,420]
+var levelspawnpoints = [420,420,190,420,129,184,420,420]
 
 var levels = []
 var level0 = [0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,26,27,34]
@@ -60,8 +70,10 @@ var level5 = [80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,58,78,98,118,138,1
 levels.push(level5)
 var level6 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,25,104,107,108,13,33,53,73,93,113,133,32,70,140,141,134,118,98,77,78]
 levels.push(level6)
+var level7 = [0,1,2,3,4,24,40,44,60,64,80,84,43,81,123,140,160,120,100,162,163,164,124,104,165,166,167,168,148,128,108,88,68,87,5,9,10,69,33,113,133,153,173,13,55,17,37,77,57,157,177]
+levels.push(level7)
 
-const levelcount = 5 // update this upon adding new levels, used for game complete detection [levels - 1]
+const levelcount = 6 // * levels - 1
 
 var secrets = [] // secret rooms
 var secret1 = []
@@ -116,6 +128,11 @@ var spikes6 = [23,45,27,84,87,88,28,127,120,121,50,112,132,167,76,97,117,138,158
 var spikes6directions = [1,1,1,4,4,4,1,1,4,4,4,2,2,4,2,2,2,2,2,2,3,3,3,3,3,3]
 spikes.push(spikes6)
 spikesdirections.push(spikes6directions)
+
+var spikes7 = [23,61,103,107,86,25,6,7,8,161,53,93,89,137,97]
+var spikes7directions = [2,4,4,1,2,1,1,1,1,4,1,4,1,4,1]
+spikes.push(spikes7)
+spikesdirections.push(spikes7directions)
 
 var switches = []
 
@@ -199,8 +216,6 @@ var allowtophitdetection = true
 var allowlefthitdetection = true
 var allowrighthitdetection = true
 var allowbottomhitdetection = true
-
-var debugmode = false
 
 /* ASSET LOADING */
 
@@ -341,15 +356,19 @@ function death() {
   dashing = false
 
   allowmove = false
-  playeryvel = 20
+  if (!debugmode)
+    playeryvel = 20
   OVERWORLD1.stop()
   BOSS1.stop()
   
   DEATH.play()
-
-  setTimeout(() => {
+  if (debugmode)
     respawn()
-  }, 2500);
+  else {
+    setTimeout(() => {
+      respawn()
+    }, 2500);
+  }
 }
 
 function respawn() {
