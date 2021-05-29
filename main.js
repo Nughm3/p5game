@@ -23,7 +23,8 @@ var game_size = [1216, 576]
 var dashamount = 0
 var dashtouchingleft = false
 
-var rungame = true
+// $ Game toggle
+var rungame = false
 
 var debugmode = false
 var debugx = 0
@@ -394,34 +395,50 @@ function respawn() {
 
 /* GAME FUNCTIONS */
 
-/*
-TODO menu
-*/
+function menu() {
+  image(ENDSCREEN, 0, 0)
+  textAlign(LEFT)
+  textFont(FONT)
+
+  fill(255, 255, 255)
+  textStyle(BOLD)
+  textSize(48)
+  text('P5GAME', 30, 288)
+
+  fill(200, 200, 200)
+  textStyle(ITALIC)
+  textSize(24)
+  text("Press ENTER to start...", 30, 318)
+
+  fill(255, 255, 255)
+  text('AdminTroller', 1035, 544)
+  text('ToxicFscyther',1020, 566)
+}
 
 function gameover() {
-  endscreen = true;
-  image(ENDSCREEN, 0, 0);
+  endscreen = true
+  image(ENDSCREEN, 0, 0)
   if (verified == true)
-    fill(255, 255, 255);
+    fill(255, 255, 255)
   else
-    fill(237, 34, 93);
-  textSize(48);
-  textFont(FONT);
-  textAlign(LEFT);
-  text('Game Complete!', 10, 50);
-  textSize(24);
+    fill(237, 34, 93)
+  textSize(48)
+  textFont(FONT)
+  textAlign(LEFT)
+  text('Game Complete!', 10, 50)
+  textSize(24)
   if (deathcount == 0)
     text('No Deaths', 13, 77)
   else if (deathcount == 1)
-    text('1 Death', 13, 77);
+    text('1 Death', 13, 77)
   else
-    text(deathcount+' Deaths', 13, 77);
-  text('Completed in ' + parseFloat(frameCount/60).toFixed(2) + ' seconds', 13, 103);
-  text('Press R to reset...', 13, 129);
+    text(deathcount+' Deaths', 13, 77)
+  text('Completed in ' + parseFloat(frameCount/60).toFixed(2) + ' seconds', 13, 103)
+  text('Press R to reset...', 13, 129)
   if (verified == false)
-    text('Run Unverified', 13, 155);
-  text('AdminTroller', 1035, 544);
-  text('ToxicFscyther',1020, 566);
+    text('Run Unverified', 13, 155)
+  text('AdminTroller', 1035, 544)
+  text('ToxicFscyther',1020, 566)
 }
 
 function nextlevel() {
@@ -483,6 +500,8 @@ function setup() {
   textFont(FONT);
 
   // Listeners
+
+  // Movements
   document.addEventListener("keydown", function(event) {
     if (event.key === 'ArrowLeft') {
       leftpressed = true
@@ -525,12 +544,14 @@ function setup() {
     }
   });
 
+  // Dash
   document.addEventListener("keydown", function(event) {
     if (event.key === 'z' && allowdash == true && allowmove == true) {
       dash()
     }
   });
 
+  // TEMP [DEBUG] Reset
   document.addEventListener("keypress", function(event) {
     if (event.key === 'r' && allowdeath == true) {
       level = -1
@@ -548,6 +569,7 @@ function setup() {
     }
   });
 
+  // TEMP [DEBUG] Skip level
   document.addEventListener("keypress", function(event) {
     if (event.key === ']' && allowdeath == true && endscreen == false) {
       verified = false
@@ -556,6 +578,7 @@ function setup() {
     }
   });
 
+  // TEMP [DEBUG] Return to previous level
   document.addEventListener("keypress", function(event) {
     if (event.key === '[' && allowdeath == true && endscreen == false) {
       verified = false
@@ -564,19 +587,32 @@ function setup() {
     }
   });
 
+  // TEMP [DEBUG] Enter level builder and debug mode
+  // ? In debug mode, there is no death animation and block coords are shown on screen.
   document.addEventListener("keypress", function(event) {
-    if (event.key === 'n') {
+    if (event.key === 'k') {
       verified = false
       localStorage.setItem("verified", false)
       debugmode = !debugmode
     }
   });
 
+  // TEMP [DEBUG] Temporarily sample AdminTroller's musical skills.
   document.addEventListener("keypress", function(event) {
     if (event.key === 'm' && allowdeath == true) {
       OVERWORLD1.pause()
       BOSS1.stop()
       BOSS1.loop()
+    }
+  });
+
+  // * Start the game
+  // ! Only works in the menu screen.
+  // FIXME there will be a bug where continuing will reset the time ;-;
+  document.addEventListener("keypress", function(event) {
+    if (event.key === 'Enter' && rungame == false) {
+      rungame = true
+      var frameCount = 0
     }
   });
 }
@@ -590,8 +626,8 @@ setInterval(() => {
 /* RENDERER */
 
 function draw() {
-  if (rungame == true)
-    gameloop()
+  if (rungame == true) gameloop()
+  else menu()
 }
 
 function gameloop() {
