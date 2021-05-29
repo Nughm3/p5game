@@ -1,5 +1,8 @@
 // # P5GAME by AdminTroller and ToxicFscyther
 
+// [Comment Style] Better Comments (Visual Studio Code)
+// [Formatter Style] Pretter (Visual Studio Code)
+
 /* VARIABLE DEFINITIONS */
 
 /*
