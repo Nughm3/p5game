@@ -136,7 +136,7 @@ spikesdirections.push(spikes7directions)
 
 var switches = []
 
-// [switch location, door location 1, door location 2, 3, etc.]
+// ? [switch location, door location 1, door location 2, 3, etc.]
 
 var switches6 = []
 switches.push(switches6)
