@@ -657,6 +657,9 @@ function setup() {
     if (event.key === "Enter" && rungame == false) {
       rungame = true;
       var frameCount = 0;
+      OVERWORLD1.stop()
+      BOSS1.stop()
+      OVERWORLD1.loop()
     }
   });
 }
