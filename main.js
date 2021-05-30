@@ -26,7 +26,7 @@ var game_size = [1216, 576];
 var dashamount = 0;
 var dashtouchingleft = false;
 
-// $ Game toggle
+// Game toggle
 var rungame = false;
 
 var debugmode = false;
@@ -704,7 +704,7 @@ function gameloop() {
       if (playerdirection == 1) image(PLAYER_DEAD_R, playerx, playery);
       else image(PLAYER_DEAD_L, playerx, playery);
     }
-    /* TODO
+    /* FIXME
     if (!playerxvel == 0) {
       var randdust = random(1, 5)
       if (randdust == 1)
