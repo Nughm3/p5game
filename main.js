@@ -59,6 +59,7 @@ else var deathcount = 0;
 frameCount = localStorage.getItem("frame");
 
 var levelspawnpoints = [420, 420, 190, 420, 129, 184, 420, 420];
+var levelbiomes = [0, 0, 1, 1, 1, 2, 2, 2];
 
 var levels = [];
 var level0 = [
@@ -185,7 +186,7 @@ spikesdirections.push(spikes7directions);
 
 var switches = [];
 
-// ? [switch location, door location 1, door location 2, 3, etc.]
+// ? [switch location, switch initial state, door location 1, 2, 3, etc.]
 
 var switches6 = [];
 switches.push(switches6);
@@ -679,15 +680,9 @@ function gameloop() {
 
     if (level < 2) allowdash = false;
 
-    if (level <= 1) {
-      image(BACKGROUND, 0, 0);
-    } else {
-      if (level < 5) {
-        image(BACKGROUND1, 0, 0);
-      } else {
-        image(BACKGROUND2, 0, 0);
-      }
-    }
+    if (levelbiomes[level] == 0) image(BACKGROUND, 0, 0);
+    else if (levelbiomes[level] == 1) image(BACKGROUND1, 0, 0);
+    else if (levelbiomes[level] == 2) image(BACKGROUND2, 0, 0);
 
     if (allowdeath == true) {
       if (dashing == true) {
@@ -736,9 +731,9 @@ function gameloop() {
         tiley = game_size[1] - 64 - row * 64;
       }
       tilex = tile * 64;
-      if (level <= 1) image(TILE1, tilex, tiley);
-      else if (level < 5) image(TILE2, tilex, tiley);
-      else image(TILE3, tilex, tiley);
+      if (levelbiomes[level] == 0) image(TILE1, tilex, tiley);
+      else if (levelbiomes[level] == 1) image(TILE2, tilex, tiley);
+      else if (levelbiomes[level] == 2) image(TILE3, tilex, tiley);
       tilehitboxes.push([tilex, tiley]);
     }
 
@@ -754,21 +749,21 @@ function gameloop() {
       }
       spikex = spike * 64;
       if (spikesdirections[level][repeat] == 1) {
-        if (level <= 1) image(SPIKEUP1, spikex, spikey);
-        else if (level < 5) image(SPIKEUP2, spikex, spikey);
-        else image(SPIKEUP3, spikex, spikey);
+        if (levelbiomes[level] == 0) image(SPIKEUP1, spikex, spikey);
+        else if (levelbiomes[level] == 1) image(SPIKEUP2, spikex, spikey);
+        else if (levelbiomes[level] == 2) image(SPIKEUP3, spikex, spikey);
       } else if (spikesdirections[level][repeat] == 2) {
-        if (level <= 1) image(SPIKELEFT1, spikex, spikey);
-        else if (level < 5) image(SPIKELEFT2, spikex, spikey);
-        else image(SPIKELEFT3, spikex, spikey);
+        if (levelbiomes[level] == 0) image(SPIKELEFT1, spikex, spikey);
+        else if (levelbiomes[level] == 1) image(SPIKELEFT2, spikex, spikey);
+        else if (levelbiomes[level] == 2) image(SPIKELEFT3, spikex, spikey);
       } else if (spikesdirections[level][repeat] == 3) {
-        if (level <= 1) image(SPIKERIGHT1, spikex, spikey);
-        else if (level < 5) image(SPIKERIGHT2, spikex, spikey);
-        else image(SPIKERIGHT3, spikex, spikey);
+        if (levelbiomes[level] == 0) image(SPIKERIGHT1, spikex, spikey);
+        else if (levelbiomes[level] == 1) image(SPIKERIGHT2, spikex, spikey);
+        else if (levelbiomes[level] == 2) image(SPIKERIGHT3, spikex, spikey);
       } else if (spikesdirections[level][repeat] == 4) {
-        if (level <= 1) image(SPIKEDOWN1, spikex, spikey);
-        else if (level < 5) image(SPIKEDOWN2, spikex, spikey);
-        else image(SPIKEDOWN3, spikex, spikey);
+        if (levelbiomes[level] == 0) image(SPIKEDOWN1, spikex, spikey);
+        else if (levelbiomes[level] == 1) image(SPIKEDOWN2, spikex, spikey);
+        else if (levelbiomes[level] == 2) image(SPIKEDOWN3, spikex, spikey);
       }
       spikehitboxes.push([spikex, spikey]);
     }
