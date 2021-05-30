@@ -279,6 +279,9 @@ var allowlefthitdetection = true;
 var allowrighthitdetection = true;
 var allowbottomhitdetection = true;
 
+var randchars = []; // * Random characters for text rendering
+var torender = []; // ? String, posx/posy
+
 /* ASSET LOADING */
 
 /*
@@ -451,6 +454,24 @@ function respawn() {
 }
 
 /* GAME FUNCTIONS */
+
+// TODO
+/*
+function rendertext(text, size, fill, pos, style, align) {
+  textSize(size);
+  fill(fill[0], fill[1], fill[2]);
+  textFont(FONT);
+  textStyle(style);
+  textAlign(align);
+  for (i = 0; i < text.length; i++) {
+    text(
+      text.slice(0, i) +
+        randchars[Math.floor(Math.random() * (randchars.length - 1))]
+    );
+  }
+}
+
+*/
 
 function menu() {
   image(ENDSCREEN, 0, 0);
@@ -657,9 +678,9 @@ function setup() {
     if (event.key === "Enter" && rungame == false) {
       rungame = true;
       var frameCount = 0;
-      OVERWORLD1.stop()
-      BOSS1.stop()
-      OVERWORLD1.loop()
+      OVERWORLD1.stop();
+      BOSS1.stop();
+      OVERWORLD1.loop();
     }
   });
 }
