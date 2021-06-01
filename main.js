@@ -303,12 +303,14 @@ function preload() {
   BACKGROUND = loadImage("media/bg/sunset.png"); // Orange
   BACKGROUND1 = loadImage("media/bg/city.png"); // Deep blue
   BACKGROUND2 = loadImage("media/bg/neon.png"); // Green
+  BACKGROUND3 = loadImage("media/bg/purple.png"); // Purple
   ENDSCREEN = loadImage("media/bg/endscreen.png"); // Dimmed background to show stats
-  // Tiles: Stage 1 tiles are ORANGE, 2 are BLUE, 3 are GREEN
+  // Tiles: Stage 1 tiles are ORANGE, 2 are BLUE, 3 are GREEN, 4 are PURPLE
   // TODO change the tile texture
   TILE1 = loadImage("media/tile/tile/tile1.png");
   TILE2 = loadImage("media/tile/tile/tile2.png");
   TILE3 = loadImage("media/tile/tile/tile3.png");
+  TILE4 = loadImage("media/tile/tile/tile4.png");
   // Switch tiles
   SWITCHOFF = loadImage("media/tile/switch/default/switch_off.png");
   SWITCHON = loadImage("media/tile/switch/default/switch_on.png");
@@ -334,19 +336,23 @@ function preload() {
   CLOUD2 = loadImage("media/fx/dust/dustcloud2.png");
   // TODO transition
   TRANSITION = loadImage("media/fx/transition/transition.png");
-  // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
+  // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN, 4 are PURPLE
   SPIKEUP1 = loadImage("media/tile/spikes1/spikeup.png");
-  SPIKEDOWN1 = loadImage("media/tile/spikes1/spikedown.png");
   SPIKELEFT1 = loadImage("media/tile/spikes1/spikeleft.png");
   SPIKERIGHT1 = loadImage("media/tile/spikes1/spikeright.png");
+  SPIKEDOWN1 = loadImage("media/tile/spikes1/spikedown.png");
   SPIKEUP2 = loadImage("media/tile/spikes2/spikeup.png");
-  SPIKEDOWN2 = loadImage("media/tile/spikes2/spikedown.png");
   SPIKELEFT2 = loadImage("media/tile/spikes2/spikeleft.png");
   SPIKERIGHT2 = loadImage("media/tile/spikes2/spikeright.png");
+  SPIKEDOWN2 = loadImage("media/tile/spikes2/spikedown.png");
   SPIKEUP3 = loadImage("media/tile/spikes3/spikeup.png");
-  SPIKEDOWN3 = loadImage("media/tile/spikes3/spikedown.png");
   SPIKELEFT3 = loadImage("media/tile/spikes3/spikeleft.png");
   SPIKERIGHT3 = loadImage("media/tile/spikes3/spikeright.png");
+  SPIKEDOWN3 = loadImage("media/tile/spikes3/spikedown.png");
+  SPIKEUP4 = loadImage("media/tile/spikes4/spikeup.png");
+  SPIKELEFT4 = loadImage("media/tile/spikes4/spikeleft.png");
+  SPIKERIGHT4 = loadImage("media/tile/spikes4/spikeright.png");
+  SPIKEDOWN4 = loadImage("media/tile/spikes4/spikedown.png");
   // Background music
   OVERWORLD1 = loadSound("media/music/overworld1.mp3");
   // OVERWORLD2 = loadSound('media/music/overworld2.mp3');
@@ -843,6 +849,7 @@ function gameloop() {
     if (levelbiomes[level] == 0) image(BACKGROUND, 0, 0);
     else if (levelbiomes[level] == 1) image(BACKGROUND1, 0, 0);
     else if (levelbiomes[level] == 2) image(BACKGROUND2, 0, 0);
+    else if (levelbiomes[level] == 3) image(BACKGROUND3, 0, 0);
 
     if (allowdeath == true) {
       if (respawnframe > 37) {
@@ -902,6 +909,7 @@ function gameloop() {
       if (levelbiomes[level] == 0) image(TILE1, tilex, tiley);
       else if (levelbiomes[level] == 1) image(TILE2, tilex, tiley);
       else if (levelbiomes[level] == 2) image(TILE3, tilex, tiley);
+      else if (levelbiomes[level] == 2) image(TILE4, tilex, tiley);
       tilehitboxes.push([tilex, tiley]);
     }
 
@@ -920,18 +928,22 @@ function gameloop() {
         if (levelbiomes[level] == 0) image(SPIKEUP1, spikex, spikey);
         else if (levelbiomes[level] == 1) image(SPIKEUP2, spikex, spikey);
         else if (levelbiomes[level] == 2) image(SPIKEUP3, spikex, spikey);
+        else if (levelbiomes[level] == 3) image(SPIKEUP4, spikex, spikey);
       } else if (spikesdirections[level][repeat] == 2) {
         if (levelbiomes[level] == 0) image(SPIKELEFT1, spikex, spikey);
         else if (levelbiomes[level] == 1) image(SPIKELEFT2, spikex, spikey);
         else if (levelbiomes[level] == 2) image(SPIKELEFT3, spikex, spikey);
+        else if (levelbiomes[level] == 3) image(SPIKELEFT4, spikex, spikey);
       } else if (spikesdirections[level][repeat] == 3) {
         if (levelbiomes[level] == 0) image(SPIKERIGHT1, spikex, spikey);
         else if (levelbiomes[level] == 1) image(SPIKERIGHT2, spikex, spikey);
         else if (levelbiomes[level] == 2) image(SPIKERIGHT3, spikex, spikey);
+        else if (levelbiomes[level] == 3) image(SPIKERIGHT4, spikex, spikey);
       } else if (spikesdirections[level][repeat] == 4) {
         if (levelbiomes[level] == 0) image(SPIKEDOWN1, spikex, spikey);
         else if (levelbiomes[level] == 1) image(SPIKEDOWN2, spikex, spikey);
         else if (levelbiomes[level] == 2) image(SPIKEDOWN3, spikex, spikey);
+        else if (levelbiomes[level] == 3) image(SPIKEDOWN4, spikex, spikey);
       }
       spikehitboxes.push([spikex, spikey]);
     }
