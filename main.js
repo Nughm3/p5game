@@ -54,8 +54,8 @@ else var deathcount = 0;
 
 frameCount = localStorage.getItem("frame");
 
-var levelspawnpoints = [420, 420, 190, 420, 129, 184, 420, 420];
-var levelbiomes = [0, 0, 1, 1, 1, 2, 2, 2];
+var levelspawnpoints = [420, 420, 190, 420, 129, 184, 420, 420, 420];
+var levelbiomes = [0, 0, 1, 1, 1, 2, 2, 2, 2];
 
 var levels = [];
 var level0 = [
@@ -107,7 +107,10 @@ var level7 = [
 ];
 levels.push(level7);
 
-const levelcount = 6; // * levels - 1
+var level8 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,48,69,70,71,72,73,74,75,76,77,78,98,118,138,158,38,58]
+levels.push(level8)
+
+const levelcount = 7; // * levels - 1
 
 var secrets = []; // secret rooms
 var secret1 = [];
@@ -179,6 +182,11 @@ var spikes7 = [23, 61, 103, 107, 86, 25, 6, 7, 8, 161, 53, 93, 89, 137, 97];
 var spikes7directions = [2, 4, 4, 1, 2, 1, 1, 1, 1, 4, 1, 4, 1, 4, 1];
 spikes.push(spikes7);
 spikesdirections.push(spikes7directions);
+
+var spikes8 = []
+var spikes8directions = []
+spikes.push(spikes8)
+spikesdirections.push(spikes8directions)
 
 var switches = [];
 
@@ -815,6 +823,13 @@ function setup() {
       OVERWORLD1.stop();
       BOSS1.stop();
       OVERWORLD1.loop();
+    }
+  });
+
+  document.addEventListener("keypress", function (event) {
+    if (event.key === "h") {
+      levels[8].pop()
+      levels[8].pop()
     }
   });
 }
