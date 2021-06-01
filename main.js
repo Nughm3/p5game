@@ -909,7 +909,7 @@ function gameloop() {
       if (levelbiomes[level] == 0) image(TILE1, tilex, tiley);
       else if (levelbiomes[level] == 1) image(TILE2, tilex, tiley);
       else if (levelbiomes[level] == 2) image(TILE3, tilex, tiley);
-      else if (levelbiomes[level] == 2) image(TILE4, tilex, tiley);
+      else if (levelbiomes[level] == 3) image(TILE4, tilex, tiley);
       tilehitboxes.push([tilex, tiley]);
     }
 
