@@ -646,11 +646,6 @@ function previouslevel() {
   }
 }
 
-function renderframe(frame, playerdirection, playerx, playery) {
-  if (playerdirection == 0) image(RESPAWNLEFT[frame], playerx, playery);
-  else image(RESPAWNRIGHT[frame], playerx, playery);
-}
-
 /* CANVAS & EVENT LISTENERS */
 
 function setup() {
@@ -819,10 +814,14 @@ function gameloop() {
           if (playerdirection == 1) image(PLAYER_IDLE_R, playerx, playery);
           else image(PLAYER_IDLE_L, playerx, playery);
         }
-      } else if (allowdeath == false) {
-        if (playerdirection == 1) image(PLAYER_DEAD_R, playerx, playery);
-        else image(PLAYER_DEAD_L, playerx, playery);
-      } else renderframe(animframe, playerdirection, playerx, playery);
+      }
+      else {
+        if (playerdirection == 0) image(RESPAWNLEFT[animframe], playerx, playery);
+        else image(RESPAWNRIGHT[animframe], playerx, playery);
+      }
+    } else {
+      if (playerdirection == 1) image(PLAYER_DEAD_R, playerx, playery);
+      else image(PLAYER_DEAD_L, playerx, playery);
     }
 
     /* FIXME
