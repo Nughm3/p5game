@@ -107,8 +107,13 @@ var level7 = [
 ];
 levels.push(level7);
 
-var level8 = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,48,69,70,71,72,73,74,75,76,77,78,98,118,138,158,38,58]
-levels.push(level8)
+var level8 = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 160, 161,
+  162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176,
+  177, 178, 48, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 98, 118, 138, 158, 38,
+  58
+];
+levels.push(level8);
 
 const levelcount = 7; // * levels - 1
 
@@ -183,10 +188,10 @@ var spikes7directions = [2, 4, 4, 1, 2, 1, 1, 1, 1, 4, 1, 4, 1, 4, 1];
 spikes.push(spikes7);
 spikesdirections.push(spikes7directions);
 
-var spikes8 = []
-var spikes8directions = []
-spikes.push(spikes8)
-spikesdirections.push(spikes8directions)
+var spikes8 = [];
+var spikes8directions = [];
+spikes.push(spikes8);
+spikesdirections.push(spikes8directions);
 
 var switches = [];
 
@@ -561,18 +566,18 @@ function death() {
   allowdeath = false;
   deathcount += 1;
   localStorage.setItem("deaths", deathcount);
-  
+
   deathframe = 0;
 
   playerxvel = 0;
   playeryvel = 0;
   dashing = false;
-  
+
   allowmove = false;
   // if (!debugmode) playeryvel = 20;
   OVERWORLD1.stop();
   BOSS1.stop();
-  
+
   DEATH.play();
   if (debugmode) respawn();
   else {
@@ -588,9 +593,9 @@ function respawn() {
   playeryvel = 0;
   playerdirection = 1;
   respawnframe = 0;
-  
+
   if (level == 2) dashindicator = true;
-  
+
   allowtophitdetection = true;
   allowbottomhitdetection = true;
   allowlefthitdetection = true;
@@ -828,8 +833,8 @@ function setup() {
 
   document.addEventListener("keypress", function (event) {
     if (event.key === "h") {
-      levels[8].pop()
-      levels[8].pop()
+      levels[8].pop();
+      levels[8].pop();
     }
   });
 }
@@ -889,8 +894,7 @@ function gameloop() {
         else image(RESPAWNRIGHT[respawnframe], playerx, playery);
       } else respawnframe = 38;
     } else if (deathframe < 18) {
-      if (playerdirection == 0)
-        image(DEATHLEFT[deathframe], playerx, playery);
+      if (playerdirection == 0) image(DEATHLEFT[deathframe], playerx, playery);
       else image(DEATHRIGHT[deathframe], playerx, playery);
     }
 
