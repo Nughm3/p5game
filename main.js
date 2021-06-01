@@ -318,7 +318,9 @@ function preload() {
   // Misc tiles
   DASH = loadImage("media/tile/misc/dash.png"); // Helps the player know to press Z to dash
   ARROWS = loadImage("media/tile/misc/arrows.png"); // Helps the player know to use arrow keys
-  SWITCHINDICOFF = loadImage("media/tile/switch/indicator/switch_off_indic.png");
+  SWITCHINDICOFF = loadImage(
+    "media/tile/switch/indicator/switch_off_indic.png"
+  );
   SWITCHINDICON = loadImage("media/tile/switch/indicator/switch_on_indic.png");
   // Effects
   DASHRIGHT = loadImage("media/fx/dash/dashR.png");
