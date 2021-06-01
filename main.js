@@ -694,8 +694,6 @@ function previouslevel() {
 
 function setup() {
   // Music
-  OVERWORLD1.stop();
-  OVERWORLD1.loop();
 
   // Canvas
   createCanvas(game_size[0], game_size[1]);
