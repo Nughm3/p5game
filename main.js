@@ -110,8 +110,7 @@ levels.push(level7);
 var level8 = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 160, 161,
   162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176,
-  177, 178, 48, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 98, 118, 138, 158, 38,
-  58
+  177, 178, 48, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 98, 118, 138, 158
 ];
 levels.push(level8);
 
@@ -195,16 +194,10 @@ spikesdirections.push(spikes8directions);
 
 var switches = [];
 
-// ? [switch location, switch initial state, door location 1, 2, 3, etc.]
+// ? [switch location, door location 1, 2, 3, etc.]
 
-var switches6 = [];
-switches.push(switches6);
-
-var switches7 = [];
-switches.push(switches7);
-
-var switches8 = [];
-switches.push(switches8);
+// var switches8 = [96, 58];
+// switches.push(switches8);
 
 var switches9 = [];
 switches.push(switches9);
@@ -833,8 +826,7 @@ function setup() {
 
   document.addEventListener("keypress", function (event) {
     if (event.key === "h") {
-      levels[8].pop();
-      levels[8].pop();
+      
     }
   });
 }
@@ -931,6 +923,23 @@ function gameloop() {
       else if (levelbiomes[level] == 3) image(TILE4, tilex, tiley);
       tilehitboxes.push([tilex, tiley]);
     }
+
+    // Started making doors for switches
+    var doortile = switches[0][1]
+    var doorx = 0;
+    var doory = 512;
+    var doorrow = 0;
+    while (doortile >= 20) {
+      doortile -= 20;
+      doorrow += 1;
+      doory = game_size[1] - 64 - doorrow * 64;
+    }
+    doorx = doortile * 64;
+    if (levelbiomes[level] == 0) image(TILE1, doorx, doory);
+    else if (levelbiomes[level] == 1) image(TILE2, doorx, doory);
+    else if (levelbiomes[level] == 2) image(TILE3, doorx, doory);
+    else if (levelbiomes[level] == 3) image(TILE4, doorx, doory);
+    tilehitboxes.push([doorx, doory]);
 
     for (repeat = 0; repeat < spikes[level].length; repeat++) {
       var spike = spikes[level][repeat];
