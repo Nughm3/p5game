@@ -212,11 +212,11 @@ var switches14 = [];
 switches.push(switches14);
 
 var bossmsg = [
-  "",
-  "",
-  "",
-  "",
-  "",
+  "hi!",
+  "how are you doing?",
+  "hey, im just here for debug purposes.",
+  "kinda sad :(",
+  "what are you here for?",
   "",
   "",
   "",
@@ -278,7 +278,8 @@ var allowbottomhitdetection = true;
 var randchars = []; // * Random characters for text rendering
 var torender = []; // ? String, posx/posy
 
-var animframe = 0;
+var respawnframe = 0;
+var deathframe = 0;
 
 /* ASSET LOADING */
 
@@ -444,6 +445,46 @@ function preload() {
     loadImage("media/players/respawnL/respawn37.png"),
     loadImage("media/players/respawnL/respawn38.png")
   ];
+  DEATHRIGHT = [
+    loadImage("media/players/deathR/death1.png"),
+    loadImage("media/players/deathR/death2.png"),
+    loadImage("media/players/deathR/death3.png"),
+    loadImage("media/players/deathR/death4.png"),
+    loadImage("media/players/deathR/death5.png"),
+    loadImage("media/players/deathR/death6.png"),
+    loadImage("media/players/deathR/death7.png"),
+    loadImage("media/players/deathR/death8.png"),
+    loadImage("media/players/deathR/death9.png"),
+    loadImage("media/players/deathR/death10.png"),
+    loadImage("media/players/deathR/death11.png"),
+    loadImage("media/players/deathR/death12.png"),
+    loadImage("media/players/deathR/death13.png"),
+    loadImage("media/players/deathR/death14.png"),
+    loadImage("media/players/deathR/death15.png"),
+    loadImage("media/players/deathR/death16.png"),
+    loadImage("media/players/deathR/death17.png"),
+    loadImage("media/players/deathR/death18.png")
+  ];
+  DEATHLEFT = [
+    loadImage("media/players/deathL/death1.png"),
+    loadImage("media/players/deathL/death2.png"),
+    loadImage("media/players/deathL/death3.png"),
+    loadImage("media/players/deathL/death4.png"),
+    loadImage("media/players/deathL/death5.png"),
+    loadImage("media/players/deathL/death6.png"),
+    loadImage("media/players/deathL/death7.png"),
+    loadImage("media/players/deathL/death8.png"),
+    loadImage("media/players/deathL/death9.png"),
+    loadImage("media/players/deathL/death10.png"),
+    loadImage("media/players/deathL/death11.png"),
+    loadImage("media/players/deathL/death12.png"),
+    loadImage("media/players/deathL/death13.png"),
+    loadImage("media/players/deathL/death14.png"),
+    loadImage("media/players/deathL/death15.png"),
+    loadImage("media/players/deathL/death16.png"),
+    loadImage("media/players/deathL/death17.png"),
+    loadImage("media/players/deathL/death18.png")
+  ];
 }
 
 /* PLAYER FUNCTIONS */
@@ -530,7 +571,7 @@ function respawn() {
   playery = levelspawnpoints[level];
   playeryvel = 0;
   playerdirection = 1;
-  animframe = 0;
+  respawnframe = 0;
 
   if (level == 2) dashindicator = true;
 
@@ -778,8 +819,12 @@ setInterval(() => {
 }, 1250);
 
 setInterval(() => {
-  animframe += 1;
+  respawnframe += 1;
 }, 35);
+
+setInterval(() => {
+  deathframe += 1;
+}, 50);
 
 /* RENDERER */
 
@@ -799,7 +844,7 @@ function gameloop() {
     else if (levelbiomes[level] == 2) image(BACKGROUND2, 0, 0);
 
     if (allowdeath == true) {
-      if (animframe > 37) {
+      if (respawnframe > 37) {
         if (dashing == true) {
           if (playerdirection == 1) {
             image(PLAYER_DASH_R, playerx, playery);
@@ -815,11 +860,11 @@ function gameloop() {
           if (playerdirection == 1) image(PLAYER_IDLE_R, playerx, playery);
           else image(PLAYER_IDLE_L, playerx, playery);
         }
-      }
-      else {
-        if (playerdirection == 0) image(RESPAWNLEFT[animframe], playerx, playery);
-        else image(RESPAWNRIGHT[animframe], playerx, playery);
-      }
+      } else if (!debugmode) {
+        if (playerdirection == 0)
+          image(RESPAWNLEFT[respawnframe], playerx, playery);
+        else image(RESPAWNRIGHT[respawnframe], playerx, playery);
+      } else respawnframe = 38;
     } else {
       if (playerdirection == 1) image(PLAYER_DEAD_R, playerx, playery);
       else image(PLAYER_DEAD_L, playerx, playery);
@@ -1038,17 +1083,18 @@ function gameloop() {
       textFont(FONT);
       textSize(40);
       textStyle(BOLD);
+      textAlign(LEFT);
       text("DASH", 475, 447);
     }
 
     if (level == 0 && playermoved == false) image(ARROWS, 30, 380);
 
-    if (!bossmsg[level] == "") {
-      textSize(24);
-      textFont(FONT);
-      fill(237, 34, 93);
-      text(bossmsg[level], 608, 60);
-    }
+    textSize(24);
+    textFont(FONT);
+    textAlign(CENTER);
+    fill(237, 34, 93);
+    text(bossmsg[level], 608, 60);
+    textAlign(LEFT);
 
     if (level == 4 && playery < -50 && playerx < 350) {
       document.write("woo a secret (reload page lol)");
