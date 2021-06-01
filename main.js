@@ -539,7 +539,7 @@ function stopdash() {
 }
 
 function death() {
-  allowgravity = true;
+  allowgravity = false;
   allowtophitdetection = false;
   allowbottomhitdetection = false;
   allowlefthitdetection = false;
@@ -547,16 +547,18 @@ function death() {
   allowdeath = false;
   deathcount += 1;
   localStorage.setItem("deaths", deathcount);
+  
+  deathframe = 0;
 
   playerxvel = 0;
   playeryvel = 0;
   dashing = false;
-
+  
   allowmove = false;
-  if (!debugmode) playeryvel = 20;
+  // if (!debugmode) playeryvel = 20;
   OVERWORLD1.stop();
   BOSS1.stop();
-
+  
   DEATH.play();
   if (debugmode) respawn();
   else {
@@ -572,15 +574,16 @@ function respawn() {
   playeryvel = 0;
   playerdirection = 1;
   respawnframe = 0;
-
+  
   if (level == 2) dashindicator = true;
-
+  
   allowtophitdetection = true;
   allowbottomhitdetection = true;
   allowlefthitdetection = true;
   allowrighthitdetection = true;
   allowdeath = true;
   allowmove = true;
+  allowgravity = true;
   OVERWORLD1.loop();
 }
 
@@ -865,9 +868,10 @@ function gameloop() {
           image(RESPAWNLEFT[respawnframe], playerx, playery);
         else image(RESPAWNRIGHT[respawnframe], playerx, playery);
       } else respawnframe = 38;
-    } else {
-      if (playerdirection == 1) image(PLAYER_DEAD_R, playerx, playery);
-      else image(PLAYER_DEAD_L, playerx, playery);
+    } else if (deathframe < 18) {
+      if (playerdirection == 0)
+        image(DEATHLEFT[deathframe], playerx, playery);
+      else image(DEATHRIGHT[deathframe], playerx, playery);
     }
 
     /* FIXME
