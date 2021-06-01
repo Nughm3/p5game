@@ -303,8 +303,6 @@ function preload() {
   PLAYER_ANIM_L = loadImage("media/players/bobbingL.png");
   PLAYER_DASH_R = loadImage("media/players/dashingR.png");
   PLAYER_DASH_L = loadImage("media/players/dashingL.png");
-  PLAYER_DEAD_R = loadImage("media/players/deadR.png");
-  PLAYER_DEAD_L = loadImage("media/players/deadL.png");
   // Backgrounds
   BACKGROUND = loadImage("media/bg/sunset.png"); // Orange
   BACKGROUND1 = loadImage("media/bg/city.png"); // Deep blue
