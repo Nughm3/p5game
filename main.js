@@ -42,15 +42,11 @@ var allowdeath = true;
 var endscreen = false;
 var playermoved = false;
 
-if (localStorage.getItem("level"))
+if (localStorage.getItem("level")) {
   var level = parseInt(localStorage.getItem("level"));
-else var level = 0;
-
-if (localStorage.getItem("verified"))
-  var verified = localStorage.getItem("verified");
-else {
-  var verified = true;
-}
+  if (level == 0) verified = true;
+  else verified = false;
+} else var level = 0;
 
 if (localStorage.getItem("deaths"))
   var deathcount = parseInt(localStorage.getItem("deaths"));
@@ -636,7 +632,6 @@ function setup() {
       dashindicator = false;
       frameCount = 0;
       verified = true;
-      localStorage.setItem("verified", true);
       OVERWORLD1.stop();
       OVERWORLD1.loop();
       BOSS1.stop();
@@ -647,7 +642,6 @@ function setup() {
   document.addEventListener("keypress", function (event) {
     if (event.key === "]" && allowdeath == true && endscreen == false) {
       verified = false;
-      localStorage.setItem("verified", false);
       nextlevel();
     }
   });
@@ -656,7 +650,6 @@ function setup() {
   document.addEventListener("keypress", function (event) {
     if (event.key === "[" && allowdeath == true && endscreen == false) {
       verified = false;
-      localStorage.setItem("verified", false);
       previouslevel();
     }
   });
@@ -666,7 +659,6 @@ function setup() {
   document.addEventListener("keypress", function (event) {
     if (event.key === "k") {
       verified = false;
-      localStorage.setItem("verified", false);
       debugmode = !debugmode;
     }
   });
