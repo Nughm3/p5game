@@ -310,9 +310,16 @@ function preload() {
   TILE1 = loadImage("media/tile/tile/tile1.png");
   TILE2 = loadImage("media/tile/tile/tile2.png");
   TILE3 = loadImage("media/tile/tile/tile3.png");
+  // Switch tiles
+  SWITCHOFF = loadImage("media/tile/switch/default/switch_off.png");
+  SWITCHON = loadImage("media/tile/switch/default/switch_on.png");
+  SWITCHOFFSEL = loadImage("media/tile/switch/selected/switch_off_sel.png"); // When the player is touching a switch
+  SWITCHONSEL = loadImage("media/tile/switch/selected/switch_on_sel.png");
   // Misc tiles
   DASH = loadImage("media/tile/misc/dash.png"); // Helps the player know to press Z to dash
   ARROWS = loadImage("media/tile/misc/arrows.png"); // Helps the player know to use arrow keys
+  SWITCHINDICOFF = loadImage("media/tile/switch/indicator/switch_off_indic.png");
+  SWITCHINDICON = loadImage("media/tile/switch/indicator/switch_on_indic.png");
   // Effects
   DASHRIGHT = loadImage("media/fx/dash/dashR.png");
   DASHLEFT = loadImage("media/fx/dash/dashL.png");
@@ -325,7 +332,7 @@ function preload() {
   CLOUD1 = loadImage("media/fx/dust/dustcloud1.png");
   CLOUD2 = loadImage("media/fx/dust/dustcloud2.png");
   // TODO transition
-  TRANSITION = loadImage("media/fx/transition.png");
+  TRANSITION = loadImage("media/fx/transition/transition.png");
   // Spikes: Stage 1 spikes are ORANGE, 2 are BLUE, 3 are GREEN
   SPIKEUP1 = loadImage("media/tile/spikes1/spikeup.png");
   SPIKEDOWN1 = loadImage("media/tile/spikes1/spikedown.png");
