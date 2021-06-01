@@ -288,7 +288,6 @@ TODO add particle effects
 TODO add sounds
 */
 
-// * We highly recommend you fold this code block.
 function preload() {
   // Players
   PLAYER_IDLE_R = loadImage("media/players/idleR.png");
@@ -364,84 +363,87 @@ function preload() {
   // Fonts
   FONT = loadFont("media/fonts/JetBrains Mono.ttf");
   // Animation sprites
-  // Right
-  RESPAWNRIGHT1 = loadImage("media/players/respawnR/respawn1.png");
-  RESPAWNRIGHT2 = loadImage("media/players/respawnR/respawn2.png");
-  RESPAWNRIGHT3 = loadImage("media/players/respawnR/respawn3.png");
-  RESPAWNRIGHT4 = loadImage("media/players/respawnR/respawn4.png");
-  RESPAWNRIGHT5 = loadImage("media/players/respawnR/respawn5.png");
-  RESPAWNRIGHT6 = loadImage("media/players/respawnR/respawn6.png");
-  RESPAWNRIGHT7 = loadImage("media/players/respawnR/respawn7.png");
-  RESPAWNRIGHT8 = loadImage("media/players/respawnR/respawn8.png");
-  RESPAWNRIGHT9 = loadImage("media/players/respawnR/respawn9.png");
-  RESPAWNRIGHT10 = loadImage("media/players/respawnR/respawn10.png");
-  RESPAWNRIGHT11 = loadImage("media/players/respawnR/respawn11.png");
-  RESPAWNRIGHT12 = loadImage("media/players/respawnR/respawn12.png");
-  RESPAWNRIGHT13 = loadImage("media/players/respawnR/respawn13.png");
-  RESPAWNRIGHT14 = loadImage("media/players/respawnR/respawn14.png");
-  RESPAWNRIGHT15 = loadImage("media/players/respawnR/respawn15.png");
-  RESPAWNRIGHT16 = loadImage("media/players/respawnR/respawn16.png");
-  RESPAWNRIGHT17 = loadImage("media/players/respawnR/respawn17.png");
-  RESPAWNRIGHT18 = loadImage("media/players/respawnR/respawn18.png");
-  RESPAWNRIGHT19 = loadImage("media/players/respawnR/respawn19.png");
-  RESPAWNRIGHT20 = loadImage("media/players/respawnR/respawn20.png");
-  RESPAWNRIGHT21 = loadImage("media/players/respawnR/respawn21.png");
-  RESPAWNRIGHT22 = loadImage("media/players/respawnR/respawn22.png");
-  RESPAWNRIGHT23 = loadImage("media/players/respawnR/respawn23.png");
-  RESPAWNRIGHT24 = loadImage("media/players/respawnR/respawn24.png");
-  RESPAWNRIGHT25 = loadImage("media/players/respawnR/respawn25.png");
-  RESPAWNRIGHT26 = loadImage("media/players/respawnR/respawn26.png");
-  RESPAWNRIGHT27 = loadImage("media/players/respawnR/respawn27.png");
-  RESPAWNRIGHT28 = loadImage("media/players/respawnR/respawn28.png");
-  RESPAWNRIGHT29 = loadImage("media/players/respawnR/respawn29.png");
-  RESPAWNRIGHT30 = loadImage("media/players/respawnR/respawn30.png");
-  RESPAWNRIGHT31 = loadImage("media/players/respawnR/respawn31.png");
-  RESPAWNRIGHT32 = loadImage("media/players/respawnR/respawn32.png");
-  RESPAWNRIGHT33 = loadImage("media/players/respawnR/respawn33.png");
-  RESPAWNRIGHT34 = loadImage("media/players/respawnR/respawn34.png");
-  RESPAWNRIGHT35 = loadImage("media/players/respawnR/respawn35.png");
-  RESPAWNRIGHT36 = loadImage("media/players/respawnR/respawn36.png");
-  RESPAWNRIGHT37 = loadImage("media/players/respawnR/respawn37.png");
-  RESPAWNRIGHT38 = loadImage("media/players/respawnR/respawn38.png");
-  // Left
-  RESPAWNLEFT1 = loadImage("media/players/respawnL/respawn1.png");
-  RESPAWNLEFT2 = loadImage("media/players/respawnL/respawn2.png");
-  RESPAWNLEFT3 = loadImage("media/players/respawnL/respawn3.png");
-  RESPAWNLEFT4 = loadImage("media/players/respawnL/respawn4.png");
-  RESPAWNLEFT5 = loadImage("media/players/respawnL/respawn5.png");
-  RESPAWNLEFT6 = loadImage("media/players/respawnL/respawn6.png");
-  RESPAWNLEFT7 = loadImage("media/players/respawnL/respawn7.png");
-  RESPAWNLEFT8 = loadImage("media/players/respawnL/respawn8.png");
-  RESPAWNLEFT9 = loadImage("media/players/respawnL/respawn9.png");
-  RESPAWNLEFT10 = loadImage("media/players/respawnL/respawn10.png");
-  RESPAWNLEFT11 = loadImage("media/players/respawnL/respawn11.png");
-  RESPAWNLEFT12 = loadImage("media/players/respawnL/respawn12.png");
-  RESPAWNLEFT13 = loadImage("media/players/respawnL/respawn13.png");
-  RESPAWNLEFT14 = loadImage("media/players/respawnL/respawn14.png");
-  RESPAWNLEFT15 = loadImage("media/players/respawnL/respawn15.png");
-  RESPAWNLEFT16 = loadImage("media/players/respawnL/respawn16.png");
-  RESPAWNLEFT17 = loadImage("media/players/respawnL/respawn17.png");
-  RESPAWNLEFT18 = loadImage("media/players/respawnL/respawn18.png");
-  RESPAWNLEFT19 = loadImage("media/players/respawnL/respawn19.png");
-  RESPAWNLEFT20 = loadImage("media/players/respawnL/respawn20.png");
-  RESPAWNLEFT21 = loadImage("media/players/respawnL/respawn21.png");
-  RESPAWNLEFT22 = loadImage("media/players/respawnL/respawn22.png");
-  RESPAWNLEFT23 = loadImage("media/players/respawnL/respawn23.png");
-  RESPAWNLEFT24 = loadImage("media/players/respawnL/respawn24.png");
-  RESPAWNLEFT25 = loadImage("media/players/respawnL/respawn25.png");
-  RESPAWNLEFT26 = loadImage("media/players/respawnL/respawn26.png");
-  RESPAWNLEFT27 = loadImage("media/players/respawnL/respawn27.png");
-  RESPAWNLEFT28 = loadImage("media/players/respawnL/respawn28.png");
-  RESPAWNLEFT29 = loadImage("media/players/respawnL/respawn29.png");
-  RESPAWNLEFT30 = loadImage("media/players/respawnL/respawn30.png");
-  RESPAWNLEFT31 = loadImage("media/players/respawnL/respawn31.png");
-  RESPAWNLEFT32 = loadImage("media/players/respawnL/respawn32.png");
-  RESPAWNLEFT33 = loadImage("media/players/respawnL/respawn33.png");
-  RESPAWNLEFT34 = loadImage("media/players/respawnL/respawn34.png");
-  RESPAWNLEFT35 = loadImage("media/players/respawnL/respawn35.png");
-  RESPAWNLEFT36 = loadImage("media/players/respawnL/respawn36.png");
-  RESPAWNLEFT37 = loadImage("media/players/respawnL/respawn37.png");
-  RESPAWNLEFT38 = loadImage("media/players/respawnL/respawn38.png");
+  // We highly recommend you fold these arrays.
+  RESPAWNRIGHT = [
+    loadImage("media/players/respawnR/respawn1.png"),
+    loadImage("media/players/respawnR/respawn2.png"),
+    loadImage("media/players/respawnR/respawn3.png"),
+    loadImage("media/players/respawnR/respawn4.png"),
+    loadImage("media/players/respawnR/respawn5.png"),
+    loadImage("media/players/respawnR/respawn6.png"),
+    loadImage("media/players/respawnR/respawn7.png"),
+    loadImage("media/players/respawnR/respawn8.png"),
+    loadImage("media/players/respawnR/respawn9.png"),
+    loadImage("media/players/respawnR/respawn10.png"),
+    loadImage("media/players/respawnR/respawn11.png"),
+    loadImage("media/players/respawnR/respawn12.png"),
+    loadImage("media/players/respawnR/respawn13.png"),
+    loadImage("media/players/respawnR/respawn14.png"),
+    loadImage("media/players/respawnR/respawn15.png"),
+    loadImage("media/players/respawnR/respawn16.png"),
+    loadImage("media/players/respawnR/respawn17.png"),
+    loadImage("media/players/respawnR/respawn18.png"),
+    loadImage("media/players/respawnR/respawn19.png"),
+    loadImage("media/players/respawnR/respawn20.png"),
+    loadImage("media/players/respawnR/respawn21.png"),
+    loadImage("media/players/respawnR/respawn22.png"),
+    loadImage("media/players/respawnR/respawn23.png"),
+    loadImage("media/players/respawnR/respawn24.png"),
+    loadImage("media/players/respawnR/respawn25.png"),
+    loadImage("media/players/respawnR/respawn26.png"),
+    loadImage("media/players/respawnR/respawn27.png"),
+    loadImage("media/players/respawnR/respawn28.png"),
+    loadImage("media/players/respawnR/respawn29.png"),
+    loadImage("media/players/respawnR/respawn30.png"),
+    loadImage("media/players/respawnR/respawn31.png"),
+    loadImage("media/players/respawnR/respawn32.png"),
+    loadImage("media/players/respawnR/respawn33.png"),
+    loadImage("media/players/respawnR/respawn34.png"),
+    loadImage("media/players/respawnR/respawn35.png"),
+    loadImage("media/players/respawnR/respawn36.png"),
+    loadImage("media/players/respawnR/respawn37.png"),
+    loadImage("media/players/respawnR/respawn38.png")
+  ];
+  RESPAWNLEFT = [
+    loadImage("media/players/respawnL/respawn1.png"),
+    loadImage("media/players/respawnL/respawn2.png"),
+    loadImage("media/players/respawnL/respawn3.png"),
+    loadImage("media/players/respawnL/respawn4.png"),
+    loadImage("media/players/respawnL/respawn5.png"),
+    loadImage("media/players/respawnL/respawn6.png"),
+    loadImage("media/players/respawnL/respawn7.png"),
+    loadImage("media/players/respawnL/respawn8.png"),
+    loadImage("media/players/respawnL/respawn9.png"),
+    loadImage("media/players/respawnL/respawn10.png"),
+    loadImage("media/players/respawnL/respawn11.png"),
+    loadImage("media/players/respawnL/respawn12.png"),
+    loadImage("media/players/respawnL/respawn13.png"),
+    loadImage("media/players/respawnL/respawn14.png"),
+    loadImage("media/players/respawnL/respawn15.png"),
+    loadImage("media/players/respawnL/respawn16.png"),
+    loadImage("media/players/respawnL/respawn17.png"),
+    loadImage("media/players/respawnL/respawn18.png"),
+    loadImage("media/players/respawnL/respawn19.png"),
+    loadImage("media/players/respawnL/respawn20.png"),
+    loadImage("media/players/respawnL/respawn21.png"),
+    loadImage("media/players/respawnL/respawn22.png"),
+    loadImage("media/players/respawnL/respawn23.png"),
+    loadImage("media/players/respawnL/respawn24.png"),
+    loadImage("media/players/respawnL/respawn25.png"),
+    loadImage("media/players/respawnL/respawn26.png"),
+    loadImage("media/players/respawnL/respawn27.png"),
+    loadImage("media/players/respawnL/respawn28.png"),
+    loadImage("media/players/respawnL/respawn29.png"),
+    loadImage("media/players/respawnL/respawn30.png"),
+    loadImage("media/players/respawnL/respawn31.png"),
+    loadImage("media/players/respawnL/respawn32.png"),
+    loadImage("media/players/respawnL/respawn33.png"),
+    loadImage("media/players/respawnL/respawn34.png"),
+    loadImage("media/players/respawnL/respawn35.png"),
+    loadImage("media/players/respawnL/respawn36.png"),
+    loadImage("media/players/respawnL/respawn37.png"),
+    loadImage("media/players/respawnL/respawn38.png")
+  ];
 }
 
 /* PLAYER FUNCTIONS */
@@ -644,153 +646,9 @@ function previouslevel() {
   }
 }
 
-// * We also highly recommend you fold this function.
 function renderframe(frame, playerdirection, playerx, playery) {
-  // Right
-  if (frame == 0 && playerdirection == 1)
-    image(RESPAWNRIGHT1, playerx, playery);
-  if (frame == 1 && playerdirection == 1)
-    image(RESPAWNRIGHT2, playerx, playery);
-  if (frame == 2 && playerdirection == 1)
-    image(RESPAWNRIGHT3, playerx, playery);
-  if (frame == 3 && playerdirection == 1)
-    image(RESPAWNRIGHT4, playerx, playery);
-  if (frame == 4 && playerdirection == 1)
-    image(RESPAWNRIGHT5, playerx, playery);
-  if (frame == 5 && playerdirection == 1)
-    image(RESPAWNRIGHT6, playerx, playery);
-  if (frame == 6 && playerdirection == 1)
-    image(RESPAWNRIGHT7, playerx, playery);
-  if (frame == 7 && playerdirection == 1)
-    image(RESPAWNRIGHT8, playerx, playery);
-  if (frame == 8 && playerdirection == 1)
-    image(RESPAWNRIGHT9, playerx, playery);
-  if (frame == 9 && playerdirection == 1)
-    image(RESPAWNRIGHT10, playerx, playery);
-  if (frame == 10 && playerdirection == 1)
-    image(RESPAWNRIGHT11, playerx, playery);
-  if (frame == 11 && playerdirection == 1)
-    image(RESPAWNRIGHT12, playerx, playery);
-  if (frame == 12 && playerdirection == 1)
-    image(RESPAWNRIGHT13, playerx, playery);
-  if (frame == 13 && playerdirection == 1)
-    image(RESPAWNRIGHT14, playerx, playery);
-  if (frame == 14 && playerdirection == 1)
-    image(RESPAWNRIGHT15, playerx, playery);
-  if (frame == 15 && playerdirection == 1)
-    image(RESPAWNRIGHT16, playerx, playery);
-  if (frame == 16 && playerdirection == 1)
-    image(RESPAWNRIGHT17, playerx, playery);
-  if (frame == 17 && playerdirection == 1)
-    image(RESPAWNRIGHT18, playerx, playery);
-  if (frame == 18 && playerdirection == 1)
-    image(RESPAWNRIGHT19, playerx, playery);
-  if (frame == 19 && playerdirection == 1)
-    image(RESPAWNRIGHT20, playerx, playery);
-  if (frame == 20 && playerdirection == 1)
-    image(RESPAWNRIGHT21, playerx, playery);
-  if (frame == 21 && playerdirection == 1)
-    image(RESPAWNRIGHT22, playerx, playery);
-  if (frame == 22 && playerdirection == 1)
-    image(RESPAWNRIGHT23, playerx, playery);
-  if (frame == 23 && playerdirection == 1)
-    image(RESPAWNRIGHT24, playerx, playery);
-  if (frame == 24 && playerdirection == 1)
-    image(RESPAWNRIGHT25, playerx, playery);
-  if (frame == 25 && playerdirection == 1)
-    image(RESPAWNRIGHT26, playerx, playery);
-  if (frame == 26 && playerdirection == 1)
-    image(RESPAWNRIGHT27, playerx, playery);
-  if (frame == 27 && playerdirection == 1)
-    image(RESPAWNRIGHT28, playerx, playery);
-  if (frame == 28 && playerdirection == 1)
-    image(RESPAWNRIGHT29, playerx, playery);
-  if (frame == 29 && playerdirection == 1)
-    image(RESPAWNRIGHT30, playerx, playery);
-  if (frame == 30 && playerdirection == 1)
-    image(RESPAWNRIGHT31, playerx, playery);
-  if (frame == 31 && playerdirection == 1)
-    image(RESPAWNRIGHT32, playerx, playery);
-  if (frame == 32 && playerdirection == 1)
-    image(RESPAWNRIGHT33, playerx, playery);
-  if (frame == 33 && playerdirection == 1)
-    image(RESPAWNRIGHT34, playerx, playery);
-  if (frame == 34 && playerdirection == 1)
-    image(RESPAWNRIGHT35, playerx, playery);
-  if (frame == 35 && playerdirection == 1)
-    image(RESPAWNRIGHT36, playerx, playery);
-  if (frame == 36 && playerdirection == 1)
-    image(RESPAWNRIGHT37, playerx, playery);
-  if (frame == 37 && playerdirection == 1)
-    image(RESPAWNRIGHT38, playerx, playery);
-  // Left
-  if (frame == 0 && playerdirection == 0) image(RESPAWNLEFT1, playerx, playery);
-  if (frame == 1 && playerdirection == 0) image(RESPAWNLEFT2, playerx, playery);
-  if (frame == 2 && playerdirection == 0) image(RESPAWNLEFT3, playerx, playery);
-  if (frame == 3 && playerdirection == 0) image(RESPAWNLEFT4, playerx, playery);
-  if (frame == 4 && playerdirection == 0) image(RESPAWNLEFT5, playerx, playery);
-  if (frame == 5 && playerdirection == 0) image(RESPAWNLEFT6, playerx, playery);
-  if (frame == 6 && playerdirection == 0) image(RESPAWNLEFT7, playerx, playery);
-  if (frame == 7 && playerdirection == 0) image(RESPAWNLEFT8, playerx, playery);
-  if (frame == 8 && playerdirection == 0) image(RESPAWNLEFT9, playerx, playery);
-  if (frame == 9 && playerdirection == 0)
-    image(RESPAWNLEFT10, playerx, playery);
-  if (frame == 10 && playerdirection == 0)
-    image(RESPAWNLEFT11, playerx, playery);
-  if (frame == 11 && playerdirection == 0)
-    image(RESPAWNLEFT12, playerx, playery);
-  if (frame == 12 && playerdirection == 0)
-    image(RESPAWNLEFT13, playerx, playery);
-  if (frame == 13 && playerdirection == 0)
-    image(RESPAWNLEFT14, playerx, playery);
-  if (frame == 14 && playerdirection == 0)
-    image(RESPAWNLEFT15, playerx, playery);
-  if (frame == 15 && playerdirection == 0)
-    image(RESPAWNLEFT16, playerx, playery);
-  if (frame == 16 && playerdirection == 0)
-    image(RESPAWNLEFT17, playerx, playery);
-  if (frame == 17 && playerdirection == 0)
-    image(RESPAWNLEFT18, playerx, playery);
-  if (frame == 18 && playerdirection == 0)
-    image(RESPAWNLEFT19, playerx, playery);
-  if (frame == 19 && playerdirection == 0)
-    image(RESPAWNLEFT20, playerx, playery);
-  if (frame == 20 && playerdirection == 0)
-    image(RESPAWNLEFT21, playerx, playery);
-  if (frame == 21 && playerdirection == 0)
-    image(RESPAWNLEFT22, playerx, playery);
-  if (frame == 22 && playerdirection == 0)
-    image(RESPAWNLEFT23, playerx, playery);
-  if (frame == 23 && playerdirection == 0)
-    image(RESPAWNLEFT24, playerx, playery);
-  if (frame == 24 && playerdirection == 0)
-    image(RESPAWNLEFT25, playerx, playery);
-  if (frame == 25 && playerdirection == 0)
-    image(RESPAWNLEFT26, playerx, playery);
-  if (frame == 26 && playerdirection == 0)
-    image(RESPAWNLEFT27, playerx, playery);
-  if (frame == 27 && playerdirection == 0)
-    image(RESPAWNLEFT28, playerx, playery);
-  if (frame == 28 && playerdirection == 0)
-    image(RESPAWNLEFT29, playerx, playery);
-  if (frame == 29 && playerdirection == 0)
-    image(RESPAWNLEFT30, playerx, playery);
-  if (frame == 30 && playerdirection == 0)
-    image(RESPAWNLEFT31, playerx, playery);
-  if (frame == 31 && playerdirection == 0)
-    image(RESPAWNLEFT32, playerx, playery);
-  if (frame == 32 && playerdirection == 0)
-    image(RESPAWNLEFT33, playerx, playery);
-  if (frame == 33 && playerdirection == 0)
-    image(RESPAWNLEFT34, playerx, playery);
-  if (frame == 34 && playerdirection == 0)
-    image(RESPAWNLEFT35, playerx, playery);
-  if (frame == 35 && playerdirection == 0)
-    image(RESPAWNLEFT36, playerx, playery);
-  if (frame == 36 && playerdirection == 0)
-    image(RESPAWNLEFT37, playerx, playery);
-  if (frame == 37 && playerdirection == 0)
-    image(RESPAWNLEFT38, playerx, playery);
+  if (playerdirection == 0) image(RESPAWNLEFT[frame], playerx, playery);
+  else image(RESPAWNRIGHT[frame], playerx, playery);
 }
 
 /* CANVAS & EVENT LISTENERS */
@@ -910,7 +768,6 @@ function setup() {
   document.addEventListener("keypress", function (event) {
     if (event.key === "Enter" && rungame == false) {
       rungame = true;
-      var frameCount = 0;
       OVERWORLD1.stop();
       BOSS1.stop();
       OVERWORLD1.loop();
@@ -925,7 +782,7 @@ setInterval(() => {
 }, 1250);
 
 setInterval(() => {
-  animframe += 1
+  animframe += 1;
 }, 35);
 
 /* RENDERER */
