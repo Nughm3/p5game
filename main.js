@@ -795,7 +795,7 @@ function setup() {
     }
   });
 
-  // Open menu scren
+  // Open menu screen
   document.addEventListener("keypress", function (event) {
     if (event.key === "r" && allowdeath) {
       menuscreen = true;
@@ -849,6 +849,7 @@ function setup() {
         deathcount = 0;
         localStorage.setItem("deaths", 0);
         endscreen = false;
+        menuscren = false;
         dashindicator = false;
         frameCount = 0;
         verified = true;
@@ -1172,7 +1173,7 @@ function gameloop() {
     textAlign(CENTER);
     fill(237, 34, 93);
     text(bossmsg[level], 608, 60);
-    if (rungame) {
+    if (rungame && !endscreen) {
       textAlign(LEFT);
       if (verified) fill(255, 255, 0);
       text(
