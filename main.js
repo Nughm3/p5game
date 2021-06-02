@@ -663,6 +663,7 @@ function menu() {
 
 function gameover() {
   endscreen = true;
+  playedbefore = false;
   image(ENDSCREEN, 0, 0);
   if (verified == true) fill(255, 255, 255);
   else fill(237, 34, 93);
@@ -770,13 +771,12 @@ function setup() {
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowUp") {
-      if (rungame && touchingground) {
-        uppressed = true;
-        if (!playermoved) playermoved = true;
-      }
       if (menuscreen && playedbefore) {
         menuoption = 0;
         SWITCH.play();
+      } else if (touchingground) {
+        uppressed = true;
+        if (!playermoved) playermoved = true;
       }
     }
   });
@@ -795,7 +795,7 @@ function setup() {
     }
   });
 
-  // Open menu screen
+  // Open menu scren
   document.addEventListener("keypress", function (event) {
     if (event.key === "r" && allowdeath) {
       menuscreen = true;
@@ -841,20 +841,21 @@ function setup() {
   // ! Only works in the menu screen.
   // FIXME there will be a bug where continuing will reset the time ;-;
   document.addEventListener("keypress", function (event) {
-    if (event.key === "Enter" && !rungame) {
-      if (menuoption == 0) {
-      } else {
+    if (event.key === "Enter" && menuscreen) {
+      if (menuoption == 1) {
         level = -1;
         nextlevel();
         deathcount = 0;
         localStorage.setItem("deaths", 0);
         endscreen = false;
-        menuscren = false;
         dashindicator = false;
         frameCount = 0;
         verified = true;
       }
+      menuoption = 0
       rungame = true;
+      menuscreen = false;
+      playedbefore = true;
       SWITCH.play();
       OVERWORLD1.stop();
       OVERWORLD1.loop();
@@ -1173,17 +1174,11 @@ function gameloop() {
     textAlign(CENTER);
     fill(237, 34, 93);
     text(bossmsg[level], 608, 60);
-    if (rungame && !endscreen) {
-      textAlign(LEFT);
-      if (verified) fill(255, 255, 0);
-      text(
-        parseFloat(frameCount / 60)
-          .toFixed(2)
-          .toString(),
-        13,
-        35
-      );
-    } else textAlign(LEFT);
+    textAlign(LEFT);
+    if (verified) fill(255, 255, 0);
+    if (!endscreen && !menuscreen) {
+      text(parseFloat(frameCount / 60).toFixed(2).toString(), 13, 33)
+    }
 
     if (level == 4 && playery < -50 && playerx < 350) {
       document.write("woo a secret (reload page lol)");
