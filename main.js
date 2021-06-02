@@ -630,9 +630,9 @@ function menu() {
   textSize(48);
   text("P5GAME", 30, 288);
 
-  // fill(200, 200, 200);
   textSize(24);
-  // text("Press ENTER to start...", 30, 318);
+  fill(150, 150, 150);
+  text("Press ENTER to select", 5, 566);
 
   fill(255, 255, 255);
   text("AdminTroller", 1035, 544);
@@ -764,6 +764,7 @@ function setup() {
     if (event.key === "ArrowUp") {
       if (menuscreen) {
         menuoption = 0;
+        SWITCH.play();
       } else if (touchingground) {
         uppressed = true;
         if (!playermoved) playermoved = true;
@@ -772,7 +773,10 @@ function setup() {
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "ArrowDown" && menuscreen) menuoption = 1;
+    if (event.key === "ArrowDown" && menuscreen) {
+      menuoption = 1;
+      SWITCH.play();
+    }
   });
 
   // Dash
@@ -850,11 +854,11 @@ function setup() {
         verified = true;
       }
       rungame = true;
+      SWITCH.play();
       OVERWORLD1.stop();
       OVERWORLD1.loop();
       BOSS1.stop();
     }
-  
   });
 
   document.addEventListener("keypress", function (event) {
