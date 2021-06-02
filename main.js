@@ -40,6 +40,8 @@ var allowgravity = true;
 var allowrespawn = true;
 var allowdeath = true;
 var endscreen = false;
+var menuoption = 0;
+var menuscreen = true;
 var playermoved = false;
 
 if (localStorage.getItem("level")) {
@@ -618,6 +620,7 @@ function rendertext(text, size, fill, pos, style, align) {
 */
 
 function menu() {
+  menuscreen = true;
   image(ENDSCREEN, 0, 0);
   textAlign(LEFT);
   textFont(FONT);
@@ -627,14 +630,27 @@ function menu() {
   textSize(48);
   text("P5GAME", 30, 288);
 
-  fill(200, 200, 200);
-  textStyle(ITALIC);
+  // fill(200, 200, 200);
   textSize(24);
-  text("Press ENTER to start...", 30, 318);
+  // text("Press ENTER to start...", 30, 318);
 
   fill(255, 255, 255);
   text("AdminTroller", 1035, 544);
   text("ToxicFscyther", 1020, 566);
+
+  if (menuoption == 0) {
+    fill(255, 255, 0);
+    textAlign(LEFT);
+    text("> Continue", 33, 323);
+    fill(255, 255, 255);
+    text("  Restart", 33, 350);
+  } else {
+    fill(255, 255, 255);
+    textAlign(LEFT);
+    text("  Continue", 33, 323);
+    fill(255, 255, 0);
+    text("> Restart", 33, 350);
+  }
 }
 
 function gameover() {
@@ -717,7 +733,7 @@ function setup() {
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowLeft") {
       leftpressed = true;
-      if (playermoved == false) playermoved = true;
+      if (!playermoved) playermoved = true;
     }
   });
 
@@ -725,14 +741,14 @@ function setup() {
     if (event.key === "ArrowLeft") {
       leftpressed = false;
       playerxvel = 0;
-      if (playermoved == false) playermoved = true;
+      if (!playermoved) playermoved = true;
     }
   });
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowRight") {
       rightpressed = true;
-      if (playermoved == false) playermoved = true;
+      if (!playermoved) playermoved = true;
     }
   });
 
@@ -740,27 +756,35 @@ function setup() {
     if (event.key === "ArrowRight") {
       rightpressed = false;
       playerxvel = 0;
-      if (playermoved == false) playermoved = true;
+      if (!playermoved) playermoved = true;
     }
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "ArrowUp" && touchingground == true) {
-      uppressed = true;
-      if (playermoved == false) playermoved = true;
+    if (event.key === "ArrowUp") {
+      if (menuscreen) {
+        menuoption = 0;
+      } else if (touchingground) {
+        uppressed = true;
+        if (!playermoved) playermoved = true;
+      }
     }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "ArrowDown" && menuscreen) menuoption = 1;
   });
 
   // Dash
   document.addEventListener("keydown", function (event) {
-    if (event.key === "z" && allowdash == true && allowmove == true) {
+    if (event.key === "z" && allowdash && allowmove) {
       dash();
     }
   });
 
   // TEMP [DEBUG] Reset
   document.addEventListener("keypress", function (event) {
-    if (event.key === "r" && allowdeath == true) {
+    if (event.key === "r" && allowdeath) {
       level = -1;
       nextlevel();
       deathcount = 0;
@@ -777,7 +801,7 @@ function setup() {
 
   // TEMP [DEBUG] Skip level
   document.addEventListener("keypress", function (event) {
-    if (event.key === "]" && allowdeath == true && endscreen == false) {
+    if (event.key === "]" && allowdeath && !endscreen) {
       verified = false;
       nextlevel();
     }
@@ -785,7 +809,7 @@ function setup() {
 
   // TEMP [DEBUG] Return to previous level
   document.addEventListener("keypress", function (event) {
-    if (event.key === "[" && allowdeath == true && endscreen == false) {
+    if (event.key === "[" && allowdeath && !endscreen) {
       verified = false;
       previouslevel();
     }
@@ -802,7 +826,7 @@ function setup() {
 
   // TEMP [DEBUG] Temporarily sample AdminTroller's musical skills.
   document.addEventListener("keypress", function (event) {
-    if (event.key === "m" && allowdeath == true) {
+    if (event.key === "m" && allowdeath) {
       OVERWORLD1.pause();
       BOSS1.stop();
       BOSS1.loop();
@@ -813,18 +837,28 @@ function setup() {
   // ! Only works in the menu screen.
   // FIXME there will be a bug where continuing will reset the time ;-;
   document.addEventListener("keypress", function (event) {
-    if (event.key === "Enter" && rungame == false) {
+    if (event.key === "Enter" && !rungame) {
+      if (menuoption == 0) {
+      } else {
+        level = -1;
+        nextlevel();
+        deathcount = 0;
+        localStorage.setItem("deaths", 0);
+        endscreen = false;
+        dashindicator = false;
+        frameCount = 0;
+        verified = true;
+      }
       rungame = true;
-      var frameCount = 0;
       OVERWORLD1.stop();
-      BOSS1.stop();
       OVERWORLD1.loop();
+      BOSS1.stop();
     }
+  
   });
 
   document.addEventListener("keypress", function (event) {
     if (event.key === "h") {
-      
     }
   });
 }
@@ -923,7 +957,7 @@ function gameloop() {
     }
 
     // Started making doors for switches
-    var doortile = switches[0][1]
+    var doortile = switches[0][1];
     var doorx = 0;
     var doory = 512;
     var doorrow = 0;
