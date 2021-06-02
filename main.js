@@ -46,9 +46,12 @@ var playermoved = false;
 
 if (localStorage.getItem("level")) {
   var level = parseInt(localStorage.getItem("level"));
+  var playedbefore = true;
   if (level == 0) verified = true;
-  else verified = false;
-} else var level = 0;
+} else {
+  var level = 0;
+  var playedbefore = false;
+}
 
 if (localStorage.getItem("deaths"))
   var deathcount = parseInt(localStorage.getItem("deaths"));
@@ -637,19 +640,24 @@ function menu() {
   fill(255, 255, 255);
   text("AdminTroller", 1035, 544);
   text("ToxicFscyther", 1020, 566);
-
-  if (menuoption == 0) {
-    fill(255, 255, 0);
-    textAlign(LEFT);
-    text("> Continue", 33, 323);
-    fill(255, 255, 255);
-    text("  Restart", 33, 350);
+  if (playedbefore == true) {
+    if (menuoption == 0) {
+      fill(255, 255, 0);
+      textAlign(LEFT);
+      text("> Continue", 33, 323);
+      fill(255, 255, 255);
+      text("  Restart", 33, 350);
+    } else {
+      fill(255, 255, 255);
+      textAlign(LEFT);
+      text("  Continue", 33, 323);
+      fill(255, 255, 0);
+      text("> Restart", 33, 350);
+    }
   } else {
-    fill(255, 255, 255);
-    textAlign(LEFT);
-    text("  Continue", 33, 323);
     fill(255, 255, 0);
-    text("> Restart", 33, 350);
+    textAlign(LEFT);
+    text("> New Game", 33, 323);
   }
 }
 
@@ -762,7 +770,7 @@ function setup() {
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowUp") {
-      if (menuscreen) {
+      if (menuscreen && playedbefore) {
         menuoption = 0;
         SWITCH.play();
       } else if (touchingground) {
@@ -773,7 +781,7 @@ function setup() {
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "ArrowDown" && menuscreen) {
+    if (event.key === "ArrowDown" && menuscreen && playedbefore) {
       menuoption = 1;
       SWITCH.play();
     }
@@ -786,20 +794,11 @@ function setup() {
     }
   });
 
-  // TEMP [DEBUG] Reset
+  // Open menu scren
   document.addEventListener("keypress", function (event) {
     if (event.key === "r" && allowdeath) {
-      level = -1;
-      nextlevel();
-      deathcount = 0;
-      localStorage.setItem("deaths", 0);
-      endscreen = false;
-      dashindicator = false;
-      frameCount = 0;
-      verified = true;
-      OVERWORLD1.stop();
-      OVERWORLD1.loop();
-      BOSS1.stop();
+      menuscreen = true;
+      rungame = false;
     }
   });
 
