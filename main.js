@@ -770,12 +770,13 @@ function setup() {
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowUp") {
+      if (rungame && touchingground) {
+        uppressed = true;
+        if (!playermoved) playermoved = true;
+      }
       if (menuscreen && playedbefore) {
         menuoption = 0;
         SWITCH.play();
-      } else if (touchingground) {
-        uppressed = true;
-        if (!playermoved) playermoved = true;
       }
     }
   });
@@ -1171,7 +1172,17 @@ function gameloop() {
     textAlign(CENTER);
     fill(237, 34, 93);
     text(bossmsg[level], 608, 60);
-    textAlign(LEFT);
+    if (rungame) {
+      textAlign(LEFT);
+      if (verified) fill(255, 255, 0);
+      text(
+        parseFloat(frameCount / 60)
+          .toFixed(2)
+          .toString(),
+        13,
+        35
+      );
+    } else textAlign(LEFT);
 
     if (level == 4 && playery < -50 && playerx < 350) {
       document.write("woo a secret (reload page lol)");
