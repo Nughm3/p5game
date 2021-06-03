@@ -881,7 +881,7 @@ setInterval(() => {
 
 setInterval(() => {
   deathframe += 1;
-}, 50);
+}, 40);
 
 /* RENDERER */
 
