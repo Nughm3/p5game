@@ -852,7 +852,7 @@ function setup() {
         frameCount = 0;
         verified = true;
       }
-      menuoption = 0
+      menuoption = 0;
       rungame = true;
       menuscreen = false;
       playedbefore = true;
@@ -1177,7 +1177,13 @@ function gameloop() {
     textAlign(LEFT);
     if (verified) fill(255, 255, 0);
     if (!endscreen && !menuscreen) {
-      text(parseFloat(frameCount / 60).toFixed(2).toString(), 13, 33)
+      text(
+        parseFloat(frameCount / 60)
+          .toFixed(2)
+          .toString(),
+        13,
+        33
+      );
     }
 
     if (level == 4 && playery < -50 && playerx < 350) {
