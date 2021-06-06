@@ -40,17 +40,17 @@ var allowgravity = true;
 var allowrespawn = true;
 var allowdeath = true;
 var endscreen = false;
-var menuoption = 0;
-var menuscreen = true;
+// var menuoption = 0;
+// var menuscreen = false;
 var playermoved = false;
 
 if (localStorage.getItem("level")) {
   var level = parseInt(localStorage.getItem("level"));
-  var playedbefore = true;
+  // var playedbefore = true;
   if (level == 0) verified = true;
 } else {
   var level = 0;
-  var playedbefore = false;
+  // var playedbefore = false;
 }
 
 if (localStorage.getItem("deaths"))
@@ -60,7 +60,7 @@ else var deathcount = 0;
 frameCount = localStorage.getItem("frame");
 
 var levelspawnpoints = [420, 420, 190, 420, 129, 184, 420, 420, 420];
-var levelbiomes = [0, 0, 1, 1, 1, 2, 2, 2, 2];
+var levelbiomes = [0, 0, 1, 1, 1, 2, 2, 2, 3];
 
 var levels = [];
 var level0 = [
@@ -119,7 +119,7 @@ var level8 = [
 ];
 levels.push(level8);
 
-const levelcount = 7; // * levels - 1
+const LEVELCOUNT = 7; // * levels - 1
 
 var secrets = []; // secret rooms
 var secret1 = [];
@@ -222,6 +222,24 @@ switches.push(switches13);
 var switches14 = [];
 switches.push(switches14);
 
+// turrets and bullets
+
+var turrets = [];
+var turret8 = [];
+turrets.push(turret8);
+var turret9 = [];
+turrets.push(turret9);
+var turret10 = [];
+turrets.push(turret10);
+var turret11 = [];
+turrets.push(turret11);
+var turret12 = [];
+turrets.push(turret12);
+var turret13 = [];
+turrets.push(turret13);
+var turret14 = [];
+turrets.push(turret14);
+
 var bossmsg = [
   "hi!",
   "how are you doing?",
@@ -241,7 +259,7 @@ var bossmsg = [
   "That is enough, fool! Adventurers! Be careful of who you are messing with. Before I have to deal with you myself.", // Phase 1
   "Get back here!", // Phase 2
   "ANOTHER TRAP!! YOUR TRICKS ARE FUTILE!", // Phase 3
-  'Can"t you just explode already! Some decency!', // Phase 4
+  "Can't you just explode already! Some decency!", // Phase 4
   "All this, for nothing, I understand your words now, my master. The Catacombs, are no more." // Final Phase
 ];
 
@@ -315,11 +333,14 @@ function preload() {
   BACKGROUND3 = loadImage("media/bg/purple.png"); // Purple
   ENDSCREEN = loadImage("media/bg/endscreen.png"); // Dimmed background to show stats
   // Tiles: Stage 1 tiles are ORANGE, 2 are BLUE, 3 are GREEN, 4 are PURPLE
-  // TODO change the tile texture
-  TILE1 = loadImage("media/tile/tile/tile1.png");
-  TILE2 = loadImage("media/tile/tile/tile2.png");
-  TILE3 = loadImage("media/tile/tile/tile3.png");
-  TILE4 = loadImage("media/tile/tile/tile4.png");
+  TILE1 = loadImage("media/tile/tile/regular/tile1.png");
+  TILE2 = loadImage("media/tile/tile/regular/tile2.png");
+  TILE3 = loadImage("media/tile/tile/regular/tile3.png");
+  TILE4 = loadImage("media/tile/tile/regular/tile4.png");
+  CRACKED1 = loadImage("media/tile/tile/cracked/tile1.png");
+  CRACKED1 = loadImage("media/tile/tile/cracked/tile2.png");
+  CRACKED1 = loadImage("media/tile/tile/cracked/tile3.png");
+  CRACKED1 = loadImage("media/tile/tile/cracked/tile4.png");
   // Switch tiles
   SWITCHOFF = loadImage("media/tile/switch/default/switch_off.png");
   SWITCHON = loadImage("media/tile/switch/default/switch_on.png");
@@ -500,6 +521,35 @@ function preload() {
     loadImage("media/players/deathL/death17.png"),
     loadImage("media/players/deathL/death18.png")
   ];
+  TURRETUP = [
+    loadImage("media/bullet/up/turret1.png"),
+    loadImage("media/bullet/up/turret2.png"),
+    loadImage("media/bullet/up/turret3.png"),
+    loadImage("media/bullet/up/turret4.png"),
+    loadImage("media/bullet/up/turret5.png")
+  ];
+  TURRETLEFT = [
+    loadImage("media/bullet/left/turret1.png"),
+    loadImage("media/bullet/left/turret2.png"),
+    loadImage("media/bullet/left/turret3.png"),
+    loadImage("media/bullet/left/turret4.png"),
+    loadImage("media/bullet/left/turret5.png")
+  ];
+  TURRETRIGHT = [
+    loadImage("media/bullet/right/turret1.png"),
+    loadImage("media/bullet/right/turret2.png"),
+    loadImage("media/bullet/right/turret3.png"),
+    loadImage("media/bullet/right/turret4.png"),
+    loadImage("media/bullet/right/turret5.png")
+  ];
+  TURRETDOWN = [
+    loadImage("media/bullet/down/turret1.png"),
+    loadImage("media/bullet/down/turret2.png"),
+    loadImage("media/bullet/down/turret3.png"),
+    loadImage("media/bullet/down/turret4.png"),
+    loadImage("media/bullet/down/turret5.png")
+  ];
+  BULLET = loadImage("media/bullet/bullet.png");
 }
 
 /* PLAYER FUNCTIONS */
@@ -619,51 +669,51 @@ function rendertext(text, size, fill, pos, style, align) {
     );
   }
 }
-
 */
 
-function menu() {
-  menuscreen = true;
-  image(ENDSCREEN, 0, 0);
-  textAlign(LEFT);
-  textFont(FONT);
+// FIXME
+// function menu() {
+//   menuscreen = true;
+//   image(ENDSCREEN, 0, 0);
+//   textAlign(LEFT);
+//   textFont(FONT);
 
-  fill(255, 255, 255);
-  textStyle(BOLD);
-  textSize(48);
-  text("P5GAME", 30, 288);
+//   fill(255, 255, 255);
+//   textStyle(BOLD);
+//   textSize(48);
+//   text("P5GAME", 30, 288);
 
-  textSize(24);
-  fill(150, 150, 150);
-  text("Press ENTER to select", 5, 566);
+//   textSize(24);
+//   fill(150, 150, 150);
+//   text("Press ENTER to select", 5, 566);
 
-  fill(255, 255, 255);
-  text("AdminTroller", 1035, 544);
-  text("ToxicFscyther", 1020, 566);
-  if (playedbefore == true) {
-    if (menuoption == 0) {
-      fill(255, 255, 0);
-      textAlign(LEFT);
-      text("> Continue", 33, 323);
-      fill(255, 255, 255);
-      text("  Restart", 33, 350);
-    } else {
-      fill(255, 255, 255);
-      textAlign(LEFT);
-      text("  Continue", 33, 323);
-      fill(255, 255, 0);
-      text("> Restart", 33, 350);
-    }
-  } else {
-    fill(255, 255, 0);
-    textAlign(LEFT);
-    text("> New Game", 33, 323);
-  }
-}
+//   fill(255, 255, 255);
+//   text("AdminTroller", 1035, 544);
+//   text("ToxicFscyther", 1020, 566);
+//   if (playedbefore == true) {
+//     if (menuoption == 0) {
+//       fill(255, 255, 0);
+//       textAlign(LEFT);
+//       text("> Continue", 33, 323);
+//       fill(255, 255, 255);
+//       text("  Restart", 33, 350);
+//     } else {
+//       fill(255, 255, 255);
+//       textAlign(LEFT);
+//       text("  Continue", 33, 323);
+//       fill(255, 255, 0);
+//       text("> Restart", 33, 350);
+//     }
+//   } else {
+//     fill(255, 255, 0);
+//     textAlign(LEFT);
+//     text("> New Game", 33, 323);
+//   }
+// }
 
 function gameover() {
   endscreen = true;
-  playedbefore = false;
+  // playedbefore = false;
   image(ENDSCREEN, 0, 0);
   if (verified == true) fill(255, 255, 255);
   else fill(237, 34, 93);
@@ -687,7 +737,7 @@ function gameover() {
 }
 
 function nextlevel() {
-  if (level > levelcount) {
+  if (level > LEVELCOUNT) {
     localStorage.setItem("frame", frameCount);
     gameover();
   } else {
@@ -769,24 +819,25 @@ function setup() {
     }
   });
 
+  // FIXME
   document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowUp") {
-      if (menuscreen && playedbefore) {
-        menuoption = 0;
-        SWITCH.play();
-      } else if (touchingground) {
-        uppressed = true;
-        if (!playermoved) playermoved = true;
-      }
+      // if (menuscreen && playedbefore) {
+      //   menuoption = 0;
+      //   SWITCH.play();
+      // } else if (touchingground) {
+      uppressed = true;
+      if (!playermoved) playermoved = true;
     }
   });
 
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "ArrowDown" && menuscreen && playedbefore) {
-      menuoption = 1;
-      SWITCH.play();
-    }
-  });
+  // FIXME
+  // document.addEventListener("keydown", function (event) {
+  //   if (event.key === "ArrowDown" && menuscreen && playedbefore) {
+  //     menuoption = 1;
+  //     SWITCH.play();
+  //   }
+  // });
 
   // Dash
   document.addEventListener("keydown", function (event) {
@@ -795,11 +846,22 @@ function setup() {
     }
   });
 
-  // Open menu scren
+  // FIXME Open menu scren
   document.addEventListener("keypress", function (event) {
     if (event.key === "r" && allowdeath) {
-      menuscreen = true;
-      rungame = false;
+      // menuscreen = true;
+      // rungame = false;
+      level = -1;
+      nextlevel();
+      deathcount = 0;
+      localStorage.setItem("deaths", 0);
+      endscreen = false;
+      dashindicator = false;
+      frameCount = 0;
+      verified = true;
+      OVERWORLD1.stop();
+      OVERWORLD1.loop();
+      BOSS1.stop();
     }
   });
 
@@ -840,28 +902,29 @@ function setup() {
   // * Start the game
   // ! Only works in the menu screen.
   // FIXME there will be a bug where continuing will reset the time ;-;
-  document.addEventListener("keypress", function (event) {
-    if (event.key === "Enter" && menuscreen) {
-      if (menuoption == 1) {
-        level = -1;
-        nextlevel();
-        deathcount = 0;
-        localStorage.setItem("deaths", 0);
-        endscreen = false;
-        dashindicator = false;
-        frameCount = 0;
-        verified = true;
-      }
-      menuoption = 0;
-      rungame = true;
-      menuscreen = false;
-      playedbefore = true;
-      SWITCH.play();
-      OVERWORLD1.stop();
-      OVERWORLD1.loop();
-      BOSS1.stop();
-    }
-  });
+  // FIXME now the whole menu is disabled
+  // document.addEventListener("keypress", function (event) {
+  //   if (event.key === "Enter" && menuscreen) {
+  //     if (menuoption == 1) {
+  //       level = -1;
+  //       nextlevel();
+  //       deathcount = 0;
+  //       localStorage.setItem("deaths", 0);
+  //       endscreen = false;
+  //       dashindicator = false;
+  //       frameCount = 0;
+  //       verified = true;
+  //     }
+  //     menuoption = 0;
+  //     rungame = true;
+  //     menuscreen = false;
+  //     playedbefore = true;
+  //     SWITCH.play();
+  //     OVERWORLD1.stop();
+  //     OVERWORLD1.loop();
+  //     BOSS1.stop();
+  //   }
+  // });
 
   document.addEventListener("keypress", function (event) {
     if (event.key === "h") {
@@ -886,8 +949,10 @@ setInterval(() => {
 /* RENDERER */
 
 function draw() {
-  if (rungame == true) gameloop();
-  else menu();
+  // FIXME menu
+  gameloop();
+  // if (rungame == true) gameloop();
+  // else menu();
 }
 
 function gameloop() {
@@ -927,22 +992,21 @@ function gameloop() {
       if (playerdirection == 0) image(DEATHLEFT[deathframe], playerx, playery);
       else image(DEATHRIGHT[deathframe], playerx, playery);
     }
-
-    /* FIXME
-    if (!playerxvel == 0) {
-      var randdust = random(1, 5)
-      if (randdust == 1)
-        image(DUST1, )
-      if (randdust == 2)
-        image(DUST2, )
-      if (randdust == 3)
-        image(DUST3, )
-      if (randdust == 4)
-        image(DUST4, )
-      if (randdust == 5)
-        image(DUST5, )
-    }
-*/
+    
+    // TODO
+    // if (!playerxvel == 0) {
+    //   var randdust = random(1, 5)
+    //   if (randdust == 1)
+    //     image(DUST1, )
+    //   if (randdust == 2)
+    //     image(DUST2, )
+    //   if (randdust == 3)
+    //     image(DUST3, )
+    //   if (randdust == 4)
+    //     image(DUST4, )
+    //   if (randdust == 5)
+    //     image(DUST5, )
+    // }
 
     for (repeat = 0; repeat < levels[level].length; repeat++) {
       var tile = levels[level][repeat];
@@ -1176,14 +1240,16 @@ function gameloop() {
     text(bossmsg[level], 608, 60);
     textAlign(LEFT);
     if (verified) fill(255, 255, 0);
-    if (!endscreen && !menuscreen) {
+    // if (!endscreen && !menuscreen) {
+    if (!endscreen) {
       text(
         parseFloat(frameCount / 60)
           .toFixed(2)
           .toString(),
-        13,
+        53,
         33
       );
+      text("Level " + level - 1, 13, 33)
     }
 
     if (level == 4 && playery < -50 && playerx < 350) {
