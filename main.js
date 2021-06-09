@@ -47,7 +47,6 @@ var playermoved = false;
 if (localStorage.getItem("level")) {
   var level = parseInt(localStorage.getItem("level"));
   var playedbefore = true;
-  if (level == 0) verified = true;
 } else {
   var level = 0;
   var playedbefore = false;
@@ -668,8 +667,7 @@ function menu() {
 function gameover() {
   endscreen = true;
   image(ENDSCREEN, 0, 0);
-  if (verified == true) fill(255, 255, 255);
-  else fill(237, 34, 93);
+  fill(255, 255, 255)
   textSize(48);
   textFont(FONT);
   textAlign(LEFT);
@@ -684,7 +682,6 @@ function gameover() {
     103
   );
   text("Press R to reset...", 13, 129);
-  if (verified == false) text("Run Unverified", 13, 155);
   text("AdminTroller", 1035, 544);
   text("ToxicFscyther", 1020, 566);
 }
@@ -809,7 +806,6 @@ function setup() {
   // TEMP [DEBUG] Skip level
   document.addEventListener("keypress", function (event) {
     if (event.key === "]" && allowdeath && !endscreen) {
-      verified = false;
       nextlevel();
     }
   });
@@ -817,7 +813,6 @@ function setup() {
   // TEMP [DEBUG] Return to previous level
   document.addEventListener("keypress", function (event) {
     if (event.key === "[" && allowdeath && !endscreen) {
-      verified = false;
       previouslevel();
     }
   });
@@ -826,7 +821,6 @@ function setup() {
   // ? In debug mode, there is no death animation and block coords are shown on screen.
   document.addEventListener("keypress", function (event) {
     if (event.key === "k") {
-      verified = false;
       debugmode = !debugmode;
     }
   });
@@ -845,8 +839,7 @@ function setup() {
   // FIXME there will be a bug where continuing will reset the time ;-;
   document.addEventListener("keypress", function (event) {
     if (event.key === "Enter" && !rungame) {
-      if (menuoption == 0) {
-      } else {
+      if (menuoption == 1) {
         level = -1;
         nextlevel();
         deathcount = 0;
@@ -854,7 +847,6 @@ function setup() {
         endscreen = false;
         dashindicator = false;
         frameCount = 0;
-        verified = true;
       }
       allowmove = true;
       rungame = true;
@@ -1017,7 +1009,6 @@ function gameloop() {
     }
 
     if (debugmode == true) {
-      verified = false;
       for (repeat = 0; repeat < 180; repeat++) {
         debugrow = 0;
         debugtile = repeat;
@@ -1176,9 +1167,9 @@ function gameloop() {
     textAlign(CENTER);
     fill(237, 34, 93);
     text(bossmsg[level], 608, 60);
+    fill(255, 255, 0)
     textAlign(LEFT);
     if (rungame) {
-      if (verified) fill(255, 255, 0);
       text(parseFloat(frameCount / 60).toFixed(2), 13, 33);
     }
 
