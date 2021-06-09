@@ -777,8 +777,8 @@ function setup() {
       if (menuscreen && playedbefore) {
         menuoption = 0;
         SWITCH.play();
-      } else if (touchingground) {
-        uppressed = true;
+      
+      uppressed = true;
         if (!playermoved) playermoved = true;
       }
     }
@@ -856,6 +856,7 @@ function setup() {
         frameCount = 0;
         verified = true;
       }
+      allowmove = true;
       rungame = true;
       SWITCH.play();
       OVERWORLD1.stop();
@@ -1176,6 +1177,10 @@ function gameloop() {
     fill(237, 34, 93);
     text(bossmsg[level], 608, 60);
     textAlign(LEFT);
+    if (rungame) {
+      if (verified) fill(255, 255, 0);
+      text(parseFloat(frameCount / 60).toFixed(2), 13, 33);
+    }
 
     if (level == 4 && playery < -50 && playerx < 350) {
       document.write("woo a secret (reload page lol)");
