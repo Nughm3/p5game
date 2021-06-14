@@ -798,34 +798,34 @@ function setup() {
   });
 
   // Open menu scren
-  document.addEventListener("keypress", function (event) {
-    if (event.key === "r" && allowdeath) {
-      menuscreen = true;
-      rungame = false;
-    }
-  });
+  // document.addEventListener("keypress", function (event) {
+  //   if (event.key === "r" && allowdeath) {
+  //     menuscreen = true;
+  //     rungame = false;
+  //   }
+  // });
 
   // TEMP [DEBUG] Skip level
-  document.addEventListener("keypress", function (event) {
-    if (event.key === "]" && allowdeath && !endscreen) {
-      nextlevel();
-    }
-  });
+  // document.addEventListener("keypress", function (event) {
+  //   if (event.key === "]" && allowdeath && !endscreen) {
+  //     nextlevel();
+  //   }
+  // });
 
   // TEMP [DEBUG] Return to previous level
-  document.addEventListener("keypress", function (event) {
-    if (event.key === "[" && allowdeath && !endscreen) {
-      previouslevel();
-    }
-  });
+  // document.addEventListener("keypress", function (event) {
+  //   if (event.key === "[" && allowdeath && !endscreen) {
+  //     previouslevel();
+  //   }
+  // });
 
   // TEMP [DEBUG] Enter level builder and debug mode
   // ? In debug mode, there is no death animation and block coords are shown on screen.
-  document.addEventListener("keypress", function (event) {
-    if (event.key === "k") {
-      debugmode = !debugmode;
-    }
-  });
+  // document.addEventListener("keypress", function (event) {
+  //   if (event.key === "k") {
+  //     debugmode = !debugmode;
+  //   }
+  // });
 
   // TEMP [DEBUG] Temporarily sample AdminTroller's musical skills.
   document.addEventListener("keypress", function (event) {
