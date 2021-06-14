@@ -587,6 +587,7 @@ function death() {
 }
 
 function respawn() {
+  uppressed = false
   playerx = 0;
   playery = levelspawnpoints[level];
   playeryvel = 0;
@@ -775,9 +776,10 @@ function setup() {
         menuoption = 0;
         SWITCH.play();
       
-      uppressed = true;
+      
         if (!playermoved) playermoved = true;
       }
+      uppressed = true;
     }
   });
 
@@ -850,6 +852,8 @@ function setup() {
       }
       allowmove = true;
       rungame = true;
+      menuscreen = false;
+      uppressed = false;
       SWITCH.play();
       OVERWORLD1.stop();
       OVERWORLD1.loop();
