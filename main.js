@@ -21,9 +21,6 @@ TODO boss levels/boss dialogue
 TODO add switches
 */
 
-// temp
-var musictroll = false;
-
 var game_size = [1216, 576];
 
 var dashamount = 0;
@@ -225,7 +222,26 @@ var switches14 = [];
 switches.push(switches14);
 
 var bossmsg = [
-  '','','','By the way, pressing M increases your chances of survival!'
+  "hi!",
+  "how are you doing?",
+  "hey, im just here for debug purposes.",
+  "kinda sad :(",
+  "what are you here for?",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "", // up to level 15 (index 14) before boss starts
+  "That is enough, fool! Adventurers! Be careful of who you are messing with. Before I have to deal with you myself.", // Phase 1
+  "Get back here!", // Phase 2
+  "ANOTHER TRAP!! YOUR TRICKS ARE FUTILE!", // Phase 3
+  'Can"t you just explode already! Some decency!', // Phase 4
+  "All this, for nothing, I understand your words now, my master. The Catacombs, are no more." // Final Phase
 ];
 
 if (level == 0) var playerx = 92;
@@ -812,7 +828,6 @@ function setup() {
   // TEMP [DEBUG] Temporarily sample AdminTroller's musical skills.
   document.addEventListener("keypress", function (event) {
     if (event.key === "m" && allowdeath) {
-      musictroll = true;
       OVERWORLD1.pause();
       BOSS1.stop();
       BOSS1.loop();
@@ -839,6 +854,11 @@ function setup() {
       OVERWORLD1.stop();
       OVERWORLD1.loop();
       BOSS1.stop();
+    }
+  });
+
+  document.addEventListener("keypress", function (event) {
+    if (event.key === "h") {
     }
   });
 }
@@ -1146,8 +1166,7 @@ function gameloop() {
     textFont(FONT);
     textAlign(CENTER);
     fill(237, 34, 93);
-    if (!menutroll) text(bossmsg[level], 608, 60);
-    else text("just kidding.", 608, 60);
+    text(bossmsg[level], 608, 60);
     fill(255, 255, 0)
     textAlign(LEFT);
     if (rungame) {
