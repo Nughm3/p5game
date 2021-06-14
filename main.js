@@ -641,6 +641,10 @@ function menu() {
   fill(150, 150, 150);
   text("Press ENTER to select", 5, 566);
 
+  textSize(16);
+  text("(Game may lag if battery is mode is not set to best performance)", 600, 20);
+
+  textSize(24);
   fill(255, 255, 255);
   text("AdminTroller", 1035, 544);
   text("ToxicFscyther", 1020, 566);
