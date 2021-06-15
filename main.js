@@ -587,7 +587,7 @@ function death() {
 }
 
 function respawn() {
-  uppressed = false
+  uppressed = false;
   playerx = 0;
   playery = levelspawnpoints[level];
   playeryvel = 0;
@@ -642,7 +642,11 @@ function menu() {
   text("Press ENTER to select", 5, 566);
 
   textSize(16);
-  text("(Game may lag if battery is mode is not set to best performance)", 600, 20);
+  text(
+    "(Game may lag if battery is mode is not set to best performance)",
+    600,
+    20
+  );
 
   textSize(24);
   fill(255, 255, 255);
@@ -672,7 +676,7 @@ function menu() {
 function gameover() {
   endscreen = true;
   image(ENDSCREEN, 0, 0);
-  fill(255, 255, 255)
+  fill(255, 255, 255);
   textSize(48);
   textFont(FONT);
   textAlign(LEFT);
@@ -686,7 +690,7 @@ function gameover() {
     13,
     103
   );
-  text("Press R to reset...", 13, 129);
+  text("Reload to reset...", 13, 129);
   text("AdminTroller", 1035, 544);
   text("ToxicFscyther", 1020, 566);
 }
@@ -779,8 +783,7 @@ function setup() {
       if (menuscreen && playedbefore) {
         menuoption = 0;
         SWITCH.play();
-      
-      
+
         if (!playermoved) playermoved = true;
       }
       uppressed = true;
@@ -1175,9 +1178,9 @@ function gameloop() {
     textAlign(CENTER);
     fill(237, 34, 93);
     text(bossmsg[level], 608, 60);
-    fill(255, 255, 0)
+    fill(255, 255, 0);
     textAlign(LEFT);
-    if (rungame) {
+    if (!endscreen && !menuscreen) {
       text(parseFloat(frameCount / 60).toFixed(2), 13, 33);
     }
 
